@@ -4,8 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
-import java.util.List;
-
 
 @Entity
 @Getter
@@ -13,14 +11,16 @@ import java.util.List;
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Moderador  extends Cuenta implements Serializable {
-
+public class DetalleCompra implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false, length = 50)
-    private String codigo;
+    @EqualsAndHashCode.Include
+    private int codigo;
 
-    @ManyToMany(mappedBy = "publicacionProductos")
-    private List<PublicacionProducto> publicacionProductos;
+    @Column(nullable = false, length = 50)
+    private int unidades;
 
+    @Column(nullable = false, length = 50)
+    private double precio;
 }

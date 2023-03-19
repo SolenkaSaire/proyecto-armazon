@@ -1,10 +1,19 @@
 package co.edu.uniquindio.proyecto.jakarta.persistence;
 
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+
 public enum Categoria {
 
-    CALZADO,
-    BLUSAS,
-    CHAQUETAS,
-    PANTALONES,
 
+    TECNOLOGIA,
+    HOGAR,
+    COCHES,
+    PINTURA,
+    herramientas;
+
+
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Usuario usuario;
 }

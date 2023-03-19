@@ -1,29 +1,45 @@
 package co.edu.uniquindio.proyecto.jakarta.persistence;
+
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Usuario implements Serializable {
+public class Usuario extends Cuenta implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(length = 10)
     @EqualsAndHashCode.Include
     private int cedula;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 50)
     private String nombre;
-    @Column(unique = true, nullable = false, length = 100)
-    private String email;
-    private String telefono;
+
+    @Column(nullable = false,length = 50)
+    private String apellido;
+
+    @Column(nullable = false,length = 50)
     private String direccion;
-    private String contraseña;
+
+    @Column(length = 10)
+    private String telefono;
+
+    @ManyToMany
+    @JoinTable(name = "comentario",
+            joinColumns = @JoinColumn(name = "cedula_usuario"),
+            inverseJoinColumns = @JoinColumn(name = "codigo_publicacion")
+    )
+    private List<PublicacionProducto> publicacionProductos;
 
 
+
+    @ManyToMany(mappedBy = "favoritos")
+    private List<PublicacionProducto> favoritos;
 }

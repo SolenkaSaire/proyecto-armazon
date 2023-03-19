@@ -5,7 +5,6 @@ import lombok.*;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @Getter
@@ -13,33 +12,22 @@ import java.util.List;
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Producto implements Serializable {
+public class ProductoModerador implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false, length = 50)
     @EqualsAndHashCode.Include
-    private int codigo;
+    private int codigo_estado;
 
     @Column(nullable = false, length = 50)
+    private LocalDateTime fecha;
+
+    @Column(nullable = false, length = 50)
+    private String motivo;
+
+/*
+    @ManyToOne
+    @JoinColumn(nullable = false)
     private Estado estado;
-
-    @Column(nullable = false, length = 50)
-    private String nombre;
-
-
-    @ElementCollection
-    @Enumerated(value = EnumType.STRING)
-    private List<Categoria> categoria;
-
-    @OneToMany
-    @Column(nullable = false, length = 50)
-    private List<Ciudad> ciudad;
-
-    @OneToMany
-    @Column(nullable = false, length = 50)
-    private List<Imagen> imagenes;
-
-
-
+*/
 }
-

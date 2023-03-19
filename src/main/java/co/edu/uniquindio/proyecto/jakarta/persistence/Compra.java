@@ -4,8 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.List;
-
 
 @Entity
 @Getter
@@ -13,14 +13,26 @@ import java.util.List;
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Moderador  extends Cuenta implements Serializable {
-
+public class Compra implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @EqualsAndHashCode.Include
+    private int codigo;
+
+
+    private Double total;
+
     @Column(nullable = false, length = 50)
-    private String codigo;
+    private String metodoPago;
+
+    @Column(nullable = false, length = 50)
+    private LocalDateTime fecha_creacion;
 
     @ManyToMany(mappedBy = "publicacionProductos")
     private List<PublicacionProducto> publicacionProductos;
+
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Usuario usuario;
 
 }

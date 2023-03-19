@@ -4,23 +4,25 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
-import java.util.List;
-
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @ToString
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Moderador  extends Cuenta implements Serializable {
+public class Imagen implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @EqualsAndHashCode.Include
     @Column(nullable = false, length = 50)
-    private String codigo;
+    private int id_imagen;
 
-    @ManyToMany(mappedBy = "publicacionProductos")
-    private List<PublicacionProducto> publicacionProductos;
+    @Column(nullable = false, length = 50)
+    private String ruta_URL;
 
+
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Producto producto;
 }

@@ -4,23 +4,20 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
-import java.util.List;
-
+import java.lang.reflect.Array;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @ToString
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Moderador  extends Cuenta implements Serializable {
 
+public class Favorito  implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false, length = 50)
-    private String codigo;
-
-    @ManyToMany(mappedBy = "publicacionProductos")
-    private List<PublicacionProducto> publicacionProductos;
+    
+    @EqualsAndHashCode.Include
+    private int codigo;
 
 }

@@ -11,6 +11,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Producto implements Serializable {
@@ -27,19 +28,26 @@ public class Producto implements Serializable {
     private String nombre;
 
 
-    @ElementCollection
+    //@ElementCollection
     @Enumerated(value = EnumType.STRING)
+    @OneToMany(mappedBy="Producto")
+    @Column(nullable = false, length = 50)
     private List<Categoria> categoria;
 
-    @OneToMany
+
+    @OneToMany(mappedBy="Producto")
     @Column(nullable = false, length = 50)
     private List<Ciudad> ciudad;
 
-    @OneToMany
+    @OneToMany(mappedBy="Producto")
     @Column(nullable = false, length = 50)
     private List<Imagen> imagenes;
 
+    @OneToMany(mappedBy="Producto")
+    @Column(nullable = false)
+    private List<PublicacionProducto> publicacionProductos;
 
+//////////////////////////
 
 }
 

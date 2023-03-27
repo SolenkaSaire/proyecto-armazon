@@ -13,7 +13,13 @@ public enum Categoria {
     herramientas;
 
 
+     @ManyToOne
+     @JoinColumn(nullable = false)
+     private Producto producto;
+
+/////////////////////////////////7
     @ManyToOne
     @JoinColumn(nullable = false)
     private Usuario usuario;
+
 }

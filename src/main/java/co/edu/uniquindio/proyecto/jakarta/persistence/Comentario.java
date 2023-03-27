@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Comentario implements Serializable {
@@ -18,10 +19,6 @@ public class Comentario implements Serializable {
     @Column(nullable = false, length = 50)
     @EqualsAndHashCode.Include
     private int codigo;
-
-
-
-
 
     @Column(nullable = true, length = 50)
     private String texto;

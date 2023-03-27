@@ -10,10 +10,14 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Usuario extends Cuenta implements Serializable {
+    @OneToOne
+    private Cuenta cuenta;
 
+    /////////////////////// 1 A 1 O SOLO EXTENDS???????
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @EqualsAndHashCode.Include
@@ -31,15 +35,29 @@ public class Usuario extends Cuenta implements Serializable {
     @Column(length = 10)
     private String telefono;
 
+
     @ManyToMany
-    @JoinTable(name = "comentario",
+    @JoinTable(name = "comentarios",
             joinColumns = @JoinColumn(name = "cedula_usuario"),
             inverseJoinColumns = @JoinColumn(name = "codigo_publicacion")
     )
-    private List<PublicacionProducto> publicacionProductos;
-
+    @Column(nullable = true)
+    private List<PublicacionProducto> comentario;//publicacionProductos?
 
 
     @ManyToMany(mappedBy = "favoritos")
-    private List<PublicacionProducto> favoritos;
+    @Column(nullable = true)
+    private List<PublicacionProducto> favorito;//publicacionProductos?
+
+    @OneToMany(mappedBy="Usuario")
+    @Column(nullable = true)
+    private List<Compra> compra;//publicacionProductos?
+
+
+
+    /////////////////////
+
+
+
+
 }

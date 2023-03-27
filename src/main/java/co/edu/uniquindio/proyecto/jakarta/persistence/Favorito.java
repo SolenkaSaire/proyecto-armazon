@@ -10,14 +10,19 @@ import java.lang.reflect.Array;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 
 public class Favorito  implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false, length = 50)
-    
     @EqualsAndHashCode.Include
     private int codigo;
+
+    
+    
+    
 
 }

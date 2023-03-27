@@ -11,6 +11,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Compra implements Serializable {
@@ -28,11 +29,23 @@ public class Compra implements Serializable {
     @Column(nullable = false, length = 50)
     private LocalDateTime fecha_creacion;
 
-    @ManyToMany(mappedBy = "publicacionProductos")
-    private List<PublicacionProducto> publicacionProductos;
+    @OneToMany(mappedBy = "Compra")
+    private List<MetodoPago> metodoPagos;
 
     @ManyToOne
     @JoinColumn(nullable = false)
     private Usuario usuario;
+
+    @ManyToMany
+    @JoinTable(name = "detalle_compra",
+            joinColumns = @JoinColumn(name = "codigo_compra"),
+            inverseJoinColumns = @JoinColumn(name = "codigo_producto")
+    )
+    private List<PublicacionProducto> publicacionProductos;
+
+    /////////////////////////////////////
+
+
+
 
 }

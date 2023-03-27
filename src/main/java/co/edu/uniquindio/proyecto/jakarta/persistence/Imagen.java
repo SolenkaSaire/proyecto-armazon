@@ -9,7 +9,10 @@ import java.io.Serializable;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+
 public class Imagen implements Serializable {
 
     @Id
@@ -20,9 +23,10 @@ public class Imagen implements Serializable {
 
     @Column(nullable = false, length = 50)
     private String ruta_URL;
-
-
+    
     @ManyToOne
     @JoinColumn(nullable = false)
     private Producto producto;
+    
+    /////////////////7
 }

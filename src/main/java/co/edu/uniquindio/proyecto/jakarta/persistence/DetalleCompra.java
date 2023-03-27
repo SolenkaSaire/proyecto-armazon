@@ -9,6 +9,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class DetalleCompra implements Serializable {
@@ -23,4 +24,9 @@ public class DetalleCompra implements Serializable {
 
     @Column(nullable = false, length = 50)
     private double precio;
+//////////////////////////
+     @ManyToOne
+     private PublicacionProducto publicacionProducto;
+
+
 }

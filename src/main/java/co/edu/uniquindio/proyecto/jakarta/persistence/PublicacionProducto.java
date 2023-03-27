@@ -2,6 +2,7 @@ package co.edu.uniquindio.proyecto.jakarta.persistence;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.*;
 
 import java.io.Serializable;
@@ -11,6 +12,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class PublicacionProducto implements Serializable {
@@ -30,24 +32,40 @@ public class PublicacionProducto implements Serializable {
     @Column(nullable = false)
     private double precio;
     @Column(nullable = false)
+    @PositiveOrZero
     private int disponibilidad;
     @Column(nullable = false)
     private String descripcion;
 
-
     @ManyToMany
-    @JoinTable(name = "comentario",
+    @JoinTable(name = "comentarios",
             joinColumns = @JoinColumn(name = "cedula_usuario"),
             inverseJoinColumns = @JoinColumn(name = "codigo_publicacion")
     )
     private List<Usuario> usuarios;
 
+    @ManyToMany(mappedBy = "favoritos")
+    private List<Usuario> favoritos;
+
     @ManyToMany(mappedBy = "moderadores")
     private List<Moderador> moderadores;
 
-    @ManyToMany(mappedBy = "compras")
+
+    @ManyToMany
+    @JoinTable(name = "detalle_compra",
+                    joinColumns = @JoinColumn(name = "codigo_compra"),
+                    inverseJoinColumns = @JoinColumn(name = "codigo_producto")
+    )
     private List<Compra> compras;
 
-    @ManyToMany(mappedBy = "favoritos")
-    private List<Usuario> favoritos;
+    @ManyToOne
+    private Producto producto;
+
+    ///////////////////
+
+
+
+
+
+
 }

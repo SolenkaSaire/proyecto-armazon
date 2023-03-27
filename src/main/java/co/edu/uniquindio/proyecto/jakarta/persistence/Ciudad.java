@@ -9,6 +9,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Ciudad implements Serializable{
@@ -21,6 +22,12 @@ public class Ciudad implements Serializable{
     @Column(nullable = false, length = 50)
     private String ciudad;
 
+
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Producto producto;
+
+///////////////////////////////////////////////
     @ManyToOne
     @JoinColumn(nullable = false)
     private Usuario usuario;

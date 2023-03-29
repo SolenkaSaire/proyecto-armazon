@@ -14,7 +14,7 @@ import java.io.Serializable;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class DetalleCompra implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, length = 50)
     @EqualsAndHashCode.Include
     private int codigo;
@@ -28,5 +28,7 @@ public class DetalleCompra implements Serializable {
      @ManyToOne
      private PublicacionProducto publicacionProducto;
 
+     @ManyToOne
+     private Compra compra;
 
 }

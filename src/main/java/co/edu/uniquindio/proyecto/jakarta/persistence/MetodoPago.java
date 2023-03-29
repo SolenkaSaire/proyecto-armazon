@@ -12,9 +12,6 @@ public enum MetodoPago {
     MASTERCARD,
     DAVIPLATA,
     CREDITO;
-
-
-    @ManyToOne
-    private Compra compra;
+    
 
 }

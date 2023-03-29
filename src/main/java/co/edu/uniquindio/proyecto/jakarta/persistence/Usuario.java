@@ -12,16 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Usuario extends Cuenta implements Serializable {
-    @OneToOne
-    private Cuenta cuenta;
-
-    /////////////////////// 1 A 1 O SOLO EXTENDS???????
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @EqualsAndHashCode.Include
-    private int cedula;
 
     @Column(nullable = false, length = 50)
     private String nombre;
@@ -35,24 +26,17 @@ public class Usuario extends Cuenta implements Serializable {
     @Column(length = 10)
     private String telefono;
 
+    @OneToMany(mappedBy = "usuario")
+    private List<Comentario> comentario;//publicacionProductos?
+
+    @OneToMany(mappedBy = "vendedor")
+    private List<PublicacionProducto> misProductos;
 
     @ManyToMany
-    @JoinTable(name = "comentarios",
-            joinColumns = @JoinColumn(name = "cedula_usuario"),
-            inverseJoinColumns = @JoinColumn(name = "codigo_publicacion")
-    )
-    @Column(nullable = true)
-    private List<PublicacionProducto> comentario;//publicacionProductos?
+    private List<PublicacionProducto> publicacionesFavoritas;//publicacionProductos?
 
-
-    @ManyToMany(mappedBy = "favoritos")
-    @Column(nullable = true)
-    private List<PublicacionProducto> favorito;//publicacionProductos?
-
-    @OneToMany(mappedBy="Usuario")
-    @Column(nullable = true)
+    @OneToMany(mappedBy="usuario")
     private List<Compra> compra;//publicacionProductos?
-
 
 
     /////////////////////

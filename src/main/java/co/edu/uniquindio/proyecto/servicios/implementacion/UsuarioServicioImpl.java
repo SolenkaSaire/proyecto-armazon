@@ -6,7 +6,6 @@ import co.edu.uniquindio.proyecto.jakarta.persistence.Usuario;
 import co.edu.uniquindio.proyecto.repositorios.UsuarioRepo;
 import co.edu.uniquindio.proyecto.servicios.interfaces.UsuarioServicio;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
 
@@ -30,7 +29,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     }
 
     @Override
-    public int actualizarUsuario(int codigoUsuario, UsuarioDTO usuarioDTO) throws Exception{
+    public int actualizarUsuario(int codigoUsuario, UsuarioDTO usuarioDTO) throws Exception {
 
         /**
          * TODO Validar que el correo no se repita
@@ -52,7 +51,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     }
 
     @Override
-    public UsuarioGetDTO obtenerUsuario(int codigoUsuario) throws Exception{
+    public UsuarioGetDTO obtenerUsuario(int codigoUsuario) throws Exception {
         return convertir( obtener(codigoUsuario) );
     }
 

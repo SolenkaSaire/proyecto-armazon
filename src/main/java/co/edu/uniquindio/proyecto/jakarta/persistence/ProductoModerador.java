@@ -20,20 +20,19 @@ public class ProductoModerador implements Serializable {
     @EqualsAndHashCode.Include
     private int codigo_estado;
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false)
     private LocalDateTime fecha;
 
     @Column(nullable = false, length = 50)
     private String motivo;
 
-
-    @OneToMany(mappedBy="productoModerador")
-    private List<Estado> estado;
-   
-    
-/*
-    @ManyToOne
-    @JoinColumn(nullable = false)
     private Estado estado;
-*/
+
+
+    @ManyToOne
+    private PublicacionProducto publicacionProducto;
+
+    @ManyToOne
+    private Moderador moderador;
+
 }

@@ -37,32 +37,32 @@ public class PublicacionProducto implements Serializable {
     @Column(nullable = false)
     private String descripcion;
 
-    @ManyToMany
-    @JoinTable(name = "comentarios",
-            joinColumns = @JoinColumn(name = "cedula_usuario"),
-            inverseJoinColumns = @JoinColumn(name = "codigo_publicacion")
-    )
-    private List<Usuario> usuarios;
+    @ManyToOne
+    private Usuario vendedor;
 
-    @ManyToMany(mappedBy = "favoritos")
+    @ManyToMany(mappedBy = "publicacionesFavoritas")
     private List<Usuario> favoritos;
 
-    @ManyToMany(mappedBy = "moderadores")
-    private List<Moderador> moderadores;
+    @OneToMany(mappedBy = "publicacionProducto")
+    private List<ProductoModerador> moderadores;
 
+    @OneToMany(mappedBy = "publicacionProducto")
+    private List<DetalleCompra> compras;
 
-    @ManyToMany
-    @JoinTable(name = "detalle_compra",
-                    joinColumns = @JoinColumn(name = "codigo_compra"),
-                    inverseJoinColumns = @JoinColumn(name = "codigo_producto")
-    )
-    private List<Compra> compras;
+    @OneToMany(mappedBy = "publicacionProducto")
+    private List<Comentario> comentarios;
 
     @ManyToOne
     private Producto producto;
 
+
+    @Column(nullable = false)
+    private Estado estado;
+
     ///////////////////
 
+    @ManyToMany
+    private List<Ciudad> ciudades;
 
 
 

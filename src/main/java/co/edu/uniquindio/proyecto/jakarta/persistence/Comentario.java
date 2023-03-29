@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Comentario implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, length = 50)
     @EqualsAndHashCode.Include
     private int codigo;
@@ -29,7 +29,11 @@ public class Comentario implements Serializable {
     @Column(nullable = false, length = 50)
     private LocalDateTime fecha_creacion;
 
+    @ManyToOne
+    private Usuario usuario;
 
+    @ManyToOne
+    private PublicacionProducto publicacionProducto;
 
 
 

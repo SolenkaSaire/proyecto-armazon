@@ -16,7 +16,7 @@ import java.util.List;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Compra implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private int codigo;
 
@@ -26,22 +26,17 @@ public class Compra implements Serializable {
     @Column(nullable = false, length = 50)
     private String metodoPago;
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false)
     private LocalDateTime fecha_creacion;
 
-    @OneToMany(mappedBy = "Compra")
-    private List<MetodoPago> metodoPagos;
+    private MetodoPago metodoPagos;
 
     @ManyToOne
     @JoinColumn(nullable = false)
     private Usuario usuario;
 
-    @ManyToMany
-    @JoinTable(name = "detalle_compra",
-            joinColumns = @JoinColumn(name = "codigo_compra"),
-            inverseJoinColumns = @JoinColumn(name = "codigo_producto")
-    )
-    private List<PublicacionProducto> publicacionProductos;
+    @OneToMany(mappedBy = "compra" )
+    private List<DetalleCompra> publicacionProductos;
 
     /////////////////////////////////////
 

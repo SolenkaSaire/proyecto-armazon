@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Getter
@@ -14,7 +15,7 @@ import java.io.Serializable;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Ciudad implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     @Column(nullable = false, length = 50)
     private int codigo;
@@ -22,13 +23,7 @@ public class Ciudad implements Serializable{
     @Column(nullable = false, length = 50)
     private String ciudad;
 
+    @ManyToMany(mappedBy = "ciudades")
+    private List<PublicacionProducto> producto;
 
-    @ManyToOne
-    @JoinColumn(nullable = false)
-    private Producto producto;
-
-///////////////////////////////////////////////
-    @ManyToOne
-    @JoinColumn(nullable = false)
-    private Usuario usuario;
 }

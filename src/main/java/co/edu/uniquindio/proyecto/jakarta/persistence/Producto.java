@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -16,35 +15,24 @@ import java.util.List;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Producto implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, length = 50)
     @EqualsAndHashCode.Include
     private int codigo;
 
     @Column(nullable = false, length = 50)
-    private Estado estado;
-
-    @Column(nullable = false, length = 50)
     private String nombre;
 
-
-    //@ElementCollection
+    @ElementCollection
     @Enumerated(value = EnumType.STRING)
-    @OneToMany(mappedBy="Producto")
-    @Column(nullable = false, length = 50)
     private List<Categoria> categoria;
 
-
-    @OneToMany(mappedBy="Producto")
-    @Column(nullable = false, length = 50)
-    private List<Ciudad> ciudad;
-
-    @OneToMany(mappedBy="Producto")
-    @Column(nullable = false, length = 50)
-    private List<Imagen> imagenes;
-
-    @OneToMany(mappedBy="Producto")
+    @ElementCollection
     @Column(nullable = false)
+    //@JoinColumn(name = "ruta_imagen")
+    private List<String> imagenes;
+
+    @OneToMany(mappedBy="producto")
     private List<PublicacionProducto> publicacionProductos;
 
 //////////////////////////

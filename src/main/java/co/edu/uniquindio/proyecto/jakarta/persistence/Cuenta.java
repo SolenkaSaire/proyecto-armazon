@@ -10,7 +10,6 @@ import jakarta.persistence.ManyToMany;
 
 
 @MappedSuperclass
-@Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Getter
 @Setter
@@ -18,17 +17,9 @@ import jakarta.persistence.ManyToMany;
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Cuenta implements Serializable {
-   /* @OneToOne(mappedBy="Cuenta")
-    private Usuario usuario;
-
-    @OneToOne(mappedBy="cuenta")
-    private Moderador moderador;
-    /////////////////////////1 A 1 O EXTENDS
-    
-    */
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private int codigo;
 

@@ -2,9 +2,11 @@ package co.edu.uniquindio.proyecto.servicios.implementacion;
 
 import co.edu.uniquindio.proyecto.dto.ProductoDTO;
 import co.edu.uniquindio.proyecto.dto.ProductoGetDTO;
+import co.edu.uniquindio.proyecto.dto.PublicacionProductoDTO;
 import co.edu.uniquindio.proyecto.jakarta.persistence.Categoria;
 import co.edu.uniquindio.proyecto.jakarta.persistence.Estado;
 import co.edu.uniquindio.proyecto.jakarta.persistence.Producto;
+import co.edu.uniquindio.proyecto.jakarta.persistence.PublicacionProducto;
 import co.edu.uniquindio.proyecto.repositorios.ProductoRepo;
 import co.edu.uniquindio.proyecto.servicios.interfaces.ProductoServicio;
 import lombok.AllArgsConstructor;
@@ -21,17 +23,36 @@ public class ProductoServicioImpl implements ProductoServicio {
 
 
     @Override
-    public int crearProducto(ProductoDTO productoDTO) throws Exception{
-        /*Producto producto = new Producto();
+    public int crearProducto(ProductoDTO productoDTO, PublicacionProductoDTO publicacionProductoDTO) throws Exception{
+        //producto: codigo;nombre;categoria;imagenes;publicacionProductos;
+        Producto producto = new Producto();
         producto.setNombre(productoDTO.getNombre());
-        producto.setCodigo(productoDTO.getCodigoVendedor());
-        producto.setCategoria(producto.getCategoria());
-        producto.setCiudad(producto.getCiudad());
-        producto.setEstado(producto.getEstado());
-        producto.setPublicacionProductos(producto.getPublicacionProductos());
-        producto.setImagenes(producto.getImagenes());*/
+        producto.setCategoria(productoDTO.getCategorias());//como ahi
+        producto.setImagenes(productoDTO.getImagenes());
+//codigo;fecha_publicacion;promedioEstrellas;fechaCreacion;fechaLimite;precio;disponibilidad;descripcion;
+
+        PublicacionProducto publicacionProducto= new PublicacionProducto();
+        publicacionProducto.setFecha_publicacion(publicacionProductoDTO.getFecha_publicacion());
+        publicacionProducto.setPromedioEstrellas(publicacionProductoDTO.getPromedioEstrellas());
+        publicacionProducto.setFechaCreacion(publicacionProductoDTO.getFechaCreacion());
+        publicacionProducto.setFechaLimite(publicacionProductoDTO.getFechaLimite());
+        publicacionProducto.setEstado(publicacionProductoDTO.getEstado());
+        publicacionProducto.setPrecio(publicacionProductoDTO.getPrecio());
+        publicacionProducto.setDisponibilidad(publicacionProductoDTO.getDisponibilidad());
+        publicacionProducto.setDescripcion(publicacionProducto.getDescripcion());
+        publicacionProducto.setCiudades(publicacionProductoDTO.getCiudad());
+      //  publicacionProducto.set
+
+//me sale un poco de errores al ahcerle status, a mi no me sale normal
+
+
 
         //return productoRepo.save(productoDTO);
+    return 0;
+    }
+
+    @Override
+    public int crearProducto(ProductoDTO productoDTO) throws Exception {
         return 0;
     }
 
@@ -82,7 +103,7 @@ public class ProductoServicioImpl implements ProductoServicio {
 
     @Override
     public List<ProductoGetDTO> listarProductosNombre(String nombre) {
-        List<Producto> productos = productoRepo.listarPorNombre(nombre);
+        List<Producto> productos = productoRepo.listarProductosNombre(nombre);
         List<ProductoGetDTO> respuesta= new ArrayList<>();
 
         for (Producto p: productos) {

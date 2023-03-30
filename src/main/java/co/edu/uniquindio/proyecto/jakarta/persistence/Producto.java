@@ -35,7 +35,9 @@ public class Producto implements Serializable {
     @OneToMany(mappedBy="producto")
     private List<PublicacionProducto> publicacionProductos;
 
-//////////////////////////
+
+
+//////////////////////////codigo;nombre;categoria;imagenes;publicacionProductos;
 
 }
 

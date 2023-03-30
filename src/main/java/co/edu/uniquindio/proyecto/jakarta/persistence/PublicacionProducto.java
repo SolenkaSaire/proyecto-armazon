@@ -17,29 +17,38 @@ import java.util.List;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class PublicacionProducto implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private int codigo;
     @Column(nullable = false)
     private LocalDateTime fecha_publicacion;
+
     @Column(nullable = true)
     private Double promedioEstrellas;
+
     @Column(nullable = false)
     private LocalDateTime fechaCreacion;
+
     @Column(nullable = false)
     private LocalDateTime fechaLimite;
+
     @Positive
     @Column(nullable = false)
     private double precio;
+
     @Column(nullable = false)
     @PositiveOrZero
     private int disponibilidad;
+
     @Column(nullable = false)
     private String descripcion;
 
+
+
+
     @ManyToOne
     private Usuario vendedor;
-
+//codigo;fecha_publicacion;promedioEstrellas;fechaCreacion;fechaLimite;precio;disponibilidad;descripcion;
     @ManyToMany(mappedBy = "publicacionesFavoritas")
     private List<Usuario> favoritos;
 

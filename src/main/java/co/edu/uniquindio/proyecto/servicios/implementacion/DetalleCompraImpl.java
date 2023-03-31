@@ -15,10 +15,22 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class DetalleCompraImpl implements DetalleCompraServicio {
+    @Override
+    public int crearDetalleCompra(DetalleCompraDTO detalleCompraDTO) throws Exception {
+        return 0;
+    }
 
+    @Override
+    public DetalleCompraDTO obtenerProducto(int codigoCompra) {
+        return null;
+    }
+
+    @Override
+    public List<DetalleCompraGetDTO> listarProductosUsuario(int codigoUsuario) {
+        return null;
+    }
+/*
     private  final DetalleCompraRepo detalleCompraRepo;
-
-
 
     @Override
     public int crearDetalleCompra(DetalleCompraDTO detalleCompraDTO) throws Exception {
@@ -40,4 +52,6 @@ public class DetalleCompraImpl implements DetalleCompraServicio {
     public List<DetalleCompraGetDTO> listarProductosUsuario(int codigoUsuario) {
         return null;
     }
+    */
+
 }

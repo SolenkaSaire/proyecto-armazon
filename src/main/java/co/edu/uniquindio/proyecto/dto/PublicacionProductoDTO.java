@@ -2,6 +2,7 @@ package co.edu.uniquindio.proyecto.dto;
 
 import co.edu.uniquindio.proyecto.jakarta.persistence.Ciudad;
 import co.edu.uniquindio.proyecto.jakarta.persistence.Estado;
+import co.edu.uniquindio.proyecto.jakarta.persistence.Usuario;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,4 +25,5 @@ public class PublicacionProductoDTO {
     private String descripcion;
     private Estado estado;
     public List<Ciudad> Ciudad;
+    public Usuario vendedor;
 }

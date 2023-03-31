@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyecto.dto;
 
 
+import co.edu.uniquindio.proyecto.jakarta.persistence.Usuario;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,4 +19,6 @@ public class PublicacionProductoGetDTO {
     private double precio;
     private int disponibilidad;
     private String descripcion;
+    public Usuario vendedor;
+
 }

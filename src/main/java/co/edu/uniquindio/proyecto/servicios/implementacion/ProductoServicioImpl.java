@@ -8,6 +8,7 @@ import co.edu.uniquindio.proyecto.jakarta.persistence.Estado;
 import co.edu.uniquindio.proyecto.jakarta.persistence.Producto;
 import co.edu.uniquindio.proyecto.jakarta.persistence.PublicacionProducto;
 import co.edu.uniquindio.proyecto.repositorios.ProductoRepo;
+import co.edu.uniquindio.proyecto.repositorios.PublicacionProductoRepo;
 import co.edu.uniquindio.proyecto.servicios.interfaces.ProductoServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ import java.util.List;
 public class ProductoServicioImpl implements ProductoServicio {
 
     private final ProductoRepo productoRepo;
+    private final PublicacionProductoRepo publicacionProductoRepo;
 
 
     @Override
@@ -29,26 +31,27 @@ public class ProductoServicioImpl implements ProductoServicio {
         producto.setNombre(productoDTO.getNombre());
         producto.setCategoria(productoDTO.getCategorias());//como ahi
         producto.setImagenes(productoDTO.getImagenes());
-//codigo;fecha_publicacion;promedioEstrellas;fechaCreacion;fechaLimite;precio;disponibilidad;descripcion;
+
+//codigo;fecha_publicacion;promedioEstrellas;fechaCreacion;fechaLimite;precio;disponibilidad;descripcion, Usuario, vendedor
+//  List<Usuario> favoritos;List<ProductoModerador> moderadores;List<DetalleCompra> compras;  List<Comentario> comentarios;
+        //Estado estado; List<Ciudad> ciudades;
 
         PublicacionProducto publicacionProducto= new PublicacionProducto();
         publicacionProducto.setFecha_publicacion(publicacionProductoDTO.getFecha_publicacion());
         publicacionProducto.setPromedioEstrellas(publicacionProductoDTO.getPromedioEstrellas());
-        publicacionProducto.setFechaCreacion(publicacionProductoDTO.getFechaCreacion());
+       // publicacionProducto.setFechaCreacion(publicacionProductoDTO.getFechaCreacion());
         publicacionProducto.setFechaLimite(publicacionProductoDTO.getFechaLimite());
         publicacionProducto.setEstado(publicacionProductoDTO.getEstado());
         publicacionProducto.setPrecio(publicacionProductoDTO.getPrecio());
         publicacionProducto.setDisponibilidad(publicacionProductoDTO.getDisponibilidad());
-        publicacionProducto.setDescripcion(publicacionProducto.getDescripcion());
+        publicacionProducto.setDescripcion(publicacionProductoDTO.getDescripcion());
         publicacionProducto.setCiudades(publicacionProductoDTO.getCiudad());
-      //  publicacionProducto.set
+        publicacionProducto.setVendedor(publicacionProductoDTO.getVendedor());
 
-//me sale un poco de errores al ahcerle status, a mi no me sale normal
+       // return publicacionProductoRepo.save( publicacionProducto ).getCodigo();//esto? voy a mirar
+//tenemos varios errores, ahi en las excepciones dice que en usuarioRepo utilizamos correo, y usuario tiene email, no correo
 
-
-
-        //return productoRepo.save(productoDTO);
-    return 0;
+        return publicacionProductoRepo.save(publicacionProducto).getCodigo();
     }
 
     @Override

@@ -44,11 +44,12 @@ public class PublicacionProducto implements Serializable {
     private String descripcion;
 
 
-
-
     @ManyToOne
     private Usuario vendedor;
-//codigo;fecha_publicacion;promedioEstrellas;fechaCreacion;fechaLimite;precio;disponibilidad;descripcion;
+//codigo;fecha_publicacion;promedioEstrellas;fechaCreacion;fechaLimite;precio;disponibilidad;descripcion, Usuario, vendedor
+//  List<Usuario> favoritos;List<ProductoModerador> moderadores;List<DetalleCompra> compras;  List<Comentario> comentarios;
+    //Estado estado; List<Ciudad> ciudades;
+
     @ManyToMany(mappedBy = "publicacionesFavoritas")
     private List<Usuario> favoritos;
 

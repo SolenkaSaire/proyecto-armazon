@@ -16,14 +16,17 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class CompraServicioImpl implements CompraServicio {
+
+    /*
     private final CompraRepo compraRepo;
     private final DetalleCompraRepo detalleCompraRepo;
     private final UsuarioServicio usuarioServicio;
     private final ProductoServicio productoServicio;
     private final PublicacionProductoServicio publicacionProductoServicio;
-
+*/
     @Override
     public int crearCompra(CompraDTO compraDTO) {
+
         return 0;
     }
 

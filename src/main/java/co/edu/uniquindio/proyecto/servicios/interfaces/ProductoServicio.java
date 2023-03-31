@@ -2,6 +2,7 @@ package co.edu.uniquindio.proyecto.servicios.interfaces;
 
 import co.edu.uniquindio.proyecto.dto.ProductoDTO;
 import co.edu.uniquindio.proyecto.dto.ProductoGetDTO;
+import co.edu.uniquindio.proyecto.dto.PublicacionProductoDTO;
 import co.edu.uniquindio.proyecto.jakarta.persistence.Categoria;
 import co.edu.uniquindio.proyecto.jakarta.persistence.Estado;
 
@@ -9,6 +10,8 @@ import java.util.List;
 
 public interface ProductoServicio {
 
+
+    int crearProducto(ProductoDTO productoDTO, PublicacionProductoDTO publicacionProductoDTO) throws Exception;
 
     int crearProducto(ProductoDTO productoDTO) throws Exception;
 

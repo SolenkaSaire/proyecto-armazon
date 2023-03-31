@@ -8,6 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class DetalleCompraDTO {
+
     private int codigoProducto;
     private int unidades;
     private float precio;

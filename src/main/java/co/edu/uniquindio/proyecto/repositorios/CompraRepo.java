@@ -7,6 +7,7 @@ import java.util.List;
 public interface CompraRepo {
     Compra save(Compra compra);
 
+    /////ola
     List<Compra> findByCodigoUsuario(int codigoUsuario);
 
 }

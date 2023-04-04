@@ -2,6 +2,7 @@ package co.edu.uniquindio.proyecto.servicios.implementacion;
 
 import co.edu.uniquindio.proyecto.dto.CompraDTO;
 import co.edu.uniquindio.proyecto.dto.CompraGetDTO;
+import co.edu.uniquindio.proyecto.jakarta.persistence.DetalleCompra;
 import co.edu.uniquindio.proyecto.repositorios.CompraRepo;
 import co.edu.uniquindio.proyecto.repositorios.DetalleCompraRepo;
 import co.edu.uniquindio.proyecto.servicios.interfaces.CompraServicio;
@@ -11,22 +12,26 @@ import co.edu.uniquindio.proyecto.servicios.interfaces.UsuarioServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @AllArgsConstructor
 public class CompraServicioImpl implements CompraServicio {
 
-    /*
+
     private final CompraRepo compraRepo;
     private final DetalleCompraRepo detalleCompraRepo;
     private final UsuarioServicio usuarioServicio;
     private final ProductoServicio productoServicio;
     private final PublicacionProductoServicio publicacionProductoServicio;
-*/
+
     @Override
     public int crearCompra(CompraDTO compraDTO) {
-
+        /*
+        List<DetalleCompra> detalle = new ArrayList<>();
+        float total = 0;
+        for(DetalleCompraDTO de :)*/
         return 0;
     }
 

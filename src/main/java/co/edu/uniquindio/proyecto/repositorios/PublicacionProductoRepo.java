@@ -13,10 +13,10 @@ import java.util.List;
 public interface PublicacionProductoRepo extends JpaRepository<PublicacionProducto, Integer> {
 
     @Query("select p from PublicacionProducto p where p.vendedor.codigo = :codigoUsuario")
-    List<Producto> listarProductosUsuario(int codigoUsuario);
+    List<PublicacionProducto> listarProductosUsuario(int codigoUsuario);
 
     @Query("select p from PublicacionProducto p where p.producto.nombre like concat( '%', :nombre, '%' ) and p.estado = 1")
-    List<Producto> listarProductosNombre(String nombre);
+    List<PublicacionProducto> listarProductosNombre(String nombre);
 
     @Query("select p.producto.nombre, p.ciudades from PublicacionProducto p where p.ciudades = :codigo")
     List<Object[]> obtenerProductos(int codigo);

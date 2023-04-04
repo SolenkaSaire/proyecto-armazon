@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyecto.dto;
 
 import co.edu.uniquindio.proyecto.jakarta.persistence.Categoria;
+import co.edu.uniquindio.proyecto.jakarta.persistence.Estado;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,7 +16,7 @@ public class ProductoGetDTO {
 
     private int codigo;
 
-    private boolean estado;
+    private Estado estado;
 
     private LocalDateTime fechaLimite;
 
@@ -23,9 +24,9 @@ public class ProductoGetDTO {
 
     private String descripcion;
 
-    private int unidades;
+    private int disponibilidad;
 
-    private float precio;
+    private double precio;
 
     private int codigoVendedor;
 

@@ -13,9 +13,11 @@ public interface ProductoServicio {
 
     int crearProducto(ProductoDTO productoDTO, PublicacionProductoDTO publicacionProductoDTO) throws Exception;
 
-    int crearProducto(ProductoDTO productoDTO) throws Exception;
 
-    int actualizarProducto(int codigoProducto, ProductoDTO productoDTO);
+
+    int actualizarProducto(int codigoProducto, ProductoGetDTO productoGetDTO, PublicacionProductoDTO publicacionProductoDTO);
+
+
 
     int actualizarUnidades(int codigoProducto, int unidades);
 

@@ -51,7 +51,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     }
 
     @Override
-    public UsuarioGetDTO obtenerUsuario(int codigoUsuario) throws Exception {
+    public UsuarioGetDTO obtenerUsuario(int codigoUsuario) throws Exception{
         return convertir( obtener(codigoUsuario) );
     }
 

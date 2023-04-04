@@ -3,11 +3,7 @@ package co.edu.uniquindio.proyecto.servicios.implementacion;
 import co.edu.uniquindio.proyecto.dto.ProductoDTO;
 import co.edu.uniquindio.proyecto.dto.ProductoGetDTO;
 import co.edu.uniquindio.proyecto.dto.PublicacionProductoDTO;
-import co.edu.uniquindio.proyecto.dto.PublicacionProductoGetDTO;
-import co.edu.uniquindio.proyecto.jakarta.persistence.Categoria;
-import co.edu.uniquindio.proyecto.jakarta.persistence.Estado;
-import co.edu.uniquindio.proyecto.jakarta.persistence.Producto;
-import co.edu.uniquindio.proyecto.jakarta.persistence.PublicacionProducto;
+import co.edu.uniquindio.proyecto.jakarta.persistence.*;
 import co.edu.uniquindio.proyecto.repositorios.ProductoRepo;
 import co.edu.uniquindio.proyecto.repositorios.PublicacionProductoRepo;
 import co.edu.uniquindio.proyecto.servicios.interfaces.ProductoServicio;
@@ -16,6 +12,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -86,7 +84,7 @@ public class ProductoServicioImpl implements ProductoServicio {
             }
 
 
-        return 0;
+        return productoRepo.save(producto).getCodigo();
     }
 
     @Override
@@ -101,23 +99,53 @@ public class ProductoServicioImpl implements ProductoServicio {
         }
 
 
-        return 0;
+        return productoRepo.save(producto).getCodigo();
     }
 
     @Override
     public int actualizarEstado(int codigoProducto, Estado estado) {
-        return 0;
+        Producto producto= new Producto();
+
+        for (PublicacionProducto p :producto.getPublicacionProductos() ) {
+            if (producto.getCodigo() == codigoProducto) {
+                p.setEstado(estado);
+                break;
+            }
+        }
+        return productoRepo.save(producto).getCodigo();
     }
 
     @Override
     public int eliminarProducto(int codigoProducto) {
+        Producto producto= new Producto();
+
+        for (PublicacionProducto p :producto.getPublicacionProductos() ) {
+            if (producto.getCodigo() == codigoProducto) {
+               producto.getPublicacionProductos().remove(p);
+                break;
+            }
+        }
+
         return 0;
+
     }
 
     @Override
-    public ProductoGetDTO obtenerProducto(int codigoProducto) {
-        return null;
-    }
+    public PublicacionProducto obtenerProducto(int codigoProducto) {
+
+        Optional<PublicacionProducto> publicacionProducto = publicacionProductoRepo.findById(codigoProducto);
+
+        if(publicacionProducto.isEmpty() ){
+            try {
+                throw new Exception("El código "+codigoProducto+" no está asociado a ningún producto");
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        return publicacionProducto.get();
+
+     }
 
     @Override
     public List<ProductoGetDTO> listarProductosUsuario(int codigoUsuario) {
@@ -132,6 +160,7 @@ public class ProductoServicioImpl implements ProductoServicio {
 
         return respuesta;
     }
+
 
     private ProductoGetDTO convertir(Producto producto, PublicacionProducto publicacionProducto){
         //PRODUCTO
@@ -159,17 +188,45 @@ public class ProductoServicioImpl implements ProductoServicio {
 
     @Override
     public List<ProductoGetDTO> listarProductosCategoria(Categoria categoria) {
-        return null;
+
+        List<Producto> listaProductos = productoRepo.listarProductosCategoria(categoria);
+        List<PublicacionProducto> listaPublicaciones = publicacionProductoRepo.listarProductosCategoria(categoria);
+        List<ProductoGetDTO> respuesta = new ArrayList<>();
+
+        for(int i = 0; i < listaProductos.size(); i++){
+            respuesta.add( convertir(listaProductos.get(i), listaPublicaciones.get(i)) );
+        }
+
+        return respuesta;
+
     }
+
 
     @Override
     public List<ProductoGetDTO> listarProductosPorEstado(Estado estado) {
-        return null;
+
+        List<Producto> listaProductos = productoRepo.listarProductosEstado(estado);
+        List<PublicacionProducto> listaPublicaciones = publicacionProductoRepo.listarProductosEstado(estado);
+        List<ProductoGetDTO> respuesta = new ArrayList<>();
+
+        for(int i = 0; i < listaProductos.size(); i++){
+            respuesta.add( convertir(listaProductos.get(i), listaPublicaciones.get(i)) );
+        }
+
+        return respuesta;
     }
 
     @Override
     public List<ProductoGetDTO> listarProductosFavoritos(int codigoUsuario) {
-        return null;
+        //usuarioServicio.validarExiste(codigoUsuario);
+        //return convertir(productoRepo.listarProductosFavoritos(codigoUsuario));
+        List<Producto> listaProductos = productoRepo.listarProductosFavoritos(codigoUsuario);
+        List<PublicacionProducto> listaPublicaciones = publicacionProductoRepo.listarProductosFavoritos(codigoUsuario);
+        List<ProductoGetDTO> respuesta = new ArrayList<>();
+        for(int i = 0; i < listaProductos.size(); i++){
+            respuesta.add( convertir(listaProductos.get(i), listaPublicaciones.get(i)) );
+        }
+        return respuesta;
     }
 
     @Override
@@ -178,14 +235,29 @@ public class ProductoServicioImpl implements ProductoServicio {
         List<ProductoGetDTO> respuesta= new ArrayList<>();
 
         for (Producto p: productos) {
-            //respuesta.add(convertir(p));
+         //   respuesta.add(convertir(p));
         }
+
+        return respuesta;
+        //return convertir(productoRepo.listarProductosNombre(nombre));
+    }
+
+
+
+    @Override
+    public List<ProductoGetDTO> listarProductosPrecio(float precioMinimo, float precioMaximo, int codigo) {
+
+        List<Producto> lista = productoRepo.listarProductoPrecio(codigo);
+        List<ProductoGetDTO> respuesta= new ArrayList<>();
+
+            for(Producto p: lista){
+              //  respuesta.add(convertir());
+            }
+
+
 
         return respuesta;
     }
 
-    @Override
-    public List<ProductoGetDTO> listarProductosPrecio(float precioMinimo, float precioMaximo) {
-        return null;
-    }
+
 }

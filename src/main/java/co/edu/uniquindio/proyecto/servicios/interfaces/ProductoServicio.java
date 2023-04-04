@@ -5,6 +5,7 @@ import co.edu.uniquindio.proyecto.dto.ProductoGetDTO;
 import co.edu.uniquindio.proyecto.dto.PublicacionProductoDTO;
 import co.edu.uniquindio.proyecto.jakarta.persistence.Categoria;
 import co.edu.uniquindio.proyecto.jakarta.persistence.Estado;
+import co.edu.uniquindio.proyecto.jakarta.persistence.PublicacionProducto;
 
 import java.util.List;
 
@@ -25,8 +26,7 @@ public interface ProductoServicio {
 
     int eliminarProducto(int codigoProducto);
 
-    ProductoGetDTO obtenerProducto(int codigoProducto);
-
+    PublicacionProducto obtenerProducto(int codigoProducto);
     List<ProductoGetDTO> listarProductosUsuario(int codigoUsuario);
 
     List<ProductoGetDTO> listarProductosCategoria(Categoria categoria);
@@ -37,6 +37,6 @@ public interface ProductoServicio {
 
     List<ProductoGetDTO> listarProductosNombre(String nombre);
 
-    List<ProductoGetDTO> listarProductosPrecio(float precioMinimo, float precioMaximo);
+    List<ProductoGetDTO> listarProductosPrecio(float precioMinimo, float precioMaximo, int codigoProducto);
 
 }

@@ -12,6 +12,7 @@ import java.util.List;
 @Setter
 public class CompraDTO {
 
+    private double total;
     private int codigoUsuario;
     private MetodoPago metodoPago;
     private List<DetalleCompraDTO> detalleCompraDTO;

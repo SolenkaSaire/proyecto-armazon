@@ -15,7 +15,7 @@ public enum Categoria {
     HOGAR,
     COCHES,
     PINTURA,
-    herramientas;
+    HERRAMIENTAS;
 
 
 }

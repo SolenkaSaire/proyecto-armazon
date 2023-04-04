@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyecto.jakarta.persistence;
 
+import co.edu.uniquindio.proyecto.dto.UsuarioGetDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,9 +23,6 @@ public class Compra implements Serializable {
 
 
     private Double total;
-
-    @Column(nullable = false, length = 50)
-    private String metodoPago;
 
     @Column(nullable = false)
     private LocalDateTime fecha_creacion;

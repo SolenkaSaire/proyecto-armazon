@@ -1,11 +1,14 @@
 package co.edu.uniquindio.proyecto.repositorios;
 
-import co.edu.uniquindio.proyecto.jakarta.persistence.Producto;
+import co.edu.uniquindio.proyecto.jakarta.persistence.*;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 /*
 public interface ProductoRepo extends JpaRepository<Producto, Integer > {
 
@@ -27,6 +30,17 @@ public interface ProductoRepo extends JpaRepository<Producto, Integer> {
     @Query("select p from PublicacionProducto p where p.producto.nombre like concat( '%', :nombre, '%' ) and p.estado = 1")
     List<Producto> listarProductosNombre(String nombre);
 
+    @Query("select p from Producto p where p.categoria = :categoria")
+    List<Producto> listarProductosCategoria(Categoria categoria);
 
+    @Query("select p from PublicacionProducto p where p.estado = :estado")
+    List<Producto> listarProductosEstado(Estado estado);
 
+    //PublicacionProducto findByCodigoProducto(int codigoProducto);
+
+    @Query("select p from PublicacionProducto p where p.favoritos = :codigoUsuario")
+    List<Producto> listarProductosFavoritos(int codigoUsuario);
+
+    @Query("select  p from PublicacionProducto p where p.precio=:codigoProducto")
+    List<Producto> listarProductoPrecio(int codigoProducto);
 }

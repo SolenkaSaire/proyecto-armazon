@@ -19,7 +19,7 @@ public class CompraGetDTO {
 
     private LocalDateTime fecha;
 
-    private float valorTotal;
+    private double total;
 
     private int codigoUsuario;
 

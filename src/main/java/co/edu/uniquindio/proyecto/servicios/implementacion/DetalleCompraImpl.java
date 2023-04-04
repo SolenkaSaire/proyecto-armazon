@@ -17,11 +17,21 @@ import java.util.List;
 public class DetalleCompraImpl implements DetalleCompraServicio {
     @Override
     public int crearDetalleCompra(DetalleCompraDTO detalleCompraDTO) throws Exception {
+        DetalleCompra detalleCompra= new DetalleCompra();
+        detalleCompra.getUnidades();
+        detalleCompra.getPrecio();
+        detalleCompra.getUnidades();
+        detalleCompra.getCompra();
+        detalleCompra.getCodigo();
         return 0;
     }
 
     @Override
     public DetalleCompraDTO obtenerProducto(int codigoCompra) {
+        DetalleCompra detalleCompra= new DetalleCompra();
+        detalleCompra.getPublicacionProducto().getProducto();
+
+
         return null;
     }
 

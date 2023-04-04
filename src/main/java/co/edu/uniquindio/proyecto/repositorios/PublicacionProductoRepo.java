@@ -1,8 +1,6 @@
 package co.edu.uniquindio.proyecto.repositorios;
 
-import co.edu.uniquindio.proyecto.jakarta.persistence.PublicacionProducto;
-import co.edu.uniquindio.proyecto.jakarta.persistence.Producto;
-import co.edu.uniquindio.proyecto.jakarta.persistence.Usuario;
+import co.edu.uniquindio.proyecto.jakarta.persistence.*;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -15,10 +13,23 @@ public interface PublicacionProductoRepo extends JpaRepository<PublicacionProduc
     @Query("select p from PublicacionProducto p where p.vendedor.codigo = :codigoUsuario")
     List<PublicacionProducto> listarProductosUsuario(int codigoUsuario);
 
+    @Query("select p from PublicacionProducto p where p.producto.categoria = :categoria")
+    List<PublicacionProducto> listarProductosCategoria(Categoria categoria);
+
     @Query("select p from PublicacionProducto p where p.producto.nombre like concat( '%', :nombre, '%' ) and p.estado = 1")
     List<PublicacionProducto> listarProductosNombre(String nombre);
 
+    @Query("select p from PublicacionProducto p where p.estado = :estado")
+    List<PublicacionProducto> listarProductosEstado(Estado estado);
+
+
     @Query("select p.producto.nombre, p.ciudades from PublicacionProducto p where p.ciudades = :codigo")
     List<Object[]> obtenerProductos(int codigo);
+
+    @Query("select p from PublicacionProducto p where p.producto.codigo = :codigoProducto")
+    PublicacionProducto buscarProducto(int codigoProducto);
+
+    @Query("select p from PublicacionProducto p where p.favoritos = :codigoUsuario")
+    List<PublicacionProducto> listarProductosFavoritos(int codigoUsuario);
 
 }

@@ -36,5 +36,6 @@ public class Comentario implements Serializable {
     private PublicacionProducto publicacionProducto;
 
 
-
+    public Comentario(String comentarion) {
+    }
 }

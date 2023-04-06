@@ -16,6 +16,7 @@ import jakarta.persistence.ManyToMany;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString
 public class Cuenta implements Serializable {
 
     @Id

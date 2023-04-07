@@ -1,3 +1,5 @@
+package co.edu.uniquindio.proyecto.servicios.implementacion;
+
 import co.edu.uniquindio.proyecto.dto.EmailDTO;
 import co.edu.uniquindio.proyecto.servicios.interfaces.EmailServicio;
 import jakarta.mail.internet.MimeMessage;
@@ -8,9 +10,9 @@ import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
 public class EmailServicioImpl implements EmailServicio {
-    private final JavaMailSen
+    private final JavaMailSender javaMailSender;
     @Override
-    public void enviarEmail(EmailDTO emailDTO) throws Exception{
+    public void enviarEmail(EmailDTO emailDTO) {
         MimeMessage mensaje = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mensaje);
         try{

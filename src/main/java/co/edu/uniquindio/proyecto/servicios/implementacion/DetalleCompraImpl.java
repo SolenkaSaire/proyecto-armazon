@@ -1,20 +1,25 @@
 package co.edu.uniquindio.proyecto.servicios.implementacion;
 
+import co.edu.uniquindio.proyecto.dto.CompraGetDTO;
 import co.edu.uniquindio.proyecto.dto.DetalleCompraDTO;
 import co.edu.uniquindio.proyecto.dto.DetalleCompraGetDTO;
 import co.edu.uniquindio.proyecto.dto.PublicacionProductoGetDTO;
+import co.edu.uniquindio.proyecto.jakarta.persistence.Compra;
 import co.edu.uniquindio.proyecto.jakarta.persistence.DetalleCompra;
 import co.edu.uniquindio.proyecto.jakarta.persistence.PublicacionProducto;
+import co.edu.uniquindio.proyecto.repositorios.CompraRepo;
 import co.edu.uniquindio.proyecto.repositorios.DetalleCompraRepo;
 import co.edu.uniquindio.proyecto.servicios.interfaces.DetalleCompraServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @AllArgsConstructor
 public class DetalleCompraImpl implements DetalleCompraServicio {
+    DetalleCompraRepo detalleCompraRepo;
     @Override
     public int crearDetalleCompra(DetalleCompraDTO detalleCompraDTO) throws Exception {
         DetalleCompra detalleCompra= new DetalleCompra();
@@ -37,31 +42,24 @@ public class DetalleCompraImpl implements DetalleCompraServicio {
 
     @Override
     public List<DetalleCompraGetDTO> listarProductosUsuario(int codigoUsuario) {
-        return null;
-    }
-/*
-    private  final DetalleCompraRepo detalleCompraRepo;
+        List<DetalleCompra> listaCompra = detalleCompraRepo.listarDetalleComprasUsuario(codigoUsuario);
+        List<DetalleCompraGetDTO> respuesta = new ArrayList<>();
 
-    @Override
-    public int crearDetalleCompra(DetalleCompraDTO detalleCompraDTO) throws Exception {
-        DetalleCompra detalleCompra = new DetalleCompra();
-        detalleCompra.setPrecio(detalleCompraDTO.getPrecio());
-        detalleCompra.setCodigo(detalleCompraDTO.getCodigoProducto());
-        detalleCompra.setUnidades(detalleCompraDTO.getUnidades());
-
-
-        return 0;
+        for (DetalleCompra p :listaCompra) {
+            respuesta.add(convertir(p));
+        }
+        return respuesta;
     }
 
-    @Override
-    public DetalleCompraDTO obtenerProducto(int codigoCompra) {
-        return null;
-    }
 
-    @Override
-    public List<DetalleCompraGetDTO> listarProductosUsuario(int codigoUsuario) {
-        return null;
+    private DetalleCompraGetDTO convertir(DetalleCompra compra) {
+        DetalleCompraGetDTO compraGetDTO = new DetalleCompraGetDTO(
+                compra.getCompra().getFecha_creacion(),
+                compra.getCompra().getTotal(),
+                compra.getCompra().getMetodoPagos(),
+                compra.getCompra().getPublicacionProductos()
+                );
+        return compraGetDTO;
     }
-    */
 
 }

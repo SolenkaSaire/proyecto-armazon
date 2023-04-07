@@ -22,7 +22,7 @@ public class DetalleCompraGetDTO {
 
     private MetodoPago metodoPago;
 
-    private List<DetalleCompraDTO> detalleCompraDTO;
+    private List<DetalleCompra> detalleCompra;
 
 
 }

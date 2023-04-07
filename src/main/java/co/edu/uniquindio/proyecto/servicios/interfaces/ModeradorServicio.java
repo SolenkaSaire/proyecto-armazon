@@ -9,6 +9,7 @@ import java.util.List;
 public interface ModeradorServicio {
 
 
+
     void aprobarProducto(PublicacionProducto publicacionProducto) throws Exception;
 
     void rechazarProducto(PublicacionProducto publicacionProducto) throws Exception;

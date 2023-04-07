@@ -1,6 +1,8 @@
 package co.edu.uniquindio.proyecto.servicios.implementacion;
 
+import co.edu.uniquindio.proyecto.dto.CompraGetDTO;
 import co.edu.uniquindio.proyecto.dto.PublicacionProductoGetDTO;
+import co.edu.uniquindio.proyecto.jakarta.persistence.Compra;
 import co.edu.uniquindio.proyecto.jakarta.persistence.Estado;
 import co.edu.uniquindio.proyecto.jakarta.persistence.PublicacionProducto;
 import co.edu.uniquindio.proyecto.repositorios.PublicacionProductoRepo;
@@ -54,21 +56,5 @@ public class ModeradorServicioImpl implements ModeradorServicio{
         return publicacionProductoGetDTO;
 
     }
-    /*
-    @Override
-    public void aprobarProducto(EstadoDTO estadoDTO) throws Exception{
-        cambiarEstado(estadoDTO, Estado.APROBADO);
-    }
-
-    @Override
-    public void rechazarProducto(EstadoDTO estadoDTO) throws Exception{
-        cambiarEstado(estadoDTO, Estado.NO_APROBADO);
-    }
-
-    private int cambiarEstado(EstadoDTO estadoDTO, Estado estado) throws Exception{
-
-        return 1;
-
-    }*/
 
 }

@@ -15,4 +15,7 @@ public interface DetalleCompraRepo extends JpaRepository<DetalleCompra, Integer>
 
     @Query("select p from DetalleCompra p where p.compra.publicacionProductos = :codigoCompra")
     List<Compra> listarDetalleCompras(int codigoCompra);
+
+    @Query("select p from DetalleCompra p where p.compra.usuario.codigo = :codigoUsuario")
+    List<DetalleCompra> listarDetalleComprasUsuario(int codigoUsuario);
 }

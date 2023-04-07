@@ -7,25 +7,32 @@ import co.edu.uniquindio.proyecto.repositorios.UsuarioRepo;
 import co.edu.uniquindio.proyecto.servicios.interfaces.UsuarioServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import javax.print.AttributeException;
+import javax.print.attribute.Attribute;
 import java.util.Optional;
 
 @Service
-@AllArgsConstructor
+//@AllArgsConstructor
 public class UsuarioServicioImpl implements UsuarioServicio {
 
     private final UsuarioRepo usuarioRepo;
+
+    public UsuarioServicioImpl(UsuarioRepo usuarioRepo){
+        this.usuarioRepo= usuarioRepo;
+    }
 
     @Override
     public int crearUsuario(UsuarioDTO usuarioDTO) throws Exception {
 
         Usuario buscado = usuarioRepo.buscarUsuario(usuarioDTO.getEmail());
-
         if(buscado!=null){
             throw new Exception("El correo "+usuarioDTO.getEmail()+" ya está en uso");
         }
-
         Usuario usuario = convertir(usuarioDTO);
         return usuarioRepo.save( usuario ).getCodigo();
+
+
     }
 
     @Override

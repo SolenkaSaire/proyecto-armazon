@@ -9,6 +9,7 @@ import lombok.Setter;
 @Setter
 public class UsuarioDTO {
 
+    private int codigo;
     private String nombre;
     private String email;
     private String password;

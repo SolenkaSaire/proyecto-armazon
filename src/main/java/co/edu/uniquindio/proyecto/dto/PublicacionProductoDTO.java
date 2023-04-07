@@ -2,6 +2,7 @@ package co.edu.uniquindio.proyecto.dto;
 
 import co.edu.uniquindio.proyecto.jakarta.persistence.Ciudad;
 import co.edu.uniquindio.proyecto.jakarta.persistence.Estado;
+import co.edu.uniquindio.proyecto.jakarta.persistence.Producto;
 import co.edu.uniquindio.proyecto.jakarta.persistence.Usuario;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,6 +17,7 @@ import java.util.List;
 public class PublicacionProductoDTO {
    // codigo;fecha_publicacion;promedioEstrellas;fechaCreacion;fechaLimite;precio;disponibilidad;descripcion;
 
+    private int codigo;
     private LocalDateTime fecha_publicacion;
     private double promedioEstrellas;
     private LocalDateTime fechaCreacion;
@@ -26,4 +28,5 @@ public class PublicacionProductoDTO {
     private Estado estado;
     public List<Ciudad> Ciudad;
     public Usuario vendedor;
+    public Producto producto;
 }

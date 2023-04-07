@@ -1,42 +1,31 @@
 package co.edu.uniquindio.proyecto.servicios.implementacion;
 
-import co.edu.uniquindio.proyecto.dto.CompraDTO;
-import co.edu.uniquindio.proyecto.dto.CompraGetDTO;
-import co.edu.uniquindio.proyecto.dto.DetalleCompraDTO;
+import co.edu.uniquindio.proyecto.dto.*;
 import co.edu.uniquindio.proyecto.jakarta.persistence.Compra;
 import co.edu.uniquindio.proyecto.jakarta.persistence.DetalleCompra;
+import co.edu.uniquindio.proyecto.jakarta.persistence.Producto;
+import co.edu.uniquindio.proyecto.jakarta.persistence.PublicacionProducto;
 import co.edu.uniquindio.proyecto.repositorios.CompraRepo;
 import co.edu.uniquindio.proyecto.repositorios.DetalleCompraRepo;
+import co.edu.uniquindio.proyecto.repositorios.ProductoRepo;
 import co.edu.uniquindio.proyecto.servicios.interfaces.CompraServicio;
 import co.edu.uniquindio.proyecto.servicios.interfaces.ProductoServicio;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 public class CompraServicioImpl implements CompraServicio {
-    @Override
-    public int crearCompra(CompraDTO compraDTO) throws Exception {
-        return 0;
-    }
 
-    @Override
-    public List<CompraGetDTO> listarCompras(int codigoUsuario) {
-        return null;
-    }
-
-    @Override
-    public CompraGetDTO obtenerCompra(int codigoCompra) {
-        return null;
-    }
-
-/*
     private final CompraRepo compraRepo;
     private final DetalleCompraRepo detalleCompraRepo;
+    private  final ProductoRepo productoRepo;
     //private final UsuarioServicio usuarioServicio;
     private final ProductoServicio productoServicio;
     //private final PublicacionProductoServicio publicacionProductoServicio;
@@ -73,37 +62,49 @@ public class CompraServicioImpl implements CompraServicio {
     }
 
     @Override
-    public List<CompraGetDTO> listarCompras(int codigoUsuario) {
-        List<Compra> compras = compraRepo.findByCodigoUsuario(codigoUsuario);List<CompraGetDTO> comprasDTO = new ArrayList<>();
-        /*
-        for (Compra compra : compras) {
-            CompraGetDTO compraDTO = new CompraGetDTO();
-            compraDTO.setCodigo(compra.getCodigo());
-            compraDTO.setMetodoPago(compra.getMetodoPagos());
-            compraDTO.setTotal(compra.getTotal());
-            compraDTO.setFecha(compra.getFecha_creacion());
-            List<DetalleCompraGetDTO> detallesDTO = new ArrayList<>();
-            for (DetalleCompra detalle : compra.getPublicacionProductos() ) {//getDetalleCompra<List>
-                DetalleCompraGetDTO detalleDTO = new DetalleCompraGetDTO();
-                detalleDTO.setCodigoProducto(detalle.getPublicacionProducto().getCodigo());
-                detalleDTO.setNombreProducto(detalle.getPublicacionProducto().getNombre());
-                detalleDTO.setPrecio(detalle.getPrecio());
-                detalleDTO.setUnidades(detalle.getUnidades());
-                detallesDTO.add(detalleDTO);
-            }
-            compraDTO.setDetalleCompra(detallesDTO);
-            comprasDTO.add(compraDTO);
+    public List<CompraGetDTO> listarCompras(int codigoProducto) {
+        List<Compra> lista = compraRepo.listarCompras(codigoProducto);
+        List<CompraGetDTO> respuesta = new ArrayList<>();
+        for (Compra p : lista){
+            respuesta.add(convertir(p));
         }
-        */
-/*
-        return comprasDTO;
+        return respuesta;
 
     }
+
+
+    private CompraGetDTO convertir(Compra compra){
+        //codigo, fecha, total, codigoUsuario, metodoPago, list<>drtalleCompraDTO
+        CompraGetDTO compraGetDTO = new CompraGetDTO(
+                compra.getCodigo(),
+                compra.getFecha_creacion(),
+                compra.getTotal(),
+                compra.getUsuario().getCodigo(),
+                compra.getMetodoPagos(),
+                compra.getPublicacionProductos()
+        );
+        return compraGetDTO;
+    }
+
 
     @Override
-    public CompraGetDTO obtenerCompra(int codigoCompra) {
-        return null;
+    public CompraGetDTO obtenerCompra(int codigoCompra) throws Exception {
+        return convertir(obtener(codigoCompra));
     }
 
- */
+
+    private Compra obtener(int codigoCompra) throws Exception{
+    Optional<Compra> compras = compraRepo.findById(codigoCompra);
+
+        if(compras.isEmpty()){
+            try {
+                throw new Exception("El código "+codigoCompra+" no está asociado a ningún producto");
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        return compras.get();
+    }
+
 }

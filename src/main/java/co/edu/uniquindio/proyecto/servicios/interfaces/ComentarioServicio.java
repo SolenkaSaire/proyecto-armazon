@@ -9,11 +9,11 @@ public interface ComentarioServicio {
 
     int crearComentario(ComentarioDTO comentarioDTO, int codigoProducto, String comentario) throws Exception;
 
-    int actualizarComentario(int codigoProducto, ComentarioDTO comentarioDTO);
+    ComentarioGetDTO actualizarComentario(int codigoProducto, ComentarioDTO comentarioDTO) throws Exception;
 
-    int eliminarComentario(int codigoProducto);
+    int eliminarComentario(int codigoComentario) throws Exception;
 
-    ComentarioGetDTO obtenerComentario(int codidoProducto);
+    ComentarioGetDTO obtenerComentario(int codidoProducto) throws Exception;
 
     List<ComentarioGetDTO> listarComentarioUsuario(int codigoUsuario);
 

@@ -32,4 +32,10 @@ public interface PublicacionProductoRepo extends JpaRepository<PublicacionProduc
     @Query("select p from PublicacionProducto p where p.favoritos = :codigoUsuario")
     List<PublicacionProducto> listarProductosFavoritos(int codigoUsuario);
 
+    @Query("select p from PublicacionProducto p where p.precio > :precioMinimo AND p.precio < :precioMaximo")
+    List<PublicacionProducto> listarProductoPrecio(double precioMinimo, double precioMaximo);
+
+    @Query("select  p from PublicacionProducto p where p.ciudades = :ciudad ")
+    List<PublicacionProducto> listarProductoCiudad(String ciudad);
+
 }

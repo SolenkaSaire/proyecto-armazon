@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyecto.dto;
 
 import co.edu.uniquindio.proyecto.dto.DetalleCompraDTO;
+import co.edu.uniquindio.proyecto.jakarta.persistence.DetalleCompra;
 import co.edu.uniquindio.proyecto.jakarta.persistence.MetodoPago;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,7 +15,6 @@ import java.util.List;
 public class CompraGetDTO {
 
 
-
     private int codigo;
 
     private LocalDateTime fecha;
@@ -25,6 +25,6 @@ public class CompraGetDTO {
 
     private MetodoPago metodoPago;
 
-    private List<DetalleCompraDTO> detalleCompraDTO;
+    private List<DetalleCompra> detalleCompra;
 
 }

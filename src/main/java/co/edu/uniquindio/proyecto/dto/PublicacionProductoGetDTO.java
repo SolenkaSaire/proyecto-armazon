@@ -1,9 +1,11 @@
 package co.edu.uniquindio.proyecto.dto;
 
 
+import co.edu.uniquindio.proyecto.jakarta.persistence.Producto;
 import co.edu.uniquindio.proyecto.jakarta.persistence.Usuario;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
@@ -20,5 +22,9 @@ public class PublicacionProductoGetDTO {
     private int disponibilidad;
     private String descripcion;
     public Usuario vendedor;
+    public Producto producto;
+
+
+
 
 }

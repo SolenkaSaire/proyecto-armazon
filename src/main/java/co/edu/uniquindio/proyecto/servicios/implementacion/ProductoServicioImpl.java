@@ -1,8 +1,6 @@
 package co.edu.uniquindio.proyecto.servicios.implementacion;
 
-import co.edu.uniquindio.proyecto.dto.ProductoDTO;
-import co.edu.uniquindio.proyecto.dto.ProductoGetDTO;
-import co.edu.uniquindio.proyecto.dto.PublicacionProductoDTO;
+import co.edu.uniquindio.proyecto.dto.*;
 import co.edu.uniquindio.proyecto.jakarta.persistence.*;
 import co.edu.uniquindio.proyecto.repositorios.ProductoRepo;
 import co.edu.uniquindio.proyecto.repositorios.PublicacionProductoRepo;
@@ -12,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -28,13 +25,8 @@ public class ProductoServicioImpl implements ProductoServicio {
         //producto: codigo;nombre;categoria;imagenes;publicacionProductos;
         Producto producto = new Producto();
         producto.setNombre(productoDTO.getNombre());
-        producto.setCategoria(productoDTO.getCategorias());//como ahi
+        producto.setCategoria(productoDTO.getCategorias());
         producto.setImagenes(productoDTO.getImagenes());
-
-//codigo;fecha_publicacion;promedioEstrellas;fechaCreacion;fechaLimite;precio;disponibilidad;descripcion, Usuario, vendedor
-//  List<Usuario> favoritos;List<ProductoModerador> moderadores;List<DetalleCompra> compras;  List<Comentario> comentarios;
-        //Estado estado; List<Ciudad> ciudades;
-
         PublicacionProducto publicacionProducto= new PublicacionProducto();
         publicacionProducto.setFecha_publicacion(publicacionProductoDTO.getFecha_publicacion());
         publicacionProducto.setPromedioEstrellas(publicacionProductoDTO.getPromedioEstrellas());
@@ -46,45 +38,64 @@ public class ProductoServicioImpl implements ProductoServicio {
         publicacionProducto.setDescripcion(publicacionProductoDTO.getDescripcion());
         publicacionProducto.setCiudades(publicacionProductoDTO.getCiudad());
         publicacionProducto.setVendedor(publicacionProductoDTO.getVendedor());
-
-       // return publicacionProductoRepo.save( publicacionProducto ).getCodigo();//esto? voy a mirar
-//tenemos varios errores, ahi en las excepciones dice que en usuarioRepo utilizamos correo, y usuario tiene email, no correo
-
         return publicacionProductoRepo.save(publicacionProducto).getCodigo();
     }
 
     @Override
-    public int actualizarProducto(int codigoProducto, ProductoGetDTO productoGetDTO, PublicacionProductoDTO publicacionProductoDTO) {
-            Producto producto= new Producto();
+    public PublicacionProductoGetDTO actualizarProducto(int codigoPublicacion, PublicacionProductoDTO publicacionProductotDTO) {
+            validarExiste(codigoPublicacion);
+            PublicacionProducto publicacionProducto = convertir(publicacionProductotDTO);
+            publicacionProducto.setCodigo(codigoPublicacion);
+        return convertir(publicacionProductoRepo.save(publicacionProducto));
+    }
 
-            for (PublicacionProducto p :producto.getPublicacionProductos() ) {
-                if (producto.getCodigo() == codigoProducto) {
-                   p.setDescripcion(null);
-                   p.getProducto().setNombre(null);
-                   p.getProducto().setImagenes(null);
-                   p.getProducto().setCategoria(null);
-                   p.setDescripcion(null);
-                   p.setEstado(null);
-                   p.setDisponibilidad(0);
-                   p.setPrecio(0);
-                   p.setCiudades(null);
-                   p.setFechaLimite(null);
-                    p.setVendedor(null);
-                    p.setFechaCreacion(null);
-                    p.setPromedioEstrellas(null);
-                    p.setModeradores(null);
-                    p.setFavoritos(null);
-                    p.setFecha_publicacion(null);
-                    p.setCompras(null);
+    private PublicacionProductoGetDTO convertir(PublicacionProducto publicacionProducto) {
+        //////////////////////////codigo;fecha_publi;promedioE; fecha_creaci;fecha_limite;precio;disponibilidad, descripcion; vendedor;
+        PublicacionProductoGetDTO publicacionProductoDTO = new PublicacionProductoGetDTO(
+                publicacionProducto.getCodigo(),
+                publicacionProducto.getFecha_publicacion(),
+                publicacionProducto.getPromedioEstrellas(),
+                publicacionProducto.getFechaCreacion(),
+                publicacionProducto.getFechaLimite(),
+                publicacionProducto.getPrecio(),
+                publicacionProducto.getDisponibilidad(),
+                publicacionProducto.getDescripcion(),
+                publicacionProducto.getVendedor(),
+                publicacionProducto.getProducto());
+            return publicacionProductoDTO;
 
+    }
 
-
-                break;
-                }
+    private void validarExiste(int codigoPublicacion) {
+        boolean existe = publicacionProductoRepo.existsById(codigoPublicacion);
+        if (!existe){
+            try {
+                throw new Exception("El código "+codigoPublicacion+" no está asociado a ninguna publicacion");
+            } catch (Exception e) {
+                throw new RuntimeException(e);
             }
 
+        }
+    }
 
-        return productoRepo.save(producto).getCodigo();
+    private PublicacionProducto convertir(PublicacionProductoDTO publicacionProductoDTO){
+        PublicacionProducto publicacionProducto = new PublicacionProducto();
+//////////////////////////codigo;nombre;categoria;imagenes;publicacionProductos;
+                publicacionProducto.getProducto().setCodigo(publicacionProductoDTO.getProducto().getCodigo());
+                publicacionProducto.getProducto().setNombre(publicacionProductoDTO.getProducto().getNombre());
+                publicacionProducto.getProducto().setCategoria(publicacionProductoDTO.getProducto().getCategoria());
+                publicacionProducto.getProducto().setImagenes(publicacionProductoDTO.getProducto().getImagenes());
+                publicacionProducto.setCodigo(publicacionProductoDTO.getCodigo());
+                publicacionProducto.setFecha_publicacion(publicacionProductoDTO.getFecha_publicacion());
+                publicacionProducto.setPromedioEstrellas(publicacionProductoDTO.getPromedioEstrellas());
+                publicacionProducto.setFechaCreacion(publicacionProductoDTO.getFechaCreacion());
+                publicacionProducto.setFechaLimite(publicacionProductoDTO.getFechaLimite());
+                publicacionProducto.setPrecio(publicacionProductoDTO.getPrecio());
+                publicacionProducto.setDisponibilidad(publicacionProductoDTO.getDisponibilidad());
+                publicacionProducto.setDescripcion(publicacionProductoDTO.getDescripcion());
+                publicacionProducto.setVendedor(publicacionProductoDTO.getVendedor());
+
+        return publicacionProducto;
     }
 
     @Override
@@ -132,9 +143,7 @@ public class ProductoServicioImpl implements ProductoServicio {
 
     @Override
     public PublicacionProducto obtenerProducto(int codigoProducto) {
-
         Optional<PublicacionProducto> publicacionProducto = publicacionProductoRepo.findById(codigoProducto);
-
         if(publicacionProducto.isEmpty() ){
             try {
                 throw new Exception("El código "+codigoProducto+" no está asociado a ningún producto");
@@ -142,122 +151,99 @@ public class ProductoServicioImpl implements ProductoServicio {
                 throw new RuntimeException(e);
             }
         }
-
         return publicacionProducto.get();
 
      }
 
     @Override
-    public List<ProductoGetDTO> listarProductosUsuario(int codigoUsuario) {
+    public List<PublicacionProductoGetDTO> listarPublicacionProductosUsuario(int codigoUsuario) {
 
-        List<Producto> listaProductos = productoRepo.listarProductosUsuario(codigoUsuario);
-        List<PublicacionProducto> listaPublicaciones = publicacionProductoRepo.listarProductosUsuario(codigoUsuario);
-        List<ProductoGetDTO> respuesta = new ArrayList<>();
+        List<PublicacionProducto> listaProductos = publicacionProductoRepo.listarProductosUsuario(codigoUsuario);
+        List<PublicacionProductoGetDTO> respuesta = new ArrayList<>();
+       // List<ProductoGetDTO> respuestaProductos = new ArrayList<>();
 
-        for(int i = 0; i < listaProductos.size(); i++){
-            respuesta.add( convertir(listaProductos.get(i), listaPublicaciones.get(i)) );
+        for (PublicacionProducto p :listaProductos) {
+            respuesta.add(convertir(p));
+           // respuestaProductos.add(convertirProducto(p.getProducto()));
         }
-
         return respuesta;
     }
 
 
-    private ProductoGetDTO convertir(Producto producto, PublicacionProducto publicacionProducto){
-        //PRODUCTO
-//////codigo;nombre;categoria;imagenes;publicacionProductos
-        //PUBLICACION
-// codigo;fecha_publicacion;promedioEstrellas;fechaCreacion;fechaLimite;precio;disponibilidad;descripcion, Usuario, vendedor
-//  List<Usuario> favoritos;List<ProductoModerador> moderadores;List<DetalleCompra> compras;  List<Comentario> comentarios;
-        //Estado estado; List<Ciudad> ciudades;
-
-        ProductoGetDTO productoGetDTO = new ProductoGetDTO(
-                producto.getCodigo(),
-                publicacionProducto.getEstado(),
-                publicacionProducto.getFechaLimite(),
-                producto.getNombre(),
-                publicacionProducto.getDescripcion(),
-                publicacionProducto.getDisponibilidad(),
-                publicacionProducto.getPrecio(),
-                publicacionProducto.getVendedor().getCodigo(),
-                producto.getImagenes(),
-                producto.getCategoria()
-        );
-
-        return productoGetDTO;
-    }
-
     @Override
-    public List<ProductoGetDTO> listarProductosCategoria(Categoria categoria) {
+    public List<PublicacionProductoGetDTO> listarPublicacionProductosCategoria(Categoria categoria) {
 
-        List<Producto> listaProductos = productoRepo.listarProductosCategoria(categoria);
         List<PublicacionProducto> listaPublicaciones = publicacionProductoRepo.listarProductosCategoria(categoria);
-        List<ProductoGetDTO> respuesta = new ArrayList<>();
+        List<PublicacionProductoGetDTO> respuesta = new ArrayList<>();
+        for (PublicacionProducto p :listaPublicaciones) {
+            respuesta.add(convertir(p));
 
-        for(int i = 0; i < listaProductos.size(); i++){
-            respuesta.add( convertir(listaProductos.get(i), listaPublicaciones.get(i)) );
         }
-
         return respuesta;
 
     }
 
 
     @Override
-    public List<ProductoGetDTO> listarProductosPorEstado(Estado estado) {
+    public List<PublicacionProductoGetDTO> listarPublicacionProductosPorEstado(Estado estado) {
 
-        List<Producto> listaProductos = productoRepo.listarProductosEstado(estado);
         List<PublicacionProducto> listaPublicaciones = publicacionProductoRepo.listarProductosEstado(estado);
-        List<ProductoGetDTO> respuesta = new ArrayList<>();
+        List<PublicacionProductoGetDTO> respuesta = new ArrayList<>();
 
-        for(int i = 0; i < listaProductos.size(); i++){
-            respuesta.add( convertir(listaProductos.get(i), listaPublicaciones.get(i)) );
+        for (PublicacionProducto p: listaPublicaciones) {
+            respuesta.add(convertir(p));
         }
 
         return respuesta;
     }
 
     @Override
-    public List<ProductoGetDTO> listarProductosFavoritos(int codigoUsuario) {
-        //usuarioServicio.validarExiste(codigoUsuario);
-        //return convertir(productoRepo.listarProductosFavoritos(codigoUsuario));
-        List<Producto> listaProductos = productoRepo.listarProductosFavoritos(codigoUsuario);
+    public List<PublicacionProductoGetDTO> listarPublicacionesProductosFavoritos(int codigoUsuario) {
+
         List<PublicacionProducto> listaPublicaciones = publicacionProductoRepo.listarProductosFavoritos(codigoUsuario);
-        List<ProductoGetDTO> respuesta = new ArrayList<>();
-        for(int i = 0; i < listaProductos.size(); i++){
-            respuesta.add( convertir(listaProductos.get(i), listaPublicaciones.get(i)) );
+        List<PublicacionProductoGetDTO> respuesta = new ArrayList<>();
+        for (PublicacionProducto p: listaPublicaciones) {
+            respuesta.add(convertir(p));
         }
         return respuesta;
     }
 
     @Override
-    public List<ProductoGetDTO> listarProductosNombre(String nombre) {
-        List<Producto> productos = productoRepo.listarProductosNombre(nombre);
-        List<ProductoGetDTO> respuesta= new ArrayList<>();
+    public List<PublicacionProductoGetDTO> listarPublicacionProductosNombre(String nombre) {
+        List<PublicacionProducto> productos = publicacionProductoRepo.listarProductosNombre(nombre);
+        List<PublicacionProductoGetDTO> respuesta= new ArrayList<>();
 
-        for (Producto p: productos) {
-         //   respuesta.add(convertir(p));
+        for (PublicacionProducto p: productos) {
+         respuesta.add(convertir(p));
         }
 
         return respuesta;
-        //return convertir(productoRepo.listarProductosNombre(nombre));
     }
 
 
 
     @Override
-    public List<ProductoGetDTO> listarProductosPrecio(float precioMinimo, float precioMaximo, int codigo) {
+    public List<PublicacionProductoGetDTO> listarPublicacionProductosPrecio(double precioMinimo, double precioMaximo) {
 
-        List<Producto> lista = productoRepo.listarProductoPrecio(codigo);
-        List<ProductoGetDTO> respuesta= new ArrayList<>();
+        List<PublicacionProducto> lista = publicacionProductoRepo.listarProductoPrecio(precioMinimo, precioMaximo);
+        List<PublicacionProductoGetDTO> respuesta= new ArrayList<>();
 
-            for(Producto p: lista){
-              //  respuesta.add(convertir());
+            for(PublicacionProducto p: lista){
+              respuesta.add(convertir(p));
             }
-
-
-
         return respuesta;
     }
+
+    @Override
+    public List<PublicacionProductoGetDTO> listarPublicacionProductoCiudad(String ciudad){
+        List<PublicacionProducto> lista = publicacionProductoRepo.listarProductoCiudad(ciudad);
+        List<PublicacionProductoGetDTO> respuesta= new ArrayList<>();
+        for(PublicacionProducto p: lista){
+            respuesta.add(convertir(p));
+        }
+        return respuesta;
+    }
+
 
 
 }

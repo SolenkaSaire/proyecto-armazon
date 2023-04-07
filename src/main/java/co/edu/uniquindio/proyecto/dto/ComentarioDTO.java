@@ -9,9 +9,12 @@ import lombok.Setter;
 @Setter
 public class ComentarioDTO {
 
+    private  int codigo;
 
     private String mensaje;
+
     private int codigoUsuario;
+
     private int codigoProducto;
 
 }

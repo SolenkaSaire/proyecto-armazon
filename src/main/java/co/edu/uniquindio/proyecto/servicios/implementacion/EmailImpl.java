@@ -6,6 +6,8 @@ import co.edu.uniquindio.proyecto.servicios.interfaces.EmailServicio;
 public class EmailImpl implements EmailServicio {
     @Override
     public String enviarEmail(EmailDTO emailDTO) {
+
+
         return null;
     }
 }

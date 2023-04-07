@@ -69,12 +69,12 @@ public class UsuarioTest {
      user.setMisProductos(null);
      user.setPublicacionesFavoritas(null);
      user.setTelefono("12345");
-     user.setCodigo(12345);
+     user.setCodigo(1);
 
      Usuario guardado = usuarioRepo.save(user);
 
      usuarioRepo.delete(guardado);
-     Optional<Usuario> buscado= usuarioRepo.findById(12345);
+     Optional<Usuario> buscado= usuarioRepo.findById(1);
 
     Assertions.assertNull(buscado.orElse(null));
  }
@@ -93,7 +93,7 @@ public class UsuarioTest {
      user.setMisProductos(null);
      user.setPublicacionesFavoritas(null);
      user.setTelefono("12345");
-     user.setCodigo(12345);
+     user.setCodigo(1);
 
      Usuario guardado = usuarioRepo.save(user);
 
@@ -117,12 +117,12 @@ public class UsuarioTest {
      user.setMisProductos(null);
      user.setPublicacionesFavoritas(null);
      user.setTelefono("12345");
-     user.setCodigo(12345);
+     user.setCodigo(1);
 
      Usuario guardado = usuarioRepo.save(user);
      System.out.println(guardado);
 
-     Optional<Usuario> buscado = usuarioRepo.findById(12345);
+     Optional<Usuario> buscado = usuarioRepo.findById(1);
      System.out.println(buscado.orElse(null));
 
 
@@ -142,7 +142,7 @@ public class UsuarioTest {
      user.setMisProductos(null);
      user.setPublicacionesFavoritas(null);
      user.setTelefono("12345");
-     user.setCodigo(12345);
+     user.setCodigo(2);
      usuarioRepo.save(user);
 
      Usuario user1= new Usuario();
@@ -156,7 +156,7 @@ public class UsuarioTest {
      user1.setMisProductos(null);
      user1.setPublicacionesFavoritas(null);
      user1.setTelefono("77226");
-     user1.setCodigo(77);
+     user1.setCodigo(1);
      usuarioRepo.save(user1);
 
      List<Usuario> lista =usuarioRepo.findAll();

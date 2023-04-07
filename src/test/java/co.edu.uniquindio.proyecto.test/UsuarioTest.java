@@ -26,21 +26,21 @@ public class UsuarioTest {
 
  @Test
  public void registar(){
-     LocalDateTime fechaActual = LocalDateTime.now();
 
+    LocalDateTime fechaActual = LocalDateTime.now();
 
     Usuario user= new Usuario();
+    user.setCodigo(12345);
     user.setPassword("123");
     user.setEmail("1264");
-    user.setCompra(null);
+    user.setNombre("cris");
     user.setApellido("gonza");
     user.setDireccion("calle16");
-    user.setNombre("cris");
-    user.setCompra(null);
+    user.setTelefono("12345");
+    user.setComentario(null);
     user.setMisProductos(null);
     user.setPublicacionesFavoritas(null);
-    user.setTelefono("12345");
-    user.setCodigo(12345);
+    user.setCompra(null);
 
    //  Comentario comentario = new Comentario(125,"hola",12,fechaActual,usuarioPrueba,null);
      //PRUEBA USUARIO VACIO
@@ -53,23 +53,23 @@ public class UsuarioTest {
  }
 
  @Test
- public void eleminar(){
+ public void eliminar(){
 
      LocalDateTime fechaActual = LocalDateTime.now();
 
 
      Usuario user= new Usuario();
+     user.setCodigo(1);
      user.setPassword("123");
      user.setEmail("1264");
-     user.setCompra(null);
+     user.setNombre("cris");
      user.setApellido("gonza");
      user.setDireccion("calle16");
-     user.setNombre("cris");
-     user.setCompra(null);
+     user.setTelefono("12345");
+     user.setComentario(null);
      user.setMisProductos(null);
      user.setPublicacionesFavoritas(null);
-     user.setTelefono("12345");
-     user.setCodigo(1);
+     user.setCompra(null);
 
      Usuario guardado = usuarioRepo.save(user);
 
@@ -82,23 +82,26 @@ public class UsuarioTest {
 @Test
  public void actualizar(){
      LocalDateTime fechaActual = LocalDateTime.now();
+
      Usuario user= new Usuario();
+     user.setCodigo(1);
      user.setPassword("123");
-     user.setEmail("sol");
-     user.setCompra(null);
+     user.setEmail("1264");
+     user.setNombre("cris");
      user.setApellido("gonza");
      user.setDireccion("calle16");
-     user.setNombre("cris");
-     user.setCompra(null);
+     user.setTelefono("12345");
+     user.setComentario(null);
      user.setMisProductos(null);
      user.setPublicacionesFavoritas(null);
-     user.setTelefono("12345");
-     user.setCodigo(1);
+     user.setCompra(null);
 
      Usuario guardado = usuarioRepo.save(user);
 
      guardado.setEmail("sole");
+
      Usuario nuevo = usuarioRepo.save(guardado);
+
      Assertions.assertEquals("sole", nuevo.getEmail());
  }
 
@@ -106,23 +109,24 @@ public class UsuarioTest {
  public void obtener(){
 
      LocalDateTime fechaActual = LocalDateTime.now();
+
      Usuario user= new Usuario();
+     user.setCodigo(1);
      user.setPassword("123");
-     user.setEmail("sol");
-     user.setCompra(null);
+     user.setEmail("1264");
+     user.setNombre("cris");
      user.setApellido("gonza");
      user.setDireccion("calle16");
-     user.setNombre("cris");
-     user.setCompra(null);
+     user.setTelefono("12345");
+     user.setComentario(null);
      user.setMisProductos(null);
      user.setPublicacionesFavoritas(null);
-     user.setTelefono("12345");
-     user.setCodigo(1);
+     user.setCompra(null);
 
      Usuario guardado = usuarioRepo.save(user);
      System.out.println(guardado);
 
-     Optional<Usuario> buscado = usuarioRepo.findById(1);
+     Optional<Usuario> buscado = usuarioRepo.findById(6);
      System.out.println(buscado.orElse(null));
 
 
@@ -130,33 +134,35 @@ public class UsuarioTest {
 
  @Test
  public void listar(){
-     LocalDateTime fechaActual = LocalDateTime.now();
+
      Usuario user= new Usuario();
+     user.setCodigo(2);
      user.setPassword("123");
-     user.setEmail("sol");
-     user.setCompra(null);
+     user.setEmail("1264");
+     user.setNombre("cris");
      user.setApellido("gonza");
      user.setDireccion("calle16");
-     user.setNombre("cris");
-     user.setCompra(null);
+     user.setTelefono("12345");
+     user.setComentario(null);
      user.setMisProductos(null);
      user.setPublicacionesFavoritas(null);
-     user.setTelefono("12345");
-     user.setCodigo(2);
+     user.setCompra(null);
+
      usuarioRepo.save(user);
 
      Usuario user1= new Usuario();
-     user1.setPassword("456");
-     user1.setEmail("didier");
-     user1.setCompra(null);
-     user1.setApellido("ortega");
-     user1.setDireccion("calle13");
-     user1.setNombre("didi");
-     user1.setCompra(null);
+     user1.setCodigo(1);
+     user1.setPassword("345");
+     user1.setEmail("penelope@hotmail.com");
+     user1.setNombre("Rosa");
+     user1.setApellido("Melo");
+     user1.setDireccion("calle 666");
+     user1.setTelefono("3142785126");
+     user1.setComentario(null);
      user1.setMisProductos(null);
      user1.setPublicacionesFavoritas(null);
-     user1.setTelefono("77226");
-     user1.setCodigo(1);
+     user1.setCompra(null);
+
      usuarioRepo.save(user1);
 
      List<Usuario> lista =usuarioRepo.findAll();

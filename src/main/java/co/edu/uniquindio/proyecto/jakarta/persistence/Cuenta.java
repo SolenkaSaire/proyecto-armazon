@@ -24,7 +24,7 @@ public class Cuenta implements Serializable {
     @EqualsAndHashCode.Include
     private int codigo;
 
-    @Column(nullable = false, length = 10)
+    @Column(nullable = false, length = 30)
     private String email;
 
     @Column(nullable = false,length = 30)

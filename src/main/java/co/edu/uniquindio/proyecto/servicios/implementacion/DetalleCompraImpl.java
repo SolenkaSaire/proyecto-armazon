@@ -1,13 +1,8 @@
 package co.edu.uniquindio.proyecto.servicios.implementacion;
 
-import co.edu.uniquindio.proyecto.dto.CompraGetDTO;
 import co.edu.uniquindio.proyecto.dto.DetalleCompraDTO;
 import co.edu.uniquindio.proyecto.dto.DetalleCompraGetDTO;
-import co.edu.uniquindio.proyecto.dto.PublicacionProductoGetDTO;
-import co.edu.uniquindio.proyecto.jakarta.persistence.Compra;
-import co.edu.uniquindio.proyecto.jakarta.persistence.DetalleCompra;
-import co.edu.uniquindio.proyecto.jakarta.persistence.PublicacionProducto;
-import co.edu.uniquindio.proyecto.repositorios.CompraRepo;
+import co.edu.uniquindio.proyecto.modelo.DetalleCompra;
 import co.edu.uniquindio.proyecto.repositorios.DetalleCompraRepo;
 import co.edu.uniquindio.proyecto.servicios.interfaces.DetalleCompraServicio;
 import lombok.AllArgsConstructor;

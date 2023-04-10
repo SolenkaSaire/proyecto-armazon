@@ -1,36 +1,58 @@
  package co.edu.uniquindio.proyecto.test;
 
-import ch.qos.logback.core.CoreConstants;
-import ch.qos.logback.core.net.SyslogOutputStream;
-import co.edu.uniquindio.proyecto.jakarta.persistence.*;
+import co.edu.uniquindio.proyecto.dto.UsuarioDTO;
+import co.edu.uniquindio.proyecto.dto.UsuarioGetDTO;
+import co.edu.uniquindio.proyecto.modelo.*;
 import co.edu.uniquindio.proyecto.repositorios.UsuarioRepo;
-import jakarta.persistence.*;
+import co.edu.uniquindio.proyecto.servicios.interfaces.UsuarioServicio;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 
-import java.lang.reflect.Array;
 import java.time.LocalDateTime;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-
+/*
  @DataJpaTest
 @AutoConfigureTestDatabase(replace= AutoConfigureTestDatabase.Replace.NONE )
+ */
+ @SpringBootTest
+ @Transactional
 public class UsuarioTest {
- @Autowired
- private UsuarioRepo usuarioRepo;
 
- @Test
- public void registar(){
+     /*
+ @Autowired
+ private UsuarioRepo usuarioRepo;*/
+ @Autowired
+ private UsuarioServicio usuarioServicio;
+
+
+     @Test
+    public void registar() throws Exception {
 
     LocalDateTime fechaActual = LocalDateTime.now();
+    UsuarioDTO u = new UsuarioDTO(
+       //     1,
+            "cri",
+            "gonza",
+            "crist@gmail.com",
+            "contra123",
+            "micasita",
+            "3104034332"
+    );
 
+     int guardado = usuarioServicio.crearUsuario(u);
+     //Assertions.assertNotNull("cris", guardado.getNombre());
+     Assertions.assertEquals(1,guardado);
+/*
     Usuario user= new Usuario();
     user.setCodigo(12345);
     user.setPassword("123");
@@ -52,8 +74,19 @@ public class UsuarioTest {
      Usuario guardado = usuarioRepo.save(user);
      //Assertions.assertNotNull("cris", guardado.getNombre());
      Assertions.assertEquals("cris",guardado.getNombre());
+    */
+
  }
 
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void obtenerTest() throws Exception {
+
+         UsuarioGetDTO usuarioDTO = usuarioServicio.obtenerUsuario(1);
+
+    }
+
+/*
  @Test
  public void eliminar(){
 
@@ -74,7 +107,6 @@ public class UsuarioTest {
      user.setCompra(null);
 
      Usuario guardado = usuarioRepo.save(user);
-
      usuarioRepo.delete(guardado);
      Optional<Usuario> buscado= usuarioRepo.findById(1);
 
@@ -142,7 +174,7 @@ public class UsuarioTest {
 
      lista.forEach(System.out::println);
 
- }
+ }*/
 
 
 }

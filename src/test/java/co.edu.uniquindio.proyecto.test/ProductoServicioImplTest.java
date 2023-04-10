@@ -1,4 +1,4 @@
-package co.edu.uniquindio.proyecto.servicios.implementacion;
+package co.edu.uniquindio.proyecto.test;
 
 import org.junit.jupiter.api.Test;
 

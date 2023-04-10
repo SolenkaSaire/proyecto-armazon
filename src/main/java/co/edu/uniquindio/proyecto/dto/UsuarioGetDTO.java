@@ -11,9 +11,11 @@ import lombok.ToString;
 @ToString
 public class UsuarioGetDTO {
 
-    private int codigo;
+    //private int codigo;
 
     private String nombre;
+    private String apellido;
+
 
     private String email;
 

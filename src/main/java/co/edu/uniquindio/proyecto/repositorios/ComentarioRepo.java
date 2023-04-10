@@ -1,10 +1,9 @@
 package co.edu.uniquindio.proyecto.repositorios;
 
-import co.edu.uniquindio.proyecto.jakarta.persistence.Producto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import java.util.List;
-import co.edu.uniquindio.proyecto.jakarta.persistence.Comentario;
+import co.edu.uniquindio.proyecto.modelo.Comentario;
 import org.springframework.stereotype.Repository;
 
 @Repository

@@ -1,17 +1,14 @@
 package co.edu.uniquindio.proyecto.servicios.implementacion;
 
 import co.edu.uniquindio.proyecto.dto.*;
-import co.edu.uniquindio.proyecto.jakarta.persistence.Compra;
-import co.edu.uniquindio.proyecto.jakarta.persistence.DetalleCompra;
-import co.edu.uniquindio.proyecto.jakarta.persistence.Producto;
-import co.edu.uniquindio.proyecto.jakarta.persistence.PublicacionProducto;
+import co.edu.uniquindio.proyecto.modelo.Compra;
+import co.edu.uniquindio.proyecto.modelo.DetalleCompra;
 import co.edu.uniquindio.proyecto.repositorios.CompraRepo;
 import co.edu.uniquindio.proyecto.repositorios.DetalleCompraRepo;
 import co.edu.uniquindio.proyecto.repositorios.ProductoRepo;
 import co.edu.uniquindio.proyecto.servicios.interfaces.CompraServicio;
 import co.edu.uniquindio.proyecto.servicios.interfaces.ProductoServicio;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -25,7 +22,6 @@ public class CompraServicioImpl implements CompraServicio {
 
     private final CompraRepo compraRepo;
     private final DetalleCompraRepo detalleCompraRepo;
-    private  final ProductoRepo productoRepo;
     //private final UsuarioServicio usuarioServicio;
     private final ProductoServicio productoServicio;
     //private final PublicacionProductoServicio publicacionProductoServicio;

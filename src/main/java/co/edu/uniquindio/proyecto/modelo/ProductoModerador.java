@@ -1,10 +1,9 @@
-package co.edu.uniquindio.proyecto.jakarta.persistence;
+package co.edu.uniquindio.proyecto.modelo;
 
 import jakarta.persistence.*;
 import lombok.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @Getter

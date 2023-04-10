@@ -1,10 +1,9 @@
-package co.edu.uniquindio.proyecto.jakarta.persistence;
+package co.edu.uniquindio.proyecto.modelo;
 
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
 @Getter
@@ -13,17 +12,23 @@ import java.util.List;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Ciudad implements Serializable{
+public class DetalleCompra implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @EqualsAndHashCode.Include
     @Column(nullable = false, length = 50)
+    @EqualsAndHashCode.Include
     private int codigo;
 
     @Column(nullable = false, length = 50)
-    private String ciudad;
+    private int unidades;
 
-    @ManyToMany(mappedBy = "ciudades")
-    private List<PublicacionProducto> producto;
+    @Column(nullable = false, length = 50)
+    private double precio;
+//////////////////////////
+     @ManyToOne
+     private PublicacionProducto publicacionProducto;
+
+     @ManyToOne
+     private Compra compra;
 
 }

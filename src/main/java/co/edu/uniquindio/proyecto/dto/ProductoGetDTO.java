@@ -1,13 +1,11 @@
 package co.edu.uniquindio.proyecto.dto;
 
-import co.edu.uniquindio.proyecto.jakarta.persistence.Categoria;
-import co.edu.uniquindio.proyecto.jakarta.persistence.Estado;
-import co.edu.uniquindio.proyecto.jakarta.persistence.PublicacionProducto;
+import co.edu.uniquindio.proyecto.modelo.Categoria;
+import co.edu.uniquindio.proyecto.modelo.PublicacionProducto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @AllArgsConstructor

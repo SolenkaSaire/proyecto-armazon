@@ -2,25 +2,22 @@ package co.edu.uniquindio.proyecto.servicios.implementacion;
 
 import co.edu.uniquindio.proyecto.dto.UsuarioDTO;
 import co.edu.uniquindio.proyecto.dto.UsuarioGetDTO;
-import co.edu.uniquindio.proyecto.jakarta.persistence.Usuario;
+import co.edu.uniquindio.proyecto.modelo.Usuario;
 import co.edu.uniquindio.proyecto.repositorios.UsuarioRepo;
+import co.edu.uniquindio.proyecto.servicios.interfaces.ComentarioServicio;
+import co.edu.uniquindio.proyecto.servicios.interfaces.ProductoServicio;
+import co.edu.uniquindio.proyecto.servicios.interfaces.PublicacionProductoServicio;
 import co.edu.uniquindio.proyecto.servicios.interfaces.UsuarioServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.print.AttributeException;
-import javax.print.attribute.Attribute;
 import java.util.Optional;
 
 @Service
-//@AllArgsConstructor
+@AllArgsConstructor
 public class UsuarioServicioImpl implements UsuarioServicio {
 
     private final UsuarioRepo usuarioRepo;
-
-    public UsuarioServicioImpl(UsuarioRepo usuarioRepo){
-        this.usuarioRepo= usuarioRepo;
-    }
 
     @Override
     public int crearUsuario(UsuarioDTO usuarioDTO) throws Exception {
@@ -31,7 +28,6 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         }
         Usuario usuario = convertir(usuarioDTO);
         return usuarioRepo.save( usuario ).getCodigo();
-
 
     }
 
@@ -62,7 +58,8 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         return convertir( obtener(codigoUsuario) );
     }
 
-    private Usuario obtener(int codigoUsuario) throws Exception{
+    @Override
+    public Usuario obtener(int codigoUsuario) throws Exception{
         Optional<Usuario> usuario = usuarioRepo.findById(codigoUsuario);
 
         if(usuario.isEmpty() ){
@@ -84,8 +81,9 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     private UsuarioGetDTO convertir(Usuario usuario){
 
         UsuarioGetDTO usuarioDTO = new UsuarioGetDTO(
-                usuario.getCodigo(),
+               // usuario.getCodigo(),
                 usuario.getNombre(),
+                usuario.getApellido(),
                 usuario.getEmail(),
                 usuario.getDireccion(),
                 usuario.getTelefono());
@@ -96,11 +94,14 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     private Usuario convertir(UsuarioDTO usuarioDTO){
 
         Usuario usuario = new Usuario();
-        usuario.setNombre( usuarioDTO.getNombre() );
-        usuario.setEmail( usuarioDTO.getEmail() );
-        usuario.setDireccion( usuarioDTO.getDireccion() );
-        usuario.setTelefono( usuarioDTO.getTelefono() );
-        usuario.setPassword( usuarioDTO.getPassword() );
+
+                usuario.setNombre( usuarioDTO.getNombre() );
+                usuario.setApellido( usuarioDTO.getApellido() );
+                usuario.setEmail( usuarioDTO.getEmail() );
+                usuario.setDireccion( usuarioDTO.getDireccion() );
+                usuario.setTelefono( usuarioDTO.getTelefono() );
+                usuario.setPassword( usuarioDTO.getPassword() );
+
 
         return usuario;
     }

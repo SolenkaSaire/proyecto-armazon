@@ -1,8 +1,7 @@
 package co.edu.uniquindio.proyecto.repositorios;
 
-import co.edu.uniquindio.proyecto.jakarta.persistence.Compra;
-import co.edu.uniquindio.proyecto.jakarta.persistence.DetalleCompra;
-import co.edu.uniquindio.proyecto.jakarta.persistence.Producto;
+import co.edu.uniquindio.proyecto.modelo.Compra;
+import co.edu.uniquindio.proyecto.modelo.DetalleCompra;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

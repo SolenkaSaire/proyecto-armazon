@@ -1,4 +1,4 @@
-package co.edu.uniquindio.proyecto.jakarta.persistence;
+package co.edu.uniquindio.proyecto.modelo;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -24,7 +24,7 @@ public class Cuenta implements Serializable {
     @EqualsAndHashCode.Include
     private int codigo;
 
-    @Column(nullable = false, length = 30)
+    @Column(nullable = false,unique = true, length = 100)
     private String email;
 
     @Column(nullable = false,length = 30)

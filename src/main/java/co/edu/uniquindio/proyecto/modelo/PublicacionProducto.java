@@ -1,4 +1,4 @@
-package co.edu.uniquindio.proyecto.jakarta.persistence;
+package co.edu.uniquindio.proyecto.modelo;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Positive;

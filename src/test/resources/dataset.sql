@@ -1,22 +1,22 @@
-insert into ciudad values ("1","Calarca");
-insert into ciudad values ("2","Pereira");
-insert into ciudad values ("3","Tebaida");
-insert into ciudad values ("4","Circacia");
-insert into ciudad values ("5","Armenia");
-
+insert into ciudad values (1,"Calarca");
+insert into ciudad values (2,"Pereira");
+insert into ciudad values (3,"Tebaida");
+insert into ciudad values (4,"Circacia");
+insert into ciudad values (5,"Armenia");
+/*
 insert into usuario () values ("1", "anderson@gmail.com","contraseña","Peña","avenida pepito","Anderson","3193192323");
 insert into usuario () values ("2", "felipe@gmail.com","contra123","Amaya","avenida lujuria","Felipe","3202342121");
 insert into usuario () values ("3", "sol@gmail.com","solesito","Torres","avenida luna","Solenka","3129632735");
 insert into usuario () values ("4", "camilo@gmail.com","camilin","Vargas","avenida flores","Camilo","3182730914");
 insert into usuario () values ("5", "diego@gmail.com","uchihaMadara","Peralta","avenida goku","Diego","3189231231");
-
+*/
 insert into producto values ("1","Carro");
 insert into producto values ("2","Moto");
 insert into producto values ("3","Xbox One");
 insert into producto values ("4","Play 5");
 insert into producto values ("5","terreneitor");
 
-insert into comentario values ("1","2","7/7/20","Me gusto pero le hace falta llantas",1,1);
+insert into comentario values ("1","2","2020-10-01 12:24:25","Me gusto pero le hace falta llantas",1,1);
 insert into comentario values ("2","4","2/3/21","Me gusto pero no puedo montar a las motomamis",2,1);
 insert into comentario values ("3","3","7/5/22","Me gusto pero no viene con controles",3,3);
 insert into comentario values ("4","3","6/1/22","Me gusto pero el plus es carisimo",4,5);
@@ -46,10 +46,10 @@ insert into moderador values ("3","admin3@hotmail.com","admin3");
 insert into moderador values ("4","admin4@hotmail.com","admin4");
 insert into moderador values ("5","admin5@hotmail.com","admin5");
 
-insert into producto_categoria values ("1","Transporte");
+insert into producto_categoria values ("1","HERRAMIENTAS");
 insert into producto_categoria values ("2","Transporte");
-insert into producto_categoria values ("3","Juegos");
-insert into producto_categoria values ("4","Juegos");
+insert into producto_categoria values ("3","HOGAR");
+insert into producto_categoria values ("4","TECNOLOGIA");
 insert into producto_categoria values ("5","TERRENEITOR");
 
 insert into producto_imagenes values ("1","imagen1");

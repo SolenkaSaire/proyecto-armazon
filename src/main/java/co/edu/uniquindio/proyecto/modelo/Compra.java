@@ -1,6 +1,5 @@
-package co.edu.uniquindio.proyecto.jakarta.persistence;
+package co.edu.uniquindio.proyecto.modelo;
 
-import co.edu.uniquindio.proyecto.dto.UsuarioGetDTO;
 import jakarta.persistence.*;
 import lombok.*;
 

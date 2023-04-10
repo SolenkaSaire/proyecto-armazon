@@ -1,7 +1,7 @@
 package co.edu.uniquindio.proyecto.dto;
 
-import co.edu.uniquindio.proyecto.jakarta.persistence.DetalleCompra;
-import co.edu.uniquindio.proyecto.jakarta.persistence.MetodoPago;
+import co.edu.uniquindio.proyecto.modelo.DetalleCompra;
+import co.edu.uniquindio.proyecto.modelo.MetodoPago;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -1,10 +1,14 @@
 package co.edu.uniquindio.proyecto.servicios.implementacion;
 
 import co.edu.uniquindio.proyecto.dto.*;
-import co.edu.uniquindio.proyecto.jakarta.persistence.*;
+import co.edu.uniquindio.proyecto.modelo.Categoria;
+import co.edu.uniquindio.proyecto.modelo.Estado;
+import co.edu.uniquindio.proyecto.modelo.Producto;
+import co.edu.uniquindio.proyecto.modelo.PublicacionProducto;
 import co.edu.uniquindio.proyecto.repositorios.ProductoRepo;
 import co.edu.uniquindio.proyecto.repositorios.PublicacionProductoRepo;
 import co.edu.uniquindio.proyecto.servicios.interfaces.ProductoServicio;
+import co.edu.uniquindio.proyecto.servicios.interfaces.UsuarioServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +21,7 @@ import java.util.Optional;
 public class ProductoServicioImpl implements ProductoServicio {
 
     private final ProductoRepo productoRepo;
+    private final UsuarioServicio usuarioServicio;
     private final PublicacionProductoRepo publicacionProductoRepo;
 
 
@@ -27,8 +32,11 @@ public class ProductoServicioImpl implements ProductoServicio {
         producto.setNombre(productoDTO.getNombre());
         producto.setCategoria(productoDTO.getCategorias());
         producto.setImagenes(productoDTO.getImagenes());
+
+        productoRepo.save(producto);
+
         PublicacionProducto publicacionProducto= new PublicacionProducto();
-        publicacionProducto.setFecha_publicacion(publicacionProductoDTO.getFecha_publicacion());
+       // publicacionProducto.setFecha_publicacion(publicacionProductoDTO.getFecha_publicacion() );
         publicacionProducto.setPromedioEstrellas(publicacionProductoDTO.getPromedioEstrellas());
        // publicacionProducto.setFechaCreacion(publicacionProductoDTO.getFechaCreacion());
         publicacionProducto.setFechaLimite(publicacionProductoDTO.getFechaLimite());
@@ -36,16 +44,20 @@ public class ProductoServicioImpl implements ProductoServicio {
         publicacionProducto.setPrecio(publicacionProductoDTO.getPrecio());
         publicacionProducto.setDisponibilidad(publicacionProductoDTO.getDisponibilidad());
         publicacionProducto.setDescripcion(publicacionProductoDTO.getDescripcion());
-        publicacionProducto.setCiudades(publicacionProductoDTO.getCiudad());
-        publicacionProducto.setVendedor(publicacionProductoDTO.getVendedor());
+        //publicacionProducto.setCiudades(publicacionProductoDTO.getCiudad());
+        publicacionProducto.setVendedor( usuarioServicio.obtener( publicacionProductoDTO.getCodigoVendedor()) );
+        publicacionProducto.setProducto(producto);
+
         return publicacionProductoRepo.save(publicacionProducto).getCodigo();
     }
 
     @Override
     public PublicacionProductoGetDTO actualizarProducto(int codigoPublicacion, PublicacionProductoDTO publicacionProductotDTO) {
             validarExiste(codigoPublicacion);
-            PublicacionProducto publicacionProducto = convertir(publicacionProductotDTO);
-            publicacionProducto.setCodigo(codigoPublicacion);
+
+            PublicacionProducto publicacionProducto = obtenerProducto(codigoPublicacion);
+            //publicacionProducto.set....
+
         return convertir(publicacionProductoRepo.save(publicacionProducto));
     }
 
@@ -81,19 +93,19 @@ public class ProductoServicioImpl implements ProductoServicio {
     private PublicacionProducto convertir(PublicacionProductoDTO publicacionProductoDTO){
         PublicacionProducto publicacionProducto = new PublicacionProducto();
 //////////////////////////codigo;nombre;categoria;imagenes;publicacionProductos;
-                publicacionProducto.getProducto().setCodigo(publicacionProductoDTO.getProducto().getCodigo());
+                /*publicacionProducto.getProducto().setCodigo(publicacionProductoDTO.getProducto().getCodigo());
                 publicacionProducto.getProducto().setNombre(publicacionProductoDTO.getProducto().getNombre());
                 publicacionProducto.getProducto().setCategoria(publicacionProductoDTO.getProducto().getCategoria());
                 publicacionProducto.getProducto().setImagenes(publicacionProductoDTO.getProducto().getImagenes());
                 publicacionProducto.setCodigo(publicacionProductoDTO.getCodigo());
-                publicacionProducto.setFecha_publicacion(publicacionProductoDTO.getFecha_publicacion());
+              //  publicacionProducto.setFecha_publicacion(publicacionProductoDTO.getFecha_publicacion());
                 publicacionProducto.setPromedioEstrellas(publicacionProductoDTO.getPromedioEstrellas());
-                publicacionProducto.setFechaCreacion(publicacionProductoDTO.getFechaCreacion());
+             //   publicacionProducto.setFechaCreacion(publicacionProductoDTO.getFechaCreacion());
                 publicacionProducto.setFechaLimite(publicacionProductoDTO.getFechaLimite());
                 publicacionProducto.setPrecio(publicacionProductoDTO.getPrecio());
                 publicacionProducto.setDisponibilidad(publicacionProductoDTO.getDisponibilidad());
                 publicacionProducto.setDescripcion(publicacionProductoDTO.getDescripcion());
-                publicacionProducto.setVendedor(publicacionProductoDTO.getVendedor());
+                publicacionProducto.setVendedor(publicacionProductoDTO.getVendedor());*/
 
         return publicacionProducto;
     }
@@ -115,15 +127,11 @@ public class ProductoServicioImpl implements ProductoServicio {
 
     @Override
     public int actualizarEstado(int codigoProducto, Estado estado) {
-        Producto producto= new Producto();
 
-        for (PublicacionProducto p :producto.getPublicacionProductos() ) {
-            if (producto.getCodigo() == codigoProducto) {
-                p.setEstado(estado);
-                break;
-            }
-        }
-        return productoRepo.save(producto).getCodigo();
+        PublicacionProducto publicacionProducto = obtenerProducto(codigoProducto);
+        publicacionProducto.setEstado(estado);
+
+        return publicacionProductoRepo.save(publicacionProducto).getCodigo();
     }
 
     @Override

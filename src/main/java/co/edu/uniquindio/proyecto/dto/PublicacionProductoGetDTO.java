@@ -1,11 +1,10 @@
 package co.edu.uniquindio.proyecto.dto;
 
 
-import co.edu.uniquindio.proyecto.jakarta.persistence.Producto;
-import co.edu.uniquindio.proyecto.jakarta.persistence.Usuario;
+import co.edu.uniquindio.proyecto.modelo.Producto;
+import co.edu.uniquindio.proyecto.modelo.Usuario;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;

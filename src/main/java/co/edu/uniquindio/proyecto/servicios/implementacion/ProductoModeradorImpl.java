@@ -1,8 +1,7 @@
 package co.edu.uniquindio.proyecto.servicios.implementacion;
 
 import co.edu.uniquindio.proyecto.dto.PublicacionProductoGetDTO;
-import co.edu.uniquindio.proyecto.jakarta.persistence.Estado;
-import co.edu.uniquindio.proyecto.jakarta.persistence.PublicacionProducto;
+import co.edu.uniquindio.proyecto.modelo.PublicacionProducto;
 import co.edu.uniquindio.proyecto.repositorios.PublicacionProductoRepo;
 import co.edu.uniquindio.proyecto.servicios.interfaces.ProductoModeradorServicio;
 

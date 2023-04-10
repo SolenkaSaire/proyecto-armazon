@@ -1,4 +1,4 @@
-package co.edu.uniquindio.proyecto.jakarta.persistence;
+package co.edu.uniquindio.proyecto.modelo;
 
 //@Entity
 public enum Estado {

@@ -24,7 +24,7 @@ public class DetalleCompra implements Serializable {
 
     @Column(nullable = false, length = 50)
     private double precio;
-//////////////////////////
+
      @ManyToOne
      private PublicacionProducto publicacionProducto;
 

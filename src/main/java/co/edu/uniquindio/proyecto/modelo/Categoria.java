@@ -10,7 +10,6 @@ import lombok.Setter;
 
 public enum Categoria {
 
-
     TECNOLOGIA,
     HOGAR,
     COCHES,

@@ -14,11 +14,13 @@ import java.util.List;
 @Getter
 @Setter
 public class ProductoDTO {
+//private String nombre;    private List<Categoria> categoria;    private List<String> imagenes;    private List<PublicacionProducto> publicacionProductos;
 
     @NotBlank
     @NotNull
     @Length(max=50, message = "nombre maximo 50 caracteres")
     private String nombre;
+    private List<String> categoria;
     @NotBlank
     @NotNull
     @Length(max=100, message = "descripcion maximo 100 caracteres")

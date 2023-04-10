@@ -26,7 +26,6 @@ public class Producto implements Serializable {
     @ElementCollection
     @Enumerated(value = EnumType.STRING)
     private List<Categoria> categoria;
-
     @ElementCollection
     @Column(nullable = false)
     //@JoinColumn(name = "ruta_imagen")

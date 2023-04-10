@@ -14,13 +14,10 @@ public class ComentarioDTO {
 
     @NotBlank
     @NotNull
-    @Length(max=50, message = "codigo maximo 50 caracteres")
-    private  int codigo;
-
-    @NotBlank
-    @NotNull
     @Length(max=70, message = "mensaje maximo 70 caracteres")
-    private String mensaje;
+    private String texto;
+
+    private int estrellas;
 
     @NotBlank
     @NotNull
@@ -30,6 +27,6 @@ public class ComentarioDTO {
     @NotBlank
     @NotNull
     @Length(max=50, message = "nombre maximo 50 caracteres")
-    private int codigoProducto;
+    private int codigoPublicacionProducto;
 
 }

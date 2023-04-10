@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyecto.dto;
 
+import co.edu.uniquindio.proyecto.modelo.DetalleCompra;
 import co.edu.uniquindio.proyecto.modelo.MetodoPago;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -18,9 +19,6 @@ public class CompraDTO {
     @NotNull
     private double total;
 
-    @NotBlank
-    @NotNull
-    private int codigoUsuario;
 
     @NotBlank
     @NotNull
@@ -28,5 +26,11 @@ public class CompraDTO {
 
     @NotBlank
     @NotNull
-    private List<DetalleCompraDTO> detalleCompraDTO;
+    private int codigoUsuario;
+
+
+    @NotBlank
+    @NotNull
+    private List<Integer> codigoDetalleCompra;
+
 }

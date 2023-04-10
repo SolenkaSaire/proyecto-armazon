@@ -16,13 +16,10 @@ import java.util.List;
 @NoArgsConstructor
 public class DetalleCompraGetDTO {
 
-    private LocalDateTime fecha;
-
-    private double valorTotal;
-
-    private MetodoPago metodoPago;
-
-    private List<DetalleCompra> detalleCompra;
+    private int unidades;
+    private double precio;
+    private int codigoPublicacionProducto;
+    private int codigoCompra;
 
 
 }

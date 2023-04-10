@@ -13,17 +13,12 @@ import java.util.List;
 @Setter
 public class CompraGetDTO {
 
-
-    private int codigo;
-
-    private LocalDateTime fecha;
-
     private double total;
-
-    private int codigoUsuario;
 
     private MetodoPago metodoPago;
 
-    private List<DetalleCompra> detalleCompra;
+    private int codigoUsuario;
+
+    private List<Integer> codigoDetalleCompra;
 
 }

@@ -1,6 +1,6 @@
 package co.edu.uniquindio.proyecto.dto;
 
-import co.edu.uniquindio.proyecto.modelo.Estado;
+import co.edu.uniquindio.proyecto.modelo.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -15,18 +15,10 @@ import java.util.List;
 @Getter
 @Setter
 public class PublicacionProductoDTO {
-   // codigo;fecha_publicacion;promedioEstrellas;fechaCreacion;fechaLimite;precio;disponibilidad;descripcion;
-
-    @NotBlank
-    @NotNull
-    private int codigo;
-   // private LocalDateTime fecha_publicacion;
 
     @NotBlank
     @NotNull
     private double promedioEstrellas;
-
-  //  private LocalDateTime fechaCreacion;
 
     @NotBlank
     @NotNull
@@ -44,9 +36,14 @@ public class PublicacionProductoDTO {
     @NotNull
     @Length(max=100, message = "descripcion maximo 100 caracteres")
     private String descripcion;
-
-    private Estado estado;
-    public List<Integer> codigosCiudades;
     public int codigoVendedor;
-    public int codigoProducto;
+    private List<Integer> codigoUsuarioFavoritos;
+    private List<Integer> codigoModeradores;
+    private List<Integer> codigoDetalleCompras;
+    private List<String> comentarios;
+    private int codigoProducto;
+
+    //private Estado estado;
+    private String estado;
+    public List<Integer> codigosCiudades;
 }

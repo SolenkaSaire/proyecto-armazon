@@ -18,8 +18,6 @@ public class CompraDTO {
     @NotBlank
     @NotNull
     private double total;
-
-
     @NotBlank
     @NotNull
     private MetodoPago metodoPago;

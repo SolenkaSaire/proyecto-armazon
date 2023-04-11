@@ -1,16 +1,13 @@
 package co.edu.uniquindio.proyecto.servicios.implementacion;
 
 import co.edu.uniquindio.proyecto.dto.UsuarioDTO;
-import co.edu.uniquindio.proyecto.dto.UsuarioGetDTO;
 import co.edu.uniquindio.proyecto.modelo.Usuario;
 import co.edu.uniquindio.proyecto.repositorios.UsuarioRepo;
-import co.edu.uniquindio.proyecto.servicios.interfaces.ComentarioServicio;
-import co.edu.uniquindio.proyecto.servicios.interfaces.ProductoServicio;
-import co.edu.uniquindio.proyecto.servicios.interfaces.PublicacionProductoServicio;
 import co.edu.uniquindio.proyecto.servicios.interfaces.UsuarioServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -53,13 +50,10 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         return codigoUsuario;
     }
 
-    @Override
-    public UsuarioGetDTO obtenerUsuario(int codigoUsuario) throws Exception{
-        return convertir( obtener(codigoUsuario) );
-    }
+
 
     @Override
-    public Usuario obtener(int codigoUsuario) throws Exception{
+    public Usuario obtenerUsuario(int codigoUsuario) throws Exception{
         Optional<Usuario> usuario = usuarioRepo.findById(codigoUsuario);
 
         if(usuario.isEmpty() ){
@@ -67,6 +61,13 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         }
 
         return usuario.get();
+    }
+
+    @Override
+    public List<Integer> obtenerUsuariosCodigo(int codigoPublicacion ) {
+        List<Integer> usuariosCodigo = usuarioRepo.obtenerUsuariosCodigo(codigoPublicacion);
+
+        return usuariosCodigo;
     }
 
     private void validarExiste(int codigoUsuario) throws Exception{
@@ -77,20 +78,22 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         }
 
     }
-
+/*
     private UsuarioGetDTO convertir(Usuario usuario){
 
         UsuarioGetDTO usuarioDTO = new UsuarioGetDTO(
-               // usuario.getCodigo(),
                 usuario.getNombre(),
                 usuario.getApellido(),
-                usuario.getEmail(),
                 usuario.getDireccion(),
-                usuario.getTelefono());
+                usuario.getTelefono(),
+                usuario.getComentario().to,
+                usuario.getMisProductos(),
+                usuario.getPublicacionesFavoritas(),
+                usuario.getCompra());
 
         return usuarioDTO;
     }
-
+*/
     private Usuario convertir(UsuarioDTO usuarioDTO){
 
         Usuario usuario = new Usuario();

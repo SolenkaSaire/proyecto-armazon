@@ -40,12 +40,4 @@ public class Usuario extends Cuenta implements Serializable {
     @ToString.Exclude
     @OneToMany(mappedBy="usuario")
     private List<Compra> compra;//publicacionProductos?
-
-
-
-    /////////////////////
-
-
-
-
 }

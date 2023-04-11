@@ -2,6 +2,7 @@ package co.edu.uniquindio.proyecto.servicios.interfaces;
 
 import co.edu.uniquindio.proyecto.dto.PublicacionProductoGetDTO;
 import co.edu.uniquindio.proyecto.modelo.Estado;
+import co.edu.uniquindio.proyecto.modelo.ProductoModerador;
 import co.edu.uniquindio.proyecto.modelo.PublicacionProducto;
 
 import java.util.List;
@@ -15,4 +16,6 @@ public interface ModeradorServicio {
     void rechazarProducto(PublicacionProducto publicacionProducto) throws Exception;
 
     List<PublicacionProductoGetDTO> listarEstado(Estado estado) throws Exception;
+
+    List<Integer> obtenerModeradoresCodigo(List<ProductoModerador> moderadores);
 }

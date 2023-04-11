@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyecto.dto;
 
 import co.edu.uniquindio.proyecto.modelo.Categoria;
+import co.edu.uniquindio.proyecto.modelo.PublicacionProducto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -20,20 +21,19 @@ public class ProductoDTO {
     @NotNull
     @Length(max=50, message = "nombre maximo 50 caracteres")
     private String nombre;
-    private List<String> categoria;
     @NotBlank
     @NotNull
-    @Length(max=100, message = "descripcion maximo 100 caracteres")
-    private String descripcion;
+    @Length(max=50, message = "categoria maximo 50 caracteres")
+    //private List<String> categorias;
 
-    private int unidades;
-
-    private float precio;
-
-    private int codigoVendedor;
-
-    private List<String> imagenes;
 
     private List<Categoria> categorias;
+    @NotBlank
+    @NotNull
+    @Length(max=50, message = "imagenes maximo 50 caracteres")
+    private List<String> imagenes;
+
+    private List<Integer> codigoPublicacionProductos;
+
 
 }

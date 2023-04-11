@@ -5,8 +5,10 @@ import co.edu.uniquindio.proyecto.modelo.Categoria;
 import co.edu.uniquindio.proyecto.modelo.Estado;
 import co.edu.uniquindio.proyecto.modelo.Producto;
 import co.edu.uniquindio.proyecto.modelo.PublicacionProducto;
+import co.edu.uniquindio.proyecto.repositorios.ModeradorRepo;
 import co.edu.uniquindio.proyecto.repositorios.ProductoRepo;
 import co.edu.uniquindio.proyecto.repositorios.PublicacionProductoRepo;
+import co.edu.uniquindio.proyecto.servicios.interfaces.ModeradorServicio;
 import co.edu.uniquindio.proyecto.servicios.interfaces.ProductoServicio;
 import co.edu.uniquindio.proyecto.servicios.interfaces.UsuarioServicio;
 import lombok.AllArgsConstructor;
@@ -23,6 +25,8 @@ public class ProductoServicioImpl implements ProductoServicio {
     private final ProductoRepo productoRepo;
     private final UsuarioServicio usuarioServicio;
     private final PublicacionProductoRepo publicacionProductoRepo;
+    ///cambios
+    private final ModeradorServicio moderadorServicio;
 
 
     @Override
@@ -36,16 +40,13 @@ public class ProductoServicioImpl implements ProductoServicio {
         productoRepo.save(producto);
 
         PublicacionProducto publicacionProducto= new PublicacionProducto();
-       // publicacionProducto.setFecha_publicacion(publicacionProductoDTO.getFecha_publicacion() );
         publicacionProducto.setPromedioEstrellas(publicacionProductoDTO.getPromedioEstrellas());
-       // publicacionProducto.setFechaCreacion(publicacionProductoDTO.getFechaCreacion());
         publicacionProducto.setFechaLimite(publicacionProductoDTO.getFechaLimite());
         publicacionProducto.setEstado(Estado.NO_APROBADO);
         publicacionProducto.setPrecio(publicacionProductoDTO.getPrecio());
         publicacionProducto.setDisponibilidad(publicacionProductoDTO.getDisponibilidad());
         publicacionProducto.setDescripcion(publicacionProductoDTO.getDescripcion());
-        //publicacionProducto.setCiudades(publicacionProductoDTO.getCiudad());
-        publicacionProducto.setVendedor( usuarioServicio.obtener( publicacionProductoDTO.getCodigoVendedor()) );
+        publicacionProducto.setVendedor( usuarioServicio.obtenerUsuario( publicacionProductoDTO.getCodigoVendedor()) );
         publicacionProducto.setProducto(producto);
 
         return publicacionProductoRepo.save(publicacionProducto).getCodigo();
@@ -61,18 +62,19 @@ public class ProductoServicioImpl implements ProductoServicio {
         return convertir(publicacionProductoRepo.save(publicacionProducto));
     }
 
-    private PublicacionProductoGetDTO convertir(PublicacionProducto publicacionProducto) {
+    private PublicacionProductoGetDTO convertir(PublicacionProducto publicacionProducto) throws Exception {
         //////////////////////////codigo;fecha_publi;promedioE; fecha_creaci;fecha_limite;precio;disponibilidad, descripcion; vendedor;
         PublicacionProductoGetDTO publicacionProductoDTO = new PublicacionProductoGetDTO(
-                publicacionProducto.getCodigo(),
-                publicacionProducto.getFecha_publicacion(),
                 publicacionProducto.getPromedioEstrellas(),
-                publicacionProducto.getFechaCreacion(),
                 publicacionProducto.getFechaLimite(),
                 publicacionProducto.getPrecio(),
                 publicacionProducto.getDisponibilidad(),
                 publicacionProducto.getDescripcion(),
-                publicacionProducto.getVendedor(),
+                publicacionProducto.getVendedor().getCodigo(),
+                usuarioServicio.obtenerUsuariosCodigo( publicacionProducto.getCodigo() ),
+                moderadorServicio.obtenerModeradoresCodigo( publicacionProducto.getModeradores()),
+
+
                 publicacionProducto.getProducto());
             return publicacionProductoDTO;
 

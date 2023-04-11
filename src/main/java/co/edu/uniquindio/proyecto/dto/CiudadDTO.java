@@ -9,9 +9,9 @@ public class CiudadDTO {
     @NotBlank
     @NotNull
     @Length(max=50, message = "ciudad maximo 50 caracteres")
-    String ciudad;
+    private String ciudad;
 
     @NotBlank
     @NotNull
-    int codigoPublicacion;
+    private int codigoPublicacion;
 }

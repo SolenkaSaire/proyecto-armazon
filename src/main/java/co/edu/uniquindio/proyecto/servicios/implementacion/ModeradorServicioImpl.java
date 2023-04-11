@@ -2,7 +2,9 @@ package co.edu.uniquindio.proyecto.servicios.implementacion;
 
 import co.edu.uniquindio.proyecto.dto.PublicacionProductoGetDTO;
 import co.edu.uniquindio.proyecto.modelo.Estado;
+import co.edu.uniquindio.proyecto.modelo.ProductoModerador;
 import co.edu.uniquindio.proyecto.modelo.PublicacionProducto;
+import co.edu.uniquindio.proyecto.repositorios.ModeradorRepo;
 import co.edu.uniquindio.proyecto.repositorios.PublicacionProductoRepo;
 import co.edu.uniquindio.proyecto.servicios.interfaces.ModeradorServicio;
 import lombok.AllArgsConstructor;
@@ -15,6 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 public class ModeradorServicioImpl implements ModeradorServicio{
     private  final PublicacionProductoRepo publicacionProductoRepo;
+    private final ModeradorRepo moderadorRepo;
     @Override
     public void aprobarProducto(PublicacionProducto publicacionProducto){
         publicacionProducto.setEstado(Estado.APROBADO);
@@ -53,6 +56,12 @@ public class ModeradorServicioImpl implements ModeradorServicio{
             );
         return publicacionProductoGetDTO;
 
+    }
+    @Override
+    private List<Integer> obtenerModeradoresCodigo(List<ProductoModerador> moderadores){
+        List<Integer> codigosModeradores = moderadorRepo.buscarModeradorCodigos( moderadores);
+
+        return codigosModeradores;
     }
 
 }

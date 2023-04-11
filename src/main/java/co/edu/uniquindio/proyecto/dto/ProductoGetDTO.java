@@ -12,14 +12,10 @@ import java.util.List;
 @Getter
 @Setter
 public class ProductoGetDTO {
-    //codigo;nombre;categoria;imagenes;publicacionProductos;
-    private int codigo;
-
     private String nombre;
-
+    private List<String> categorias;
     private List<String> imagenes;
+    private List<Integer> codigoPublicacionProductos;
 
-    private List<Categoria> categorias;
-    private List<PublicacionProducto> publicacionProductos;
 
 }

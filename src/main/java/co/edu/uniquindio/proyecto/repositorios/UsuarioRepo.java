@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface UsuarioRepo extends JpaRepository<Usuario, Integer> {
 
@@ -20,7 +22,10 @@ public interface UsuarioRepo extends JpaRepository<Usuario, Integer> {
     @Query("select u.nombre, u.email from Usuario u where u.codigo =:codigo")
     Object[] obtenerDatosUsuario(String codigo);
 
-
+    @Query("select u.codigo from PublicacionProducto u where u.favoritos =:codigoPublicacion")
+    List<Integer> obtenerUsuariosCodigo(int codigoPublicacion );
    // Usuario findByEmailAndPassword();
+
+
 
 }

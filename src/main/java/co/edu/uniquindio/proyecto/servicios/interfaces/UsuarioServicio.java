@@ -4,6 +4,8 @@ import co.edu.uniquindio.proyecto.dto.UsuarioDTO;
 import co.edu.uniquindio.proyecto.dto.UsuarioGetDTO;
 import co.edu.uniquindio.proyecto.modelo.Usuario;
 
+import java.util.List;
+
 public interface UsuarioServicio {
 //funciones asociadas a la entidad, crear, actualizar, iniciar sesion, etc
 
@@ -13,10 +15,9 @@ public interface UsuarioServicio {
 
     int eliminiarUsuario(int codigoUsuario) throws Exception;
 
-    UsuarioGetDTO obtenerUsuario(int codigoUsuario) throws Exception;
+    //UsuarioGetDTO obtenerUsuario(int codigoUsuario) throws Exception;
     
-    Usuario obtener(int codigo) throws Exception;
-    
-    
+    Usuario obtenerUsuario(int codigo) throws Exception;
 
+    List<Integer> obtenerUsuariosCodigo( int codigoPublicacion ) throws Exception;
 }

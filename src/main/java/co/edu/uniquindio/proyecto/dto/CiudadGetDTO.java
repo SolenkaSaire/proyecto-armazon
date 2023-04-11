@@ -2,7 +2,7 @@ package co.edu.uniquindio.proyecto.dto;
 
 public class CiudadGetDTO {
 
-    String ciudad;
+    private String ciudad;
 
-    int codigoPublicacion;
+    private int codigoPublicacion;
 }

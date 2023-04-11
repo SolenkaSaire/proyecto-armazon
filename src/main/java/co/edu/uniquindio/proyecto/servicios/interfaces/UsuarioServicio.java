@@ -2,6 +2,7 @@ package co.edu.uniquindio.proyecto.servicios.interfaces;
 
 import co.edu.uniquindio.proyecto.dto.UsuarioDTO;
 import co.edu.uniquindio.proyecto.dto.UsuarioGetDTO;
+import co.edu.uniquindio.proyecto.modelo.ProductoModerador;
 import co.edu.uniquindio.proyecto.modelo.Usuario;
 
 import java.util.List;
@@ -19,5 +20,5 @@ public interface UsuarioServicio {
     
     Usuario obtenerUsuario(int codigo) throws Exception;
 
-    List<Integer> obtenerUsuariosCodigo( int codigoPublicacion ) throws Exception;
+    List<Integer> obtenerUsuariosCodigo( List<Usuario> favoritos) throws Exception;
 }

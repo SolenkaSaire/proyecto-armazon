@@ -8,9 +8,7 @@ import co.edu.uniquindio.proyecto.modelo.PublicacionProducto;
 import co.edu.uniquindio.proyecto.repositorios.ModeradorRepo;
 import co.edu.uniquindio.proyecto.repositorios.ProductoRepo;
 import co.edu.uniquindio.proyecto.repositorios.PublicacionProductoRepo;
-import co.edu.uniquindio.proyecto.servicios.interfaces.ModeradorServicio;
-import co.edu.uniquindio.proyecto.servicios.interfaces.ProductoServicio;
-import co.edu.uniquindio.proyecto.servicios.interfaces.UsuarioServicio;
+import co.edu.uniquindio.proyecto.servicios.interfaces.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +25,9 @@ public class ProductoServicioImpl implements ProductoServicio {
     private final PublicacionProductoRepo publicacionProductoRepo;
     ///cambios
     private final ModeradorServicio moderadorServicio;
+    private final DetalleCompraServicio detalleCompraServicio;
+    private final ComentarioServicio comentarioServicio;
+    private final PublicacionProductoServicio publicacionProductoServicio;
 
 
     @Override
@@ -55,11 +56,37 @@ public class ProductoServicioImpl implements ProductoServicio {
     @Override
     public PublicacionProductoGetDTO actualizarProducto(int codigoPublicacion, PublicacionProductoDTO publicacionProductotDTO) {
             validarExiste(codigoPublicacion);
+            //validarExiste( codigoprodcuto);
+            Producto productoActualizado = obtenerProducto2( obtenerProducto(codigoPublicacion).getProducto().getCodigo() );
+            productoActualizado.setNombre( obtenerProducto2(publicacionProductotDTO.getCodigoProducto()).getNombre() );
+            productoActualizado.setCategoria( obtenerProducto2(publicacionProductotDTO.getCodigoProducto()).getCategoria()  );
+            productoActualizado.setImagenes( obtenerProducto2(publicacionProductotDTO.getCodigoProducto()).getImagenes() );
 
+
+            PublicacionProducto p = new PublicacionProducto();
             PublicacionProducto publicacionProducto = obtenerProducto(codigoPublicacion);
             //publicacionProducto.set....
+            publicacionProducto.setPromedioEstrellas( publicacionProductotDTO.getPromedioEstrellas() );
+            publicacionProducto.setFechaLimite( publicacionProductotDTO.getFechaLimite() );
+            publicacionProducto.setPrecio( publicacionProductotDTO.getPrecio() );
+            publicacionProducto.setDisponibilidad(  publicacionProductotDTO.getDisponibilidad() );
+            publicacionProducto.setProducto( productoActualizado );
 
         return convertir(publicacionProductoRepo.save(publicacionProducto));
+    }
+
+    @Override
+    public Producto obtenerProducto2(int codigoProducto) {
+        Optional<Producto> producto = productoRepo.findById(codigoProducto);
+        if(producto.isEmpty() ){
+            try {
+                throw new Exception("El código "+codigoProducto+" no está asociado a ningún producto");
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return producto.get();
+
     }
 
     private PublicacionProductoGetDTO convertir(PublicacionProducto publicacionProducto) throws Exception {
@@ -71,11 +98,14 @@ public class ProductoServicioImpl implements ProductoServicio {
                 publicacionProducto.getDisponibilidad(),
                 publicacionProducto.getDescripcion(),
                 publicacionProducto.getVendedor().getCodigo(),
-                usuarioServicio.obtenerUsuariosCodigo( publicacionProducto.getCodigo() ),
+                usuarioServicio.obtenerUsuariosCodigo( publicacionProducto.getFavoritos() ),
                 moderadorServicio.obtenerModeradoresCodigo( publicacionProducto.getModeradores()),
-
-
-                publicacionProducto.getProducto());
+                detalleCompraServicio.obtenerDetallesCodigo( publicacionProducto.getCompras() ),
+                comentarioServicio.obtenerListaComentarios( publicacionProducto.getComentarios() ),
+                publicacionProducto.getProducto().getCodigo(),
+                publicacionProducto.getEstado().toString(),
+                publicacionProductoServicio.obtenerCiudadesCodigo( publicacionProducto.getCiudades() )
+                );
             return publicacionProductoDTO;
 
     }

@@ -13,7 +13,7 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class DetalleCompraImpl implements DetalleCompraServicio {
+public class DetalleCompraServicioImpl implements DetalleCompraServicio {
     DetalleCompraRepo detalleCompraRepo;
     @Override
     public int crearDetalleCompra(DetalleCompraDTO detalleCompraDTO) throws Exception {
@@ -44,6 +44,16 @@ public class DetalleCompraImpl implements DetalleCompraServicio {
             respuesta.add(convertir(p));
         }
         return respuesta;
+    }
+
+    @Override
+    public List<Integer> obtenerDetallesCodigo(List<DetalleCompra> compras) {
+        List<Integer> codigoDetalles = new ArrayList<>();
+        for (DetalleCompra d: compras) {
+            codigoDetalles.add( d.getCodigo() );
+
+        }
+        return codigoDetalles;
     }
 
 

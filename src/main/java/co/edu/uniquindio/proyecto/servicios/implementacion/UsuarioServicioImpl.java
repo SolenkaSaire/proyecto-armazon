@@ -7,8 +7,7 @@ import co.edu.uniquindio.proyecto.servicios.interfaces.UsuarioServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @AllArgsConstructor
@@ -63,9 +62,14 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         return usuario.get();
     }
 
+    //obtiene la lista de codigos de usuarios del parametro de listas de usuarios favorito enviado
     @Override
-    public List<Integer> obtenerUsuariosCodigo(int codigoPublicacion ) {
-        List<Integer> usuariosCodigo = usuarioRepo.obtenerUsuariosCodigo(codigoPublicacion);
+    public List<Integer> obtenerUsuariosCodigo(List<Usuario> favoritos ) {
+        List<Integer> usuariosCodigo = new ArrayList<Integer>();
+
+        for (Usuario aux :favoritos ) {
+            usuariosCodigo.add(aux.getCodigo());
+        }
 
         return usuariosCodigo;
     }

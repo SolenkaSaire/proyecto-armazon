@@ -5,6 +5,7 @@ import co.edu.uniquindio.proyecto.dto.PublicacionProductoDTO;
 import co.edu.uniquindio.proyecto.dto.PublicacionProductoGetDTO;
 import co.edu.uniquindio.proyecto.modelo.Categoria;
 import co.edu.uniquindio.proyecto.modelo.Estado;
+import co.edu.uniquindio.proyecto.modelo.Producto;
 import co.edu.uniquindio.proyecto.modelo.PublicacionProducto;
 
 import java.util.List;
@@ -16,7 +17,8 @@ public interface ProductoServicio {
     int actualizarEstado(int codigoProducto, Estado estado);
     int eliminarProducto(int codigoProducto);
     PublicacionProducto obtenerProducto(int codigoProducto);
-    List<PublicacionProductoGetDTO> listarPublicacionProductosUsuario(int codigoUsuario);
+    Producto obtenerProducto2(int codigoProducto);
+        List<PublicacionProductoGetDTO> listarPublicacionProductosUsuario(int codigoUsuario);
     List<PublicacionProductoGetDTO> listarPublicacionProductosCategoria(Categoria categoria);
     List<PublicacionProductoGetDTO> listarPublicacionProductosPorEstado(Estado estado);
     public List<PublicacionProductoGetDTO> listarPublicacionesProductosFavoritos(int codigoUsuario);

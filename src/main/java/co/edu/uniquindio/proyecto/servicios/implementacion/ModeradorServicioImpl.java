@@ -2,6 +2,7 @@ package co.edu.uniquindio.proyecto.servicios.implementacion;
 
 import co.edu.uniquindio.proyecto.dto.PublicacionProductoGetDTO;
 import co.edu.uniquindio.proyecto.modelo.Estado;
+import co.edu.uniquindio.proyecto.modelo.Moderador;
 import co.edu.uniquindio.proyecto.modelo.ProductoModerador;
 import co.edu.uniquindio.proyecto.modelo.PublicacionProducto;
 import co.edu.uniquindio.proyecto.repositorios.ModeradorRepo;
@@ -58,8 +59,11 @@ public class ModeradorServicioImpl implements ModeradorServicio{
 
     }
     @Override
-    private List<Integer> obtenerModeradoresCodigo(List<ProductoModerador> moderadores){
-        List<Integer> codigosModeradores = moderadorRepo.buscarModeradorCodigos( moderadores);
+    public List<Integer> obtenerModeradoresCodigo(List<ProductoModerador> moderadores){
+        List<Integer> codigosModeradores = new ArrayList<Integer>();
+        for (ProductoModerador m: moderadores) {
+            codigosModeradores.add( m.getModerador().getCodigo() );
+        }
 
         return codigosModeradores;
     }

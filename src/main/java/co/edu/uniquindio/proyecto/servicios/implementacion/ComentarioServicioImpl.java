@@ -80,6 +80,15 @@ public class ComentarioServicioImpl implements ComentarioServicio {
         return respuesta;
     }
 
+    @Override
+    public List<String> obtenerListaComentarios(List<Comentario> comentarios) {
+        List<String> comentariosString = new ArrayList<>();
+        for (Comentario c:comentarios) {
+            comentariosString.add(c.getTexto());
+        }
+        return comentariosString;
+    }
+
     private ComentarioGetDTO convertir(Comentario comentario){
     //codigo, fecha, mensaje, codigoUsuario, codigoProducto
         ComentarioGetDTO comentarioGetDTO = new ComentarioGetDTO(

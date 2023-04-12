@@ -82,7 +82,7 @@ public class UsuarioTest {
     @Sql("classpath:dataset.sql")
     public void obtenerTest() throws Exception {
 
-         UsuarioGetDTO usuarioDTO = usuarioServicio.obtenerUsuario(1);
+         Usuario usuario = usuarioServicio.obtenerUsuario(1);
 
     }
 

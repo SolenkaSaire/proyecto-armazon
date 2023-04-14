@@ -1,9 +1,14 @@
 package co.edu.uniquindio.proyecto.servicios.implementacion;
 
 import co.edu.uniquindio.proyecto.dto.UsuarioDTO;
+import co.edu.uniquindio.proyecto.dto.UsuarioGetDTO;
+import co.edu.uniquindio.proyecto.modelo.Comentario;
+import co.edu.uniquindio.proyecto.modelo.Compra;
+import co.edu.uniquindio.proyecto.modelo.PublicacionProducto;
 import co.edu.uniquindio.proyecto.modelo.Usuario;
 import co.edu.uniquindio.proyecto.repositorios.UsuarioRepo;
 import co.edu.uniquindio.proyecto.servicios.interfaces.UsuarioServicio;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -62,10 +67,9 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         return usuario.get();
     }
 
-    //obtiene la lista de codigos de usuarios del parametro de listas de usuarios favorito enviado
     @Override
     public List<Integer> obtenerUsuariosCodigo(List<Usuario> favoritos ) {
-        List<Integer> usuariosCodigo = new ArrayList<Integer>();
+        List<Integer> usuariosCodigo = new ArrayList<>();
 
         for (Usuario aux :favoritos ) {
             usuariosCodigo.add(aux.getCodigo());
@@ -82,7 +86,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         }
 
     }
-/*
+
     private UsuarioGetDTO convertir(Usuario usuario){
 
         UsuarioGetDTO usuarioDTO = new UsuarioGetDTO(
@@ -90,26 +94,57 @@ public class UsuarioServicioImpl implements UsuarioServicio {
                 usuario.getApellido(),
                 usuario.getDireccion(),
                 usuario.getTelefono(),
-                usuario.getComentario().to,
-                usuario.getMisProductos(),
-                usuario.getPublicacionesFavoritas(),
-                usuario.getCompra());
-
+                obtenerComentariosUsuario(usuario),
+                obtenerCodPublicaciones(usuario),
+                obtenerCodPublicacionesFavoritas(usuario),
+                obtenerCodCompras(usuario),
+                usuario.getEmail(),
+                usuario.getPassword()
+        );
         return usuarioDTO;
     }
-*/
+
+    public List<Integer> obtenerCodCompras(Usuario usuario){
+        List<Integer> compras= new ArrayList<>();
+        for (Compra miCompra: usuario.getCompra() ) {
+            compras.add(miCompra.getCodigo());
+        }
+        return compras;
+    }
+
+
+    public List<Integer> obtenerCodPublicacionesFavoritas(Usuario usuario){
+        List<Integer> publicacionesFavoritas= new ArrayList<>();
+        for (PublicacionProducto misFavoritos: usuario.getPublicacionesFavoritas() ) {
+            publicacionesFavoritas.add(misFavoritos.getCodigo());
+        }
+        return publicacionesFavoritas;
+    }
+
+    public List<Integer> obtenerCodPublicaciones(Usuario usuario){
+        List<Integer> publicaciones= new ArrayList<>();
+        for (PublicacionProducto misPublicaciones: usuario.getMisProductos() ) {
+            publicaciones.add(misPublicaciones.getCodigo());
+        }
+        return publicaciones;
+    }
+
+    public List<String> obtenerComentariosUsuario(Usuario usuario){
+        List<String> comentarios= new ArrayList<>();
+        for (Comentario comentario: usuario.getComentario() ) {
+            comentarios.add(comentario.getTexto());
+        }
+        return comentarios;
+    }
+
     private Usuario convertir(UsuarioDTO usuarioDTO){
-
         Usuario usuario = new Usuario();
-
                 usuario.setNombre( usuarioDTO.getNombre() );
                 usuario.setApellido( usuarioDTO.getApellido() );
                 usuario.setEmail( usuarioDTO.getEmail() );
                 usuario.setDireccion( usuarioDTO.getDireccion() );
                 usuario.setTelefono( usuarioDTO.getTelefono() );
                 usuario.setPassword( usuarioDTO.getPassword() );
-
-
         return usuario;
     }
 

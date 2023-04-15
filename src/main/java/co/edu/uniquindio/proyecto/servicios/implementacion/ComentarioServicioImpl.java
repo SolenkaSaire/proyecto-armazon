@@ -6,6 +6,8 @@ import co.edu.uniquindio.proyecto.modelo.Comentario;
 import co.edu.uniquindio.proyecto.modelo.PublicacionProducto;
 import co.edu.uniquindio.proyecto.repositorios.*;
 import co.edu.uniquindio.proyecto.servicios.interfaces.ComentarioServicio;
+import co.edu.uniquindio.proyecto.servicios.interfaces.PublicacionProductoServicio;
+import co.edu.uniquindio.proyecto.servicios.interfaces.UsuarioServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,18 +25,38 @@ public class ComentarioServicioImpl implements ComentarioServicio {
     private final DetalleCompraRepo detalleCompraRepo;
     private  final ProductoRepo productoRepo;
 */
+    private final PublicacionProductoServicio publicacionProductoServicio;
+    private final UsuarioServicio usuarioServicio;
+    private final PublicacionProductoRepo publicacionProductoRepo;
+
     @Override
-    public int crearComentario(ComentarioDTO comentarioDTO, int codigoProducto, String comentario) throws Exception {
-        PublicacionProducto publicacionProducto = new PublicacionProducto();
-        Comentario comentarios= new Comentario(comentario);
-        for (Comentario p : publicacionProducto.getComentarios()) {
-            if (publicacionProducto.getCodigo() == codigoProducto) {
-                p.getPublicacionProducto().getComentarios().add(comentarios );
-                break;
+    public int crearComentario(ComentarioDTO comentarioDTO) throws Exception {
+        PublicacionProducto publicacionProducto = publicacionProductoServicio.obtenerPublicacionProductoP(comentarioDTO.getCodigoPublicacionProducto());
+        Comentario nuevoComentario= new Comentario();
+        nuevoComentario.setTexto(comentarioDTO.getTexto());
+        nuevoComentario.setEstrellas(comentarioDTO.getEstrellas());
+        nuevoComentario.setUsuario(usuarioServicio.obtenerUsuario(comentarioDTO.getCodigoUsuario()));
+        nuevoComentario.setPublicacionProducto(publicacionProductoServicio.obtenerPublicacionProductoP(comentarioDTO.getCodigoPublicacionProducto()));
+        comentarioRepo.save(nuevoComentario);
+        double promedio=0;
+        /*for (Comentario p : publicacionProducto.getComentarios() ) {
+            promedio+= p.getEstrellas();
+        }*/
+        for (int i = 0; i < publicacionProducto.getComentarios().size()-1; i++) {
+            Comentario aux = publicacionProducto.getComentarios().get(i);
+            promedio+=aux.getEstrellas();
+            if(publicacionProducto.getComentarios().size()-1==i){
+                promedio=promedio/5;
+                publicacionProducto.setPromedioEstrellas(promedio);
             }
         }
 
-        return comentarios.getCodigo();
+        if (publicacionProducto.getCodigo() == comentarioDTO.getCodigoPublicacionProducto()) {
+            publicacionProducto.getComentarios().add(nuevoComentario);
+            publicacionProductoRepo.save(publicacionProducto);
+        }
+
+        return nuevoComentario.getCodigo();
     }
 
     @Override
@@ -45,10 +67,14 @@ public class ComentarioServicioImpl implements ComentarioServicio {
         return convertir(comentarioRepo.save(comentario));
     }
 
-    private Comentario convertir(ComentarioDTO comentarioDTO) {
+    private Comentario convertir(ComentarioDTO comentarioDTO) throws Exception {
 
         Comentario comentario = new Comentario();
-        comentario.setCodigo(comentarioDTO.getCodigo());
+        comentario.setTexto(comentarioDTO.getTexto());
+        comentario.setEstrellas(comentarioDTO.getEstrellas());
+        comentario.setUsuario(usuarioServicio.obtenerUsuario(comentarioDTO.getCodigoUsuario()));
+        comentario.setPublicacionProducto(publicacionProductoServicio.obtenerPublicacionProductoP(comentarioDTO.getCodigoPublicacionProducto()));
+
         return comentario;
     }
 
@@ -81,22 +107,23 @@ public class ComentarioServicioImpl implements ComentarioServicio {
     }
 
     @Override
-    public List<String> obtenerListaComentarios(List<Comentario> comentarios) {
-        List<String> comentariosString = new ArrayList<>();
-        for (Comentario c:comentarios) {
-            comentariosString.add(c.getTexto());
+    public List<ComentarioGetDTO> listarComentarios(int codigoPublicacion) {
+        List<Comentario> lista = comentarioRepo.listarComentariosPublicacion(codigoPublicacion);
+        List<ComentarioGetDTO> respuesta = new ArrayList<>();
+        for (Comentario p :lista){
+            respuesta.add(convertir(p));
         }
-        return comentariosString;
+
+        return respuesta;
     }
 
     private ComentarioGetDTO convertir(Comentario comentario){
     //codigo, fecha, mensaje, codigoUsuario, codigoProducto
         ComentarioGetDTO comentarioGetDTO = new ComentarioGetDTO(
-                comentario.getCodigo(),
-                comentario.getFecha_creacion(),
                 comentario.getTexto(),
+                comentario.getEstrellas(),
                 comentario.getUsuario().getCodigo(),
-                comentario.getPublicacionProducto().getProducto().getCodigo()
+                comentario.getPublicacionProducto().getCodigo()
         );
         return comentarioGetDTO;
     }

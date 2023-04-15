@@ -10,22 +10,12 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 public class DetalleCompraServicioImpl implements DetalleCompraServicio {
     DetalleCompraRepo detalleCompraRepo;
-    @Override
-    public int crearDetalleCompra(DetalleCompraDTO detalleCompraDTO) throws Exception {
-        DetalleCompra detalleCompra= new DetalleCompra();
-        detalleCompra.getUnidades();
-        detalleCompra.getPrecio();
-        detalleCompra.getUnidades();
-        detalleCompra.getCompra();
-        detalleCompra.getCodigo();
-        return 0;
-    }
-
     @Override
     public DetalleCompraDTO obtenerProducto(int codigoCompra) {
         DetalleCompra detalleCompra= new DetalleCompra();
@@ -56,15 +46,26 @@ public class DetalleCompraServicioImpl implements DetalleCompraServicio {
         return codigoDetalles;
     }
 
+    @Override
+    public DetalleCompra obtenerDetalleCompra(int codigoDetalleCompra) throws Exception {
+        Optional<DetalleCompra> detalleCompra = detalleCompraRepo.findById(codigoDetalleCompra);
 
-    private DetalleCompraGetDTO convertir(DetalleCompra compra) {
-        DetalleCompraGetDTO compraGetDTO = new DetalleCompraGetDTO(
-                compra.getCompra().getFecha_creacion(),
-                compra.getCompra().getTotal(),
-                compra.getCompra().getMetodoPagos(),
-                compra.getCompra().getPublicacionProductos()
+        if(detalleCompra.isEmpty() ){
+            throw new Exception("El código "+codigoDetalleCompra+" no está asociado a ningún producto");
+        }
+
+        return detalleCompra.get();
+    }
+
+
+    private DetalleCompraGetDTO convertir(DetalleCompra detalleCompra) {
+        DetalleCompraGetDTO detalleCompraGetDTO = new DetalleCompraGetDTO(
+                detalleCompra.getUnidades(),
+                detalleCompra.getPrecio(),
+                detalleCompra.getPublicacionProducto().getCodigo(),
+                detalleCompra.getCompra().getCodigo()
                 );
-        return compraGetDTO;
+        return detalleCompraGetDTO;
     }
 
 }

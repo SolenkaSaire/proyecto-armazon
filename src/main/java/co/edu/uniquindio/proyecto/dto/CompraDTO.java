@@ -29,6 +29,6 @@ public class CompraDTO {
 
     @NotBlank
     @NotNull
-    private List<Integer> codigoDetalleCompra;
+    private List<DetalleCompraDTO> detalleCompraDTO;
 
 }

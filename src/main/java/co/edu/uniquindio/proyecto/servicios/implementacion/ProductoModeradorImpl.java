@@ -4,6 +4,7 @@ import co.edu.uniquindio.proyecto.dto.PublicacionProductoGetDTO;
 import co.edu.uniquindio.proyecto.modelo.PublicacionProducto;
 import co.edu.uniquindio.proyecto.repositorios.PublicacionProductoRepo;
 import co.edu.uniquindio.proyecto.servicios.interfaces.ProductoModeradorServicio;
+import co.edu.uniquindio.proyecto.servicios.interfaces.PublicacionProductoServicio;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +12,9 @@ import java.util.List;
 public class ProductoModeradorImpl implements ProductoModeradorServicio {
 
     PublicacionProductoRepo publicacionProductoRepo;
-
+    //cambios
+    PublicacionProductoServicio publicacionProductoServicio;
+/*
     private PublicacionProductoGetDTO convertir(PublicacionProducto p) {
         PublicacionProductoGetDTO publicacionProductoGetDTO= new PublicacionProductoGetDTO(
                 p.getCodigo(),
@@ -29,15 +32,15 @@ public class ProductoModeradorImpl implements ProductoModeradorServicio {
         );
         return publicacionProductoGetDTO;
 
-    }
+    }*/
 
     @Override
-    public List<PublicacionProductoGetDTO> listarPublicaciones() {
+    public List<PublicacionProductoGetDTO> listarPublicaciones() throws Exception {
         List<PublicacionProducto> registros = publicacionProductoRepo.findAll();
         List<PublicacionProductoGetDTO> respuesta = new ArrayList<>();
 
         for (PublicacionProducto p : registros){
-            respuesta.add(convertir(p));
+            respuesta.add(publicacionProductoServicio.convertir(p));
         }
         return  respuesta;
     }

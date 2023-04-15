@@ -8,6 +8,7 @@ import co.edu.uniquindio.proyecto.modelo.PublicacionProducto;
 import co.edu.uniquindio.proyecto.repositorios.ModeradorRepo;
 import co.edu.uniquindio.proyecto.repositorios.PublicacionProductoRepo;
 import co.edu.uniquindio.proyecto.servicios.interfaces.ModeradorServicio;
+import co.edu.uniquindio.proyecto.servicios.interfaces.PublicacionProductoServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,8 @@ import java.util.List;
 public class ModeradorServicioImpl implements ModeradorServicio{
     private  final PublicacionProductoRepo publicacionProductoRepo;
     private final ModeradorRepo moderadorRepo;
+    //cambios
+    //private final PublicacionProductoServicio publicacionProductoServicio;
     @Override
     public void aprobarProducto(PublicacionProducto publicacionProducto){
         publicacionProducto.setEstado(Estado.APROBADO);
@@ -29,17 +32,7 @@ public class ModeradorServicioImpl implements ModeradorServicio{
         publicacionProducto.setEstado(Estado.NO_APROBADO);
     }
 
-    @Override
-    public List<PublicacionProductoGetDTO> listarEstado(Estado estado) {
-        List<PublicacionProducto> registros = publicacionProductoRepo.listarProductosEstado(estado);
-        List<PublicacionProductoGetDTO> respuesta = new ArrayList<>();
-
-        for (PublicacionProducto p : registros){
-            respuesta.add(convertir(p));
-        }
-        return  respuesta;
-    }
-
+/*
     private PublicacionProductoGetDTO convertir(PublicacionProducto p) {
         PublicacionProductoGetDTO publicacionProductoGetDTO= new PublicacionProductoGetDTO(
             p.getCodigo(),
@@ -57,7 +50,7 @@ public class ModeradorServicioImpl implements ModeradorServicio{
             );
         return publicacionProductoGetDTO;
 
-    }
+    }*/
     @Override
     public List<Integer> obtenerModeradoresCodigo(List<ProductoModerador> moderadores){
         List<Integer> codigosModeradores = new ArrayList<Integer>();

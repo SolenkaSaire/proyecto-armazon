@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ProductoModeradorServicio {
 
-    public List<PublicacionProductoGetDTO> listarPublicaciones();
+    public List<PublicacionProductoGetDTO> listarPublicaciones() throws Exception;
 
 
 }

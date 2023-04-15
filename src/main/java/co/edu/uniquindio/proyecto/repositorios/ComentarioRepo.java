@@ -15,5 +15,6 @@ public interface ComentarioRepo extends JpaRepository<Comentario, Integer> {
     @Query("select p from Comentario p where p.usuario.codigo = :codigoUsuario")
     List<Comentario> listarComentarioUsuario(int codigoUsuario);
 
-
+    @Query("select p from Comentario p where p.publicacionProducto.codigo = :codigoPublicacion")
+    List<Comentario> listarComentariosPublicacion(int codigoPublicacion);
 }

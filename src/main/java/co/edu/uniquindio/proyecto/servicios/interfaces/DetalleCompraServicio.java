@@ -8,8 +8,6 @@ import java.util.List;
 
 public interface DetalleCompraServicio {
 
-    int crearDetalleCompra(DetalleCompraDTO detalleCompraDTO) throws Exception;
-
 
     DetalleCompraDTO obtenerProducto(int codigoCompra);
 
@@ -17,4 +15,6 @@ public interface DetalleCompraServicio {
 
 
     List<Integer> obtenerDetallesCodigo(List<DetalleCompra> compras);
+
+    DetalleCompra obtenerDetalleCompra(int codigoDetalleCompra) throws Exception;
 }

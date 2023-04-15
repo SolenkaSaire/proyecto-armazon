@@ -19,6 +19,6 @@ public class CompraGetDTO {
 
     private int codigoUsuario;
 
-    private List<Integer> codigoDetalleCompra;
+    private List<DetalleCompra> detalleCompra;
 
 }

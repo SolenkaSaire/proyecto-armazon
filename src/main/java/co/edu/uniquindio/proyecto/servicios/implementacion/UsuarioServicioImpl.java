@@ -87,23 +87,6 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
     }
 
-    private UsuarioGetDTO convertir(Usuario usuario){
-
-        UsuarioGetDTO usuarioDTO = new UsuarioGetDTO(
-                usuario.getNombre(),
-                usuario.getApellido(),
-                usuario.getDireccion(),
-                usuario.getTelefono(),
-                obtenerComentariosUsuario(usuario),
-                obtenerCodPublicaciones(usuario),
-                obtenerCodPublicacionesFavoritas(usuario),
-                obtenerCodCompras(usuario),
-                usuario.getEmail(),
-                usuario.getPassword()
-        );
-        return usuarioDTO;
-    }
-
     public List<Integer> obtenerCodCompras(Usuario usuario){
         List<Integer> compras= new ArrayList<>();
         for (Compra miCompra: usuario.getCompra() ) {

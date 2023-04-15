@@ -23,7 +23,7 @@ public class Compra implements Serializable {
 
     private Double total;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 50)
     private LocalDateTime fecha_creacion;
 
     private MetodoPago metodoPagos;

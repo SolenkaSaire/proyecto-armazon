@@ -16,23 +16,23 @@ insert into producto values (3,"Xbox One");
 insert into producto values (4,"Play 5");
 insert into producto values (5,"terreneitor");
 
+insert into publicacion_producto values (1,"El carro de Toreto",13,1,"2015-11-01 14:40:25","2015-11-01 14:40:25","2015-11-01 14:40:25",475455000,4.5,1,1);
+insert into publicacion_producto values (2,"Moto FZ 250",5,1,"2015-11-01 14:40:25","2015-11-01 14:40:25","2015-11-01 14:40:25",765455000,5,2,1);
+insert into publicacion_producto values (3,"La consola mas economica del mercado",6,2,"2012-11-01 14:40:25","2011-11-01 14:40:25","2015-11-01 14:40:25",1255000,4,3,3);
+insert into publicacion_producto values (4,"El plus sigue siendo caro...",4,2,"2012-11-01 14:40:25","2013-11-01 14:40:25","2014-11-01 14:40:25",3455000,2,4,5);
+insert into publicacion_producto values (5,"TERRENEITOR, el coche mas poderoso que ha existido, con traccion 4X4 y 2 turbo motores",2,1,"2018-11-01 14:40:25","2017-11-01 14:40:25","2016-11-01 14:40:25",1000,5,5,5);
+
 insert into comentario values (1,2,"2020-10-01 12:24:25","Me gusto pero le hace falta llantas",1,1);
 insert into comentario values (2,4,"2019-10-01 12:24:25","Me gusto pero no puedo montar a las motomamis",2,1);
 insert into comentario values (3,3,"2018-10-01 16:24:25","Me gusto pero no viene con controles",3,3);
 insert into comentario values (4,3,"2010-10-01 18:24:25","Me gusto pero el plus es carisimo",4,5);
 insert into comentario values (5,5,"2012-10-01 14:24:25","TERRENEITOR, el coche mas poderoso que ha existido",5,5);
 
-insert into compra values (1,"2012-15-01 14:24:25",1,22.250,1);
-insert into compra values (2,"2011-14-01 14:30:25",1,90.250,1);
-insert into compra values (3,"2013-13-01 14:24:25",1,122.250,3);
-insert into compra values (4,"2014-12-01 14:24:25",1,232.250,5);
-insert into compra values (5,"2015-11-01 14:40:25",1,423.250,5);
-
-insert into publicacion_producto values (1,"El carro de Toreto",13,1,"2015-11-01 14:40:25","2015-11-01 14:40:25","2015-11-01 14:40:25",475455000,4.5,1,1);
-insert into publicacion_producto values (2,"Moto FZ 250",5,1,"2015-11-01 14:40:25","2015-11-01 14:40:25","2015-11-01 14:40:25",765455000,5,2,1);
-insert into publicacion_producto values (3,"La consola mas economica del mercado",6,2,"2012-11-01 14:40:25","2011-11-01 14:40:25","2015-11-01 14:40:25",1255000,4,3,3);
-insert into publicacion_producto values (4,"El plus sigue siendo caro...",4,2,"2012-11-01 14:40:25","2013-11-01 14:40:25","2014-11-01 14:40:25",3455000,2,4,5);
-insert into publicacion_producto values (5,"TERRENEITOR, el coche mas poderoso que ha existido, con traccion 4X4 y 2 turbo motores",2,1,"2018-11-01 14:40:25","2017-11-01 14:40:25","2016-11-01 14:40:25",1000,5,5,5);
+insert into compra values (1,"2020-10-01 12:24:25",1,22.250,1);
+insert into compra values (2,"2021-10-01 12:24:25",1,90.250,1);
+insert into compra values (3,"2020-5-01 12:24:25",1,122.250,3);
+insert into compra values (4,"2020-4-01 12:24:25",1,232.250,5);
+insert into compra values (5,"2018-6-01 12:24:25",1,423.250,5);
 
 insert into detalle_compra values (1,475455000,13,1,1);
 insert into detalle_compra values (2,765455000,5,2,2);

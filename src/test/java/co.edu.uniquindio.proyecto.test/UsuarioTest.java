@@ -28,9 +28,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  @Transactional
 public class UsuarioTest {
 
-     /*
+
  @Autowired
- private UsuarioRepo usuarioRepo;*/
+ private UsuarioRepo usuarioRepo;
  @Autowired
  private UsuarioServicio usuarioServicio;
 
@@ -38,143 +38,72 @@ public class UsuarioTest {
      @Test
     public void registar() throws Exception {
 
-    LocalDateTime fechaActual = LocalDateTime.now();
-    UsuarioDTO u = new UsuarioDTO(
-       //     1,
-            "cri",
-            "gonza",
-            "crist@gmail.com",
-            "contra123",
-            "micasita",
-            "3104034332"
-    );
+         LocalDateTime fechaActual = LocalDateTime.now();
 
-     int guardado = usuarioServicio.crearUsuario(u);
-     //Assertions.assertNotNull("cris", guardado.getNombre());
-     Assertions.assertEquals(1,guardado);
-/*
-    Usuario user= new Usuario();
-    user.setCodigo(12345);
-    user.setPassword("123");
-    user.setEmail("1264");
-    user.setNombre("cris");
-    user.setApellido("gonza");
-    user.setDireccion("calle16");
-    user.setTelefono("12345");
-    user.setComentario(null);
-    user.setMisProductos(null);
-    user.setPublicacionesFavoritas(null);
-    user.setCompra(null);
+         String[] comentarios = new String[] {"Perro","Gato","Terreneitor"};
+         Integer[] publicaciones = new Integer[] {1,2,3};
+         Integer[] publicacionesFav = new Integer[] {1,2,3};
+         Integer[] compra = new Integer[] {1,2,3};
 
-   //  Comentario comentario = new Comentario(125,"hola",12,fechaActual,usuarioPrueba,null);
-     //PRUEBA USUARIO VACIO
-    // Usuario usuarioPrueba2 = new Usuario();
+         UsuarioDTO usuarioDTO = new UsuarioDTO("Anderson", "Peña", "Calle 50",
+                 "3193150066", Arrays.asList(comentarios), Arrays.asList(publicaciones),
+                 Arrays.asList(publicacionesFav), Arrays.asList(compra), "anderson@gmail.com",
+                 "contrasena");
 
+         int codigo = usuarioServicio.crearUsuario(usuarioDTO);
 
-     Usuario guardado = usuarioRepo.save(user);
-     //Assertions.assertNotNull("cris", guardado.getNombre());
-     Assertions.assertEquals("cris",guardado.getNombre());
-    */
+         Usuario usuario = usuarioServicio.obtenerUsuario(codigo);
+
+         Assertions.assertEquals("Anderson", usuario.getNombre());
 
  }
+
 
     @Test
     @Sql("classpath:dataset.sql")
-    public void obtenerTest() throws Exception {
+    public void eliminar() throws Exception {
 
-         Usuario usuario = usuarioServicio.obtenerUsuario(1);
+         usuarioServicio.eliminiarUsuario(1);
 
-    }
+         Assertions.assertNull(usuarioRepo.findById(1).orElse(null));
 
-/*
- @Test
- public void eliminar(){
-
-     LocalDateTime fechaActual = LocalDateTime.now();
-
-
-     Usuario user= new Usuario();
-     user.setCodigo(1);
-     user.setPassword("123");
-     user.setEmail("1264");
-     user.setNombre("cris");
-     user.setApellido("gonza");
-     user.setDireccion("calle16");
-     user.setTelefono("12345");
-     user.setComentario(null);
-     user.setMisProductos(null);
-     user.setPublicacionesFavoritas(null);
-     user.setCompra(null);
-
-     Usuario guardado = usuarioRepo.save(user);
-     usuarioRepo.delete(guardado);
-     Optional<Usuario> buscado= usuarioRepo.findById(1);
-
-    Assertions.assertNull(buscado.orElse(null));
  }
 
 @Test
- public void actualizar(){
-     LocalDateTime fechaActual = LocalDateTime.now();
+@Sql("classpath:dataset.sql")
+ public void actualizar() throws Exception {
 
-     Usuario user= new Usuario();
-     user.setCodigo(1);
-     user.setPassword("123");
-     user.setEmail("1264");
-     user.setNombre("cris");
-     user.setApellido("gonza");
-     user.setDireccion("calle16");
-     user.setTelefono("12345");
-     user.setComentario(null);
-     user.setMisProductos(null);
-     user.setPublicacionesFavoritas(null);
-     user.setCompra(null);
+    Usuario usuario = usuarioServicio.obtenerUsuario(1);
 
-     Usuario guardado = usuarioRepo.save(user);
+    UsuarioDTO usuarioDTO = new UsuarioDTO(usuario.getNombre(), usuario.getApellido(),
+            "calle 20", usuario.getTelefono(), null, null, null,
+            null, usuario.getEmail(), usuario.getPassword());
 
-     guardado.setEmail("sole");
+    int codigo = usuarioServicio.actualizarUsuario(1,usuarioDTO);
 
-     Usuario nuevo = usuarioRepo.save(guardado);
+    Usuario actualizado = usuarioServicio.obtenerUsuario(codigo);
 
-     Assertions.assertEquals("sole", nuevo.getEmail());
- }
-
- @Test
- public void obtener(){
-
-     LocalDateTime fechaActual = LocalDateTime.now();
-
-     Usuario user= new Usuario();
-     user.setCodigo(1);
-     user.setPassword("123");
-     user.setEmail("1264");
-     user.setNombre("cris");
-     user.setApellido("gonza");
-     user.setDireccion("calle16");
-     user.setTelefono("12345");
-     user.setComentario(null);
-     user.setMisProductos(null);
-     user.setPublicacionesFavoritas(null);
-     user.setCompra(null);
-
-     Usuario guardado = usuarioRepo.save(user);
-     System.out.println(guardado);
-
-     Optional<Usuario> buscado = usuarioRepo.findById(6);
-     System.out.println(buscado.orElse(null));
-
+    Assertions.assertEquals("calle 20", actualizado.getDireccion());
 
  }
 
  @Test
  @Sql("classpath:dataset.sql")
- public void listar(){
+ public void obtener() throws Exception {
 
-     List<Usuario> lista =usuarioRepo.findAll();
+     Usuario usuario = usuarioServicio.obtenerUsuario(1);
 
-     lista.forEach(System.out::println);
+     Assertions.assertNotNull(usuario);
 
- }*/
+ }
 
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void listar(){
+
+        List<Usuario> list = usuarioRepo.findAll();
+        System.out.println(list);
+
+    }
 
 }

@@ -19,7 +19,7 @@ public class EmailTest {
         emailServicio.enviarEmail(new EmailDTO(
                 "perro",
                 "hola como vas",
-                "cristianr.gonzalezi@uqvirtual.edu.co"));
+                "cristian.gon1414@gmail.com"));
 
     }
 

@@ -17,10 +17,12 @@ public class EmailTest {
     @Test
     public void enviarCorreoTest() throws Exception{
         emailServicio.enviarEmail(new EmailDTO(
-                "perro",
-                "hola como vas",
-                "cristian.gon1414@gmail.com"));
+                "TestMail-Html",
+                "<h1>Este es un mensaje de prueba</h1><p>¡Gracias por utilizar Spring Mail!</p><img src='https://www.uniquindio.edu.co/info/uniquindio/media/bloque2477.png' width='400' height='200'>",
+                "solenkam.sairec@uqvirtual.edu.co"));
 
     }
+
+
 
 }

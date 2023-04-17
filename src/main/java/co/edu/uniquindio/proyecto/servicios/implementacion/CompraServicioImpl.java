@@ -5,7 +5,6 @@ import co.edu.uniquindio.proyecto.modelo.Compra;
 import co.edu.uniquindio.proyecto.modelo.DetalleCompra;
 import co.edu.uniquindio.proyecto.repositorios.CompraRepo;
 import co.edu.uniquindio.proyecto.repositorios.DetalleCompraRepo;
-import co.edu.uniquindio.proyecto.repositorios.ProductoRepo;
 import co.edu.uniquindio.proyecto.servicios.interfaces.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -81,10 +80,10 @@ public class CompraServicioImpl implements CompraServicio {
     }
 
 
-    private Compra obtener(int codigoCompra) throws Exception{
-    Optional<Compra> compras = compraRepo.findById(codigoCompra);
+    public Compra obtener(int codigoCompra) throws Exception{
+    Optional<Compra> compra = compraRepo.findById(codigoCompra);
 
-        if(compras.isEmpty()){
+        if(compra.isEmpty()){
             try {
                 throw new Exception("El código "+codigoCompra+" no está asociado a ningún producto");
             } catch (Exception e) {
@@ -92,7 +91,7 @@ public class CompraServicioImpl implements CompraServicio {
             }
         }
 
-        return compras.get();
+        return compra.get();
     }
 
 }

@@ -1,7 +1,6 @@
  package co.edu.uniquindio.proyecto.test;
 
 import co.edu.uniquindio.proyecto.dto.UsuarioDTO;
-import co.edu.uniquindio.proyecto.dto.UsuarioGetDTO;
 import co.edu.uniquindio.proyecto.modelo.*;
 import co.edu.uniquindio.proyecto.repositorios.UsuarioRepo;
 import co.edu.uniquindio.proyecto.servicios.interfaces.UsuarioServicio;
@@ -9,11 +8,8 @@ import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
-
 import java.time.LocalDateTime;
 import java.util.*;
 

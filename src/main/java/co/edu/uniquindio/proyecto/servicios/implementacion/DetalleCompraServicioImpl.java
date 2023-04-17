@@ -68,4 +68,14 @@ public class DetalleCompraServicioImpl implements DetalleCompraServicio {
         return detalleCompraGetDTO;
     }
 
+    public DetalleCompraDTO convertirDTO(DetalleCompra detalleCompra) {
+        DetalleCompraDTO detalleCompraDTO = new DetalleCompraDTO(
+                detalleCompra.getUnidades(),
+                detalleCompra.getPrecio(),
+                detalleCompra.getPublicacionProducto().getCodigo(),
+                detalleCompra.getCompra().getCodigo()
+        );
+        return detalleCompraDTO;
+    }
+
 }

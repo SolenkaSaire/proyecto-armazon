@@ -20,7 +20,7 @@ public class EmailDTO {
     @NotBlank
     @NotNull
     @Length(max=500, message = "cuerpo maximo 500 caracteres")
-    private String cuerpo;
+    private String cuerpo ="text/html; charset=utf-8";
 
     @NotBlank
     @NotNull

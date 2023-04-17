@@ -35,12 +35,6 @@ public class UsuarioDTO {
     @Length(max=10, message = "telefono maximo 20 caracteres")
     private String telefono;
 
-    private List<String> comentarios;//publicacionProductos?
-    private List<Integer> codigoMisPublicaciones;
-    private List<Integer> codigoPublicacionesFavoritas;//publicacionProductos?
-    private List<Integer> codigoCompra;//publicacionProductos?
-
-
     @NotBlank
     @NotNull
     @Length(max=100, message = "email maximo 150 caracteres")

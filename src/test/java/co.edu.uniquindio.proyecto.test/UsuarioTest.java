@@ -34,17 +34,9 @@ public class UsuarioTest {
      @Test
     public void registar() throws Exception {
 
-         LocalDateTime fechaActual = LocalDateTime.now();
-
-         String[] comentarios = new String[] {"Perro","Gato","Terreneitor"};
-         Integer[] publicaciones = new Integer[] {1,2,3};
-         Integer[] publicacionesFav = new Integer[] {1,2,3};
-         Integer[] compra = new Integer[] {1,2,3};
 
          UsuarioDTO usuarioDTO = new UsuarioDTO("Anderson", "Peña", "Calle 50",
-                 "3193150066", Arrays.asList(comentarios), Arrays.asList(publicaciones),
-                 Arrays.asList(publicacionesFav), Arrays.asList(compra), "anderson@gmail.com",
-                 "contrasena");
+                 "3193150066", "anderson@gmail.com", "contrasena");
 
          int codigo = usuarioServicio.crearUsuario(usuarioDTO);
 
@@ -72,8 +64,7 @@ public class UsuarioTest {
     Usuario usuario = usuarioServicio.obtenerUsuario(1);
 
     UsuarioDTO usuarioDTO = new UsuarioDTO(usuario.getNombre(), usuario.getApellido(),
-            "calle 20", usuario.getTelefono(), null, null, null,
-            null, usuario.getEmail(), usuario.getPassword());
+            "calle 20", usuario.getTelefono(), usuario.getEmail(), usuario.getPassword());
 
     int codigo = usuarioServicio.actualizarUsuario(1,usuarioDTO);
 

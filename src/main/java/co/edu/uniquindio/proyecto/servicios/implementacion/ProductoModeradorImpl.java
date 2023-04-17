@@ -5,10 +5,12 @@ import co.edu.uniquindio.proyecto.modelo.PublicacionProducto;
 import co.edu.uniquindio.proyecto.repositorios.PublicacionProductoRepo;
 import co.edu.uniquindio.proyecto.servicios.interfaces.ProductoModeradorServicio;
 import co.edu.uniquindio.proyecto.servicios.interfaces.PublicacionProductoServicio;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class ProductoModeradorImpl implements ProductoModeradorServicio {
 
     PublicacionProductoRepo publicacionProductoRepo;

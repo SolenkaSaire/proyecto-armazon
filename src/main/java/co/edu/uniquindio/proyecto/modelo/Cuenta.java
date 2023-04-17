@@ -27,7 +27,7 @@ public class Cuenta implements Serializable {
     @Column(nullable = false,unique = true, length = 100)
     private String email;
 
-    @Column(nullable = false,length = 30)
+    @Column(nullable = false,length = 100)
     private String password;
 
 

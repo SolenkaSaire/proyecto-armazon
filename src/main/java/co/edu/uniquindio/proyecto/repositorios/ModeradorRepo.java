@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ModeradorRepo extends JpaRepository<Moderador, Integer> {
@@ -21,4 +22,6 @@ public interface ModeradorRepo extends JpaRepository<Moderador, Integer> {
     @Query("select p from ProductoModerador p where p = :codigoModerador")
     List<ProductoModerador> listarProductoModerador (int codigoModerador);
 
+    @Query("select p from Moderador p where p.email = :email")
+    Optional<Moderador> findByEmail(String email);
 }

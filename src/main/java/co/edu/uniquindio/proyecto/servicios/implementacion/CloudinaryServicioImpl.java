@@ -1,5 +1,5 @@
 package co.edu.uniquindio.proyecto.servicios.implementacion;
-/*
+
 import co.edu.uniquindio.proyecto.servicios.interfaces.CloudinaryServicio;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
@@ -42,4 +42,3 @@ public class CloudinaryServicioImpl implements CloudinaryServicio {
         return file;
     }
 }
-*/

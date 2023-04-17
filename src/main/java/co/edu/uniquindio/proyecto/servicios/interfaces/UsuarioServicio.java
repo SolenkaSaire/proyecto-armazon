@@ -21,4 +21,6 @@ public interface UsuarioServicio {
     Usuario obtenerUsuario(int codigo) throws Exception;
 
     List<Integer> obtenerUsuariosCodigo( List<Usuario> favoritos) throws Exception;
+
+    void validarExiste(int codigoUsuario) throws Exception;
 }

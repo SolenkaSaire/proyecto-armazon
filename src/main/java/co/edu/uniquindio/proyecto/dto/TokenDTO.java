@@ -5,7 +5,6 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.validator.constraints.Length;
 
 @AllArgsConstructor
 @Getter
@@ -14,7 +13,5 @@ public class TokenDTO {
 
     private String token;
 
-    @NotBlank
-    @NotNull
-    private String estado;
+
 }

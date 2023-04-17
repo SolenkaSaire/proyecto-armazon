@@ -1,15 +1,14 @@
 package co.edu.uniquindio.proyecto.servicios.implementacion;
 
 import co.edu.uniquindio.proyecto.dto.UsuarioDTO;
-import co.edu.uniquindio.proyecto.dto.UsuarioGetDTO;
 import co.edu.uniquindio.proyecto.modelo.Comentario;
 import co.edu.uniquindio.proyecto.modelo.Compra;
 import co.edu.uniquindio.proyecto.modelo.PublicacionProducto;
 import co.edu.uniquindio.proyecto.modelo.Usuario;
 import co.edu.uniquindio.proyecto.repositorios.UsuarioRepo;
 import co.edu.uniquindio.proyecto.servicios.interfaces.UsuarioServicio;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -19,7 +18,7 @@ import java.util.*;
 public class UsuarioServicioImpl implements UsuarioServicio {
 
     private final UsuarioRepo usuarioRepo;
-
+    private final PasswordEncoder passwordEncoder;
     @Override
     public int crearUsuario(UsuarioDTO usuarioDTO) throws Exception {
 
@@ -28,7 +27,9 @@ public class UsuarioServicioImpl implements UsuarioServicio {
             throw new Exception("El correo "+usuarioDTO.getEmail()+" ya está en uso");
         }
         Usuario usuario = convertir(usuarioDTO);
+        usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
         return usuarioRepo.save( usuario ).getCodigo();
+
 
     }
 
@@ -78,7 +79,8 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         return usuariosCodigo;
     }
 
-    private void validarExiste(int codigoUsuario) throws Exception{
+    @Override
+    public void validarExiste(int codigoUsuario) throws Exception{
         boolean existe = usuarioRepo.existsById(codigoUsuario);
 
         if( !existe ){

@@ -2,23 +2,37 @@ package co.edu.uniquindio.proyecto.servicios.implementacion;
 
 import co.edu.uniquindio.proyecto.dto.SesionDTO;
 import co.edu.uniquindio.proyecto.dto.TokenDTO;
+import co.edu.uniquindio.proyecto.seguridad.modelo.UserDetailsImpl;
+import co.edu.uniquindio.proyecto.seguridad.servicios.JwtService;
 import co.edu.uniquindio.proyecto.servicios.interfaces.SesionServicio;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.List;
 import java.util.UUID;
 
 public class SesionServicioImpl implements SesionServicio {
+
+    private final JwtService jwtService;
+    private final AuthenticationManager authenticationManager;
+
+    public SesionServicioImpl(JwtService jwtService, AuthenticationManager authenticationManager) {
+        this.jwtService = jwtService;
+        this.authenticationManager = authenticationManager;
+    }
+
     @Override
     public TokenDTO login(SesionDTO sesionDTO) {
-        if (credencialesSonCorrectas(sesionDTO)) {
-            String token = generarToken();
-           // return new TokenDTO(token);
-        } else {
-            return null;
-        }
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(sesionDTO.getEmail(), sesionDTO.getPassword()));
 
-        return null;
+        UserDetails user = (UserDetailsImpl) authentication.getPrincipal();
+        String jwtToken = jwtService.generateToken(user);
+        return new TokenDTO(jwtToken);
     }
+
+
 
     @Override
     public void logout(int codigoUsuario) {

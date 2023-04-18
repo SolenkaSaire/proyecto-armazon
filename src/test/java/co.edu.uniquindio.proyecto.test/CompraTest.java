@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyecto.test;
 
+import ch.qos.logback.core.CoreConstants;
 import co.edu.uniquindio.proyecto.dto.CompraDTO;
 import co.edu.uniquindio.proyecto.dto.CompraGetDTO;
 import co.edu.uniquindio.proyecto.dto.DetalleCompraDTO;
@@ -46,13 +47,19 @@ public class CompraTest {
             respuesta.add(detalleCompraServicio.convertirDTO(p));
         }
 
-        CompraDTO compraDTO = new CompraDTO(12.212, MetodoPago.NEQUI, 1, respuesta);
+        CompraDTO compraDTO = new CompraDTO(MetodoPago.NEQUI, 1, respuesta);
 
         int codigo = compraServicio.crearCompra(compraDTO);
 
+        System.out.println("Esta es el codigo: "+codigo);
+
+        //System.out.println("Esta es el precio de la compra: "+compraDTO.getTotal());
+
         Compra compra = compraServicio.obtener(codigo);
 
-        Assertions.assertEquals(12.212, compra.getTotal());
+        System.out.println("Esta es el precio: "+compra.getTotal());
+
+        Assertions.assertEquals(12.212, compra.getTotal(), 0.001);
 
     }
     @Test

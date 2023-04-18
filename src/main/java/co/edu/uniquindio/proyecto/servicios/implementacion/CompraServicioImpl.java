@@ -32,6 +32,7 @@ public class CompraServicioImpl implements CompraServicio {
         for(DetalleCompraDTO de : compraDTO.getDetalleCompraDTO() ){
             DetalleCompra detalleCompra = new DetalleCompra();
             detalleCompra.setPublicacionProducto( publicacionProductoServicio.obtenerPublicacionProductoP(de.getCodigoPublicacionProducto()));
+
             detalleCompra.setUnidades( de.getUnidades() );
             detalleCompra.setPrecio( de.getPrecio() );
             total = de.getPrecio() * de.getUnidades();
@@ -41,7 +42,7 @@ public class CompraServicioImpl implements CompraServicio {
         compra.setUsuario( usuarioServicio.obtenerUsuario( compraDTO.getCodigoUsuario()));
         compra.setFecha_creacion(LocalDateTime.now());
         compra.setMetodoPagos( compraDTO.getMetodoPago() );
-        compra.setTotal( total );
+        compra.setTotal(total);
         Compra compraGuardada = compraRepo.save(compra);
         for (DetalleCompra d: detalle ) {
             d.setCompra(compraGuardada);

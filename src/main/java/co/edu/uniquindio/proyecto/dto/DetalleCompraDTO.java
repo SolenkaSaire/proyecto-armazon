@@ -17,13 +17,18 @@ public class DetalleCompraDTO {
     @NotBlank
     @NotNull
     private int unidades;
+
     @NotBlank
     @NotNull
     private double precio;
+
+
     @NotBlank
     @NotNull
     private int codigoPublicacionProducto;
+
+
     @NotBlank
     @NotNull
-    private int codigoCompra;
+    private int codigoProducto;
 }

@@ -39,6 +39,7 @@ insert into detalle_compra values (2,765455000,5,2,2);
 insert into detalle_compra values (3,1255000,6,3,3);
 insert into detalle_compra values (4,3455000,4,4,4);
 insert into detalle_compra values (5,1000,2,5,5);
+insert into detalle_compra values (6,100000,3,1,1);
 
 insert into moderador values (1,"admin1@hotmail.com","admin1");
 insert into moderador values (2,"admin2@hotmail.com","admin2");

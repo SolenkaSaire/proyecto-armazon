@@ -2,6 +2,7 @@ package co.edu.uniquindio.proyecto.controladores;
 
 
 import co.edu.uniquindio.proyecto.dto.UsuarioDTO;
+import co.edu.uniquindio.proyecto.dto.UsuarioGetDTO;
 import co.edu.uniquindio.proyecto.modelo.Usuario;
 import co.edu.uniquindio.proyecto.servicios.interfaces.UsuarioServicio;
 import lombok.AllArgsConstructor;
@@ -32,6 +33,11 @@ public class UsuarioControlador {
     @DeleteMapping("/eliminar/{codigo}")
     public int eliminiarUsuario(@PathVariable int codigoUsuario) throws Exception {
         return usuarioServicio.eliminiarUsuario(codigoUsuario);
+    }
+
+    @GetMapping("/obtenerUsuario/{codigo}")
+    public UsuarioGetDTO obtenerUsuario(@PathVariable int codigoUsuario) throws Exception{
+        return usuarioServicio.obtenerUsuario(codigoUsuario);
     }
 
 //obtener debe retornar un UsuarioGetDTO (no borren el que ya tinene)

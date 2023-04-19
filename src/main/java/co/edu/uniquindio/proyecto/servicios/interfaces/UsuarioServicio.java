@@ -17,10 +17,10 @@ public interface UsuarioServicio {
     int eliminiarUsuario(int codigoUsuario) throws Exception;
 
     //UsuarioGetDTO obtenerUsuario(int codigoUsuario) throws Exception;
-    
-    Usuario obtenerUsuario(int codigo) throws Exception;
 
+    Usuario obtenerUsuarioU(int codigoUsuario) throws Exception;
     List<Integer> obtenerUsuariosCodigo( List<Usuario> favoritos) throws Exception;
 
+    public UsuarioGetDTO obtenerUsuario(int codigoUsuario) throws Exception;
     void validarExiste(int codigoUsuario) throws Exception;
 }

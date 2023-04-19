@@ -39,7 +39,7 @@ public class PublicacionProductoServicioImpl implements PublicacionProductoServi
         publicacionProducto.setPrecio(publicacionProductoDTO.getPrecio());
         publicacionProducto.setDisponibilidad(publicacionProductoDTO.getDisponibilidad());
         publicacionProducto.setDescripcion(publicacionProductoDTO.getDescripcion());
-        publicacionProducto.setVendedor( usuarioServicio.obtenerUsuario( publicacionProductoDTO.getCodigoVendedor()));
+        publicacionProducto.setVendedor( usuarioServicio.obtenerUsuarioU( publicacionProductoDTO.getCodigoVendedor()));
         publicacionProducto.setFechaCreacion( LocalDateTime.now() );
         publicacionProducto.setFechaLimite( LocalDateTime.now().plusDays(60) );
         publicacionProducto.setProducto( productoServicio.obtenerProductoP( codProducto )  );
@@ -75,7 +75,7 @@ public class PublicacionProductoServicioImpl implements PublicacionProductoServi
         publicacionProducto.setPrecio(publicacionProductoDTO.getPrecio());
         publicacionProducto.setDisponibilidad(publicacionProductoDTO.getDisponibilidad());
         publicacionProducto.setDescripcion(publicacionProductoDTO.getDescripcion());
-        publicacionProducto.setVendedor( usuarioServicio.obtenerUsuario( publicacionProductoDTO.getCodigoVendedor()));
+        publicacionProducto.setVendedor( usuarioServicio.obtenerUsuarioU( publicacionProductoDTO.getCodigoVendedor()));
         publicacionProducto.setFechaLimite( publicacionProductoDTO.getFechaLimite() );
         return publicacionProducto;
     }

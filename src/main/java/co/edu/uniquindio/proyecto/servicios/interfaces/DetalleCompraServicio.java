@@ -10,11 +10,12 @@ public interface DetalleCompraServicio {
 
 
     DetalleCompraDTO obtenerProducto(int codigoCompra);
+    DetalleCompra obtenerDetalleCompra(int codigoDetalleCompra) throws Exception;
+
 
     List<DetalleCompraGetDTO> listarProductosUsuario(int codigoUsuario);
 
 
     List<Integer> obtenerDetallesCodigo(List<DetalleCompra> compras);
 
-    DetalleCompra obtenerDetalleCompra(int codigoDetalleCompra) throws Exception;
-}
+   }

@@ -24,13 +24,13 @@ public class UsuarioControlador {
     }
 
     @PutMapping("/actualizar/{codigo}")
-    public int actualizarUsuario(@RequestBody int codigoUsuario, UsuarioDTO usuarioDTO) throws Exception{
+    public int actualizarUsuario(@PathVariable int codigoUsuario,@RequestBody UsuarioDTO usuarioDTO) throws Exception{
         return usuarioServicio.actualizarUsuario(codigoUsuario,usuarioDTO);
 
     }
 
     @DeleteMapping("/eliminar/{codigo}")
-    public int eliminiarUsuario(@RequestBody int codigoUsuario) throws Exception {
+    public int eliminiarUsuario(@PathVariable int codigoUsuario) throws Exception {
         return usuarioServicio.eliminiarUsuario(codigoUsuario);
     }
 

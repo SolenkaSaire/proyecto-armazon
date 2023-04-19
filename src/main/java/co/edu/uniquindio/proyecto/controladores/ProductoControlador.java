@@ -21,17 +21,17 @@ public class ProductoControlador {
     }
 
     @PutMapping("/actualizarProductos/{codigo}")
-    int actualizarProducto(@RequestBody int codigoProducto, ProductoDTO productoDTO) throws Exception{
+    int actualizarProducto(@PathVariable int codigoProducto,@RequestBody ProductoDTO productoDTO) throws Exception{
         return productoServicio.actualizarProducto(codigoProducto,productoDTO);
     }
 
     @PutMapping("/actualizarUnidades/{codigo}")
-    int actualizarUnidades(@RequestBody int codigoProducto, int unidades) throws Exception{
+    int actualizarUnidades(@PathVariable int codigoProducto,@PathVariable int unidades) throws Exception{
         return productoServicio.actualizarUnidades(codigoProducto,unidades);
     }
 
     @PutMapping("/actualizarEstado/{codigo}")
-    int actualizarEstado(@RequestBody int codigoProducto, Estado estado) throws Exception{
+    int actualizarEstado(@PathVariable int codigoProducto,@RequestBody Estado estado) throws Exception{
         return productoServicio.actualizarEstado(codigoProducto,estado);
     }
 

@@ -19,35 +19,35 @@ public class PublicacionProductoControlador {
 
 
     @PostMapping("/crear")
-    int crearPublicacionProducto(@RequestBody PublicacionProductoDTO publicacionProductoDTO, ProductoDTO productoDTO) throws Exception{
+    int crearPublicacionProducto(@RequestBody PublicacionProductoDTO publicacionProductoDTO,@RequestBody ProductoDTO productoDTO) throws Exception{
         return publicacionProductoServicio.crearPublicacionProducto(publicacionProductoDTO,productoDTO);
 
     }
     @PutMapping("/actualizarPublicacionProducto/{codigo}")
-    int actualizarPublicacionProducto(@RequestBody int codigoPublicacion,PublicacionProductoDTO publicacionProductoDTO, ProductoDTO productoDTO) throws Exception{
+    int actualizarPublicacionProducto(@PathVariable int codigoPublicacion,@RequestBody PublicacionProductoDTO publicacionProductoDTO,@RequestBody ProductoDTO productoDTO) throws Exception{
         return publicacionProductoServicio.actualizarPublicacionProducto(codigoPublicacion,publicacionProductoDTO,productoDTO);
 
     }
 
     @PutMapping("/actualizarUnidades/{codigo}")
-    int actualizarUnidades(@RequestBody int codigoPublicacion, int unidades) throws Exception{
+    int actualizarUnidades(@PathVariable int codigoPublicacion,@PathVariable int unidades) throws Exception{
     return publicacionProductoServicio.actualizarUnidades(codigoPublicacion,unidades);
     }
 
     @PutMapping("/actualizarEstado/{codigo}")
-    int actualizarEstado(@RequestBody int codigoPublicacion, Estado estado) throws Exception{
+    int actualizarEstado(@PathVariable int codigoPublicacion,@RequestBody Estado estado) throws Exception{
     return publicacionProductoServicio.actualizarEstado(codigoPublicacion,estado);
 
     }
 
     @DeleteMapping("/eliminarPublicacion/{codigo}")
-    int eliminarPublicacion(@RequestBody int codigoPublicacion) throws Exception{
+    int eliminarPublicacion(@PathVariable int codigoPublicacion) throws Exception{
 
     return publicacionProductoServicio.eliminarPublicacion(codigoPublicacion);
     }
 
     @DeleteMapping("/eliminarTodaPubli/{codigo}")
-    int eliminarTodaPublicacionProducto(@RequestBody int codigoProducto) throws Exception{
+    int eliminarTodaPublicacionProducto(@PathVariable int codigoProducto) throws Exception{
     return publicacionProductoServicio.eliminarTodaPublicacionProducto(codigoProducto);
 
     }

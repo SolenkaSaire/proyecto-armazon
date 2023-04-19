@@ -5,9 +5,7 @@ import co.edu.uniquindio.proyecto.modelo.PublicacionProducto;
 import co.edu.uniquindio.proyecto.servicios.interfaces.ModeradorServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/api/moderador")
@@ -17,12 +15,12 @@ public class ModeradorControlador {
     private final ModeradorServicio moderadorServicio;
 
     @PutMapping("/aprovar/{codigo}")
-    void aprobarProducto(PublicacionProducto publicacionProducto) throws Exception{
+    void aprobarProducto(@RequestBody PublicacionProducto publicacionProducto) throws Exception{
 
     }
 
     @PutMapping("/rechazar/{codigo}")
-    void rechazarProducto(PublicacionProducto publicacionProducto) throws Exception{
+    void rechazarProducto(@RequestBody PublicacionProducto publicacionProducto) throws Exception{
 
     }
 

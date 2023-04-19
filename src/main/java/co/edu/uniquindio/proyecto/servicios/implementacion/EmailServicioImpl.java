@@ -17,7 +17,7 @@ public class EmailServicioImpl implements EmailServicio {
         MimeMessageHelper helper = new MimeMessageHelper(mensaje);
         try{
             helper.setSubject(emailDTO.getAsunto());
-            helper.setText(emailDTO.getCuerpo());
+            helper.setText(emailDTO.getCuerpo(), true);
             helper.setTo(emailDTO.getDestinatario());
             helper.setFrom("cristianr.gonzalezi@uqvirtual.edu.co");//"no_reply@dominio.com");
             javaMailSender.send(mensaje);

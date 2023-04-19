@@ -36,16 +36,5 @@ public class ProductoModeradorImpl implements ProductoModeradorServicio {
 
     }*/
 
-    @Override
-    public List<PublicacionProductoGetDTO> listarPublicaciones() throws Exception {
-        List<PublicacionProducto> registros = publicacionProductoRepo.findAll();
-        List<PublicacionProductoGetDTO> respuesta = new ArrayList<>();
-
-        for (PublicacionProducto p : registros){
-            respuesta.add(publicacionProductoServicio.convertir(p));
-        }
-        return  respuesta;
-    }
-
 
 }

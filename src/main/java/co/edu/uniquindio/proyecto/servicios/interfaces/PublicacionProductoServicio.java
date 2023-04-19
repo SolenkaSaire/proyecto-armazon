@@ -1,9 +1,6 @@
 package co.edu.uniquindio.proyecto.servicios.interfaces;
 
-import co.edu.uniquindio.proyecto.dto.ProductoDTO;
-import co.edu.uniquindio.proyecto.dto.ProductoGetDTO;
-import co.edu.uniquindio.proyecto.dto.PublicacionProductoDTO;
-import co.edu.uniquindio.proyecto.dto.PublicacionProductoGetDTO;
+import co.edu.uniquindio.proyecto.dto.*;
 import co.edu.uniquindio.proyecto.modelo.*;
 
 import java.util.List;
@@ -20,9 +17,6 @@ public interface PublicacionProductoServicio {
     PublicacionProductoGetDTO obtenerPublicacionProducto(int codigoPublicacion) throws Exception;
     abstract PublicacionProducto obtenerPublicacionProductoP(int codigoPublicacion) throws Exception;
     List<PublicacionProductoGetDTO> listarProductosPublicacionUsuario(int codigoUsuario) throws Exception;
-    PublicacionProductoGetDTO convertir(PublicacionProducto publicacionProducto) throws Exception;
-
-    List<String> obtenerListaComentarios(List<Comentario> comentarios);
 
     List<PublicacionProductoGetDTO> listarPublicacionProductoCategoria(Categoria categoria) throws Exception;
     List<PublicacionProductoGetDTO> listarPublicacionProductosPorEstado(Estado estado) throws Exception;

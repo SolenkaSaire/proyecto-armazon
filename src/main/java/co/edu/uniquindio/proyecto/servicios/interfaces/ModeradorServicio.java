@@ -15,6 +15,4 @@ public interface ModeradorServicio {
 
     void rechazarProducto(PublicacionProducto publicacionProducto) throws Exception;
 
-
-    List<Integer> obtenerModeradoresCodigo(List<ProductoModerador> moderadores);
 }

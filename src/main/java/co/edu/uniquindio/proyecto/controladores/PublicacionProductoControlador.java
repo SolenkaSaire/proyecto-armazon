@@ -11,7 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping
+@RequestMapping("/api/publicacionproducto")
 @AllArgsConstructor
 public class PublicacionProductoControlador {
 

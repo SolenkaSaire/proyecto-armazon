@@ -5,16 +5,19 @@ import co.edu.uniquindio.proyecto.dto.TokenDTO;
 import co.edu.uniquindio.proyecto.servicios.interfaces.SesionServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping
+@RequestMapping("/api/auth")
 @AllArgsConstructor
 public class SesionControlador {
 
     private final SesionServicio sesionServicio;
 
-    TokenDTO login(SesionDTO sesionDTO){
+    @PostMapping("/login")
+    TokenDTO login(@RequestBody  SesionDTO sesionDTO){
     return sesionServicio.login(sesionDTO);
     }
 

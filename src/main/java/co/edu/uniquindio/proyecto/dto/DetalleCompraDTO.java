@@ -20,15 +20,5 @@ public class DetalleCompraDTO {
 
     @NotBlank
     @NotNull
-    private double precio;
-
-
-    @NotBlank
-    @NotNull
     private int codigoPublicacionProducto;
-
-
-    @NotBlank
-    @NotNull
-    private int codigoProducto;
 }

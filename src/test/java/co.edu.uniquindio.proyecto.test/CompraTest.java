@@ -40,12 +40,9 @@ public class CompraTest {
     @Sql("classpath:dataset.sql")
     public void crear() throws Exception {
 
-        List<DetalleCompra> listaCompra = detalleCompraRepo.listarDetalleComprasUsuario(1);
         List<DetalleCompraDTO> respuesta = new ArrayList<>();
-
-        for (DetalleCompra p :listaCompra) {
-            respuesta.add(detalleCompraServicio.convertirDTO(p));
-        }
+        respuesta.add(new DetalleCompraDTO(1, 1));
+        respuesta.add(new DetalleCompraDTO(1, 2));
 
         CompraDTO compraDTO = new CompraDTO(MetodoPago.NEQUI, 1, respuesta);
 
@@ -59,7 +56,7 @@ public class CompraTest {
 
         System.out.println("Esta es el precio: "+compra.getTotal());
 
-        Assertions.assertEquals(12.212, compra.getTotal(), 0.001);
+        Assertions.assertEquals(1240910000, compra.getTotal());
 
     }
     @Test

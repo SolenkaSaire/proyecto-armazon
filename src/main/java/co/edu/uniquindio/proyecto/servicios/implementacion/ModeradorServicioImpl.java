@@ -51,14 +51,5 @@ public class ModeradorServicioImpl implements ModeradorServicio{
         return publicacionProductoGetDTO;
 
     }*/
-    @Override
-    public List<Integer> obtenerModeradoresCodigo(List<ProductoModerador> moderadores){
-        List<Integer> codigosModeradores = new ArrayList<Integer>();
-        for (ProductoModerador m: moderadores) {
-            codigosModeradores.add( m.getModerador().getCodigo() );
-        }
-
-        return codigosModeradores;
-    }
 
 }

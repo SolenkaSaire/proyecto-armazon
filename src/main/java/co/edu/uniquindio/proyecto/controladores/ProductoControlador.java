@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping
+@RequestMapping("/api/producto")
 @AllArgsConstructor
 public class ProductoControlador {
     private final ProductoServicio productoServicio;
@@ -40,9 +40,5 @@ public class ProductoControlador {
         return productoServicio.obtenerProducto(codigoProducto);
     }
 
-    @GetMapping("/obtenerProductoP/{codigo}")
-    Producto obtenerProductoP(@PathVariable int codigoProducto) throws Exception{
-        return productoServicio.obtenerProductoP(codigoProducto);
-    }
 
 }

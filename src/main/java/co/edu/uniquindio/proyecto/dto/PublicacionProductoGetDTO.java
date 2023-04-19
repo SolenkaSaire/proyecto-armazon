@@ -23,14 +23,9 @@ public class PublicacionProductoGetDTO {
     private int disponibilidad;
     private String descripcion;
     public int codigoVendedor;
-    private List<Integer> codigoUsuarioFavoritos;
-    private List<Integer> codigoModeradores;
-    private List<Integer> codigoDetalleCompras;
-    private List<String> comentarios;
     private int codigoProducto;
 
     //private Estado estado;
     private String estado;
-    public List<Integer> codigosCiudades;
 
 }

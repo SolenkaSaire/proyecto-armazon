@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping
+@RequestMapping("/api/usuario")
 @AllArgsConstructor
 public class UsuarioControlador {
 
@@ -34,10 +34,7 @@ public class UsuarioControlador {
         return usuarioServicio.eliminiarUsuario(codigoUsuario);
     }
 
-    @GetMapping("/obtener/{codigo}")
-    Usuario obtenerUsuario1(@PathVariable int codigo) throws Exception{
-        return usuarioServicio.obtenerUsuario(codigo);
-    }
+//obtener debe retornar un UsuarioGetDTO (no borren el que ya tinene)
 }
 
 

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
-@RequestMapping
+@RequestMapping("/api/detallecompra")
 @AllArgsConstructor
 public class DetalleCompraControlador {
 
@@ -20,11 +20,6 @@ public class DetalleCompraControlador {
     @GetMapping("/obtenerProducto/{codigo}")
     DetalleCompraDTO obtenerProducto(int codigoCompra){
         return detalleCompraServicio.obtenerProducto(codigoCompra);
-    }
-
-    @GetMapping("/obtenerDetalleCompra/{codigo}")
-    DetalleCompra obtenerDetalleCompra(int codigoDetalleCompra) throws Exception{
-        return detalleCompraServicio.obtenerDetalleCompra(codigoDetalleCompra);
     }
 
 }

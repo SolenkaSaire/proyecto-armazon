@@ -10,13 +10,13 @@ import java.io.IOException;
 import java.util.Map;
 
 @Controller
-@RequestMapping
+@RequestMapping("/api/imagenes")
 @AllArgsConstructor
 public class CloudinaryControlador {
     private final CloudinaryServicio cloudinaryServicio;
 
-    @PostMapping("/subirImagen")
-    Map subirImagen(@RequestBody File file, String carpeta) throws Exception{
+    @PostMapping("/subirImagen/{codigo}")
+    Map subirImagen(@RequestBody File file,@PathVariable String carpeta) throws Exception{
     return cloudinaryServicio.subirImagen(file,carpeta);
     }
 

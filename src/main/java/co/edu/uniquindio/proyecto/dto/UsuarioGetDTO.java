@@ -15,14 +15,10 @@ import java.util.List;
 @Setter
 @ToString
 public class UsuarioGetDTO {
+    private int codigo;
     private String nombre;
     private String apellido;
     private String direccion;
     private String telefono;
-    private List<String> comentarios;
-    private List<Integer> codigoMisPublicaciones;
-    private List<Integer> codigoPublicacionesFavoritas;
-    private List<Integer> codigoCompra;
     private String email;
-    private String password;
 }

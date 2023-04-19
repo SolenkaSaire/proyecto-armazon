@@ -3,6 +3,7 @@ package co.edu.uniquindio.proyecto.servicios.implementacion;
 import co.edu.uniquindio.proyecto.dto.*;
 import co.edu.uniquindio.proyecto.modelo.Compra;
 import co.edu.uniquindio.proyecto.modelo.DetalleCompra;
+import co.edu.uniquindio.proyecto.modelo.PublicacionProducto;
 import co.edu.uniquindio.proyecto.repositorios.CompraRepo;
 import co.edu.uniquindio.proyecto.repositorios.DetalleCompraRepo;
 import co.edu.uniquindio.proyecto.servicios.interfaces.*;
@@ -31,11 +32,12 @@ public class CompraServicioImpl implements CompraServicio {
         double total = 0;
         for(DetalleCompraDTO de : compraDTO.getDetalleCompraDTO() ){
             DetalleCompra detalleCompra = new DetalleCompra();
-            detalleCompra.setPublicacionProducto( publicacionProductoServicio.obtenerPublicacionProductoP(de.getCodigoPublicacionProducto()));
+            PublicacionProducto pp = publicacionProductoServicio.obtenerPublicacionProductoP(de.getCodigoPublicacionProducto());
+            detalleCompra.setPublicacionProducto(pp);
 
             detalleCompra.setUnidades( de.getUnidades() );
-            detalleCompra.setPrecio( de.getPrecio() );
-            total = de.getPrecio() * de.getUnidades();
+            detalleCompra.setPrecio( pp.getPrecio() );
+            total += pp.getPrecio() * de.getUnidades();
             detalle.add(detalleCompra);
         }
         Compra compra = new Compra();

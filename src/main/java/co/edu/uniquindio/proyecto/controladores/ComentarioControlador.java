@@ -8,7 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping
+@RequestMapping("/api/comentario")
 @AllArgsConstructor
 public class ComentarioControlador {
 
@@ -20,13 +20,13 @@ public class ComentarioControlador {
     }
 
     @PutMapping("/actualizar/{codigo}")
-    ComentarioGetDTO actualizarComentario(@RequestBody int codigoProducto, ComentarioDTO comentarioDTO) throws Exception{
+    ComentarioGetDTO actualizarComentario( @PathVariable int codigoProducto,@RequestBody ComentarioDTO comentarioDTO) throws Exception{
     return  comentarioServicio.actualizarComentario(codigoProducto,comentarioDTO);
     }
 
 
     @DeleteMapping("/eliminar/{codigo}")
-    int eliminarComentario(@RequestBody int codigoComentario) throws Exception{
+    int eliminarComentario(@PathVariable int codigoComentario) throws Exception{
     return comentarioServicio.eliminarComentario(codigoComentario);
     }
 

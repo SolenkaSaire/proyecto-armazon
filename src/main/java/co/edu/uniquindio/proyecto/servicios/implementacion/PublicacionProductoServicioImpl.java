@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyecto.servicios.implementacion;
 
+import co.edu.uniquindio.proyecto.dto.ComentarioDTO;
 import co.edu.uniquindio.proyecto.dto.ProductoDTO;
 import co.edu.uniquindio.proyecto.dto.PublicacionProductoDTO;
 import co.edu.uniquindio.proyecto.dto.PublicacionProductoGetDTO;
@@ -144,8 +145,7 @@ public class PublicacionProductoServicioImpl implements PublicacionProductoServi
         return respuesta;
     }
 
-    @Override
-    public PublicacionProductoGetDTO convertir(PublicacionProducto publicacionProducto) throws Exception {
+    private PublicacionProductoGetDTO convertir(PublicacionProducto publicacionProducto) throws Exception {
         PublicacionProductoGetDTO publicacionProductoGetDTO = new PublicacionProductoGetDTO(
                 publicacionProducto.getPromedioEstrellas(),
                 publicacionProducto.getFechaLimite(),
@@ -153,25 +153,12 @@ public class PublicacionProductoServicioImpl implements PublicacionProductoServi
                 publicacionProducto.getDisponibilidad(),
                 publicacionProducto.getDescripcion(),
                 publicacionProducto.getVendedor().getCodigo(),
-                usuarioServicio.obtenerUsuariosCodigo( publicacionProducto.getFavoritos() ),
-                moderadorServicio.obtenerModeradoresCodigo( publicacionProducto.getModeradores()),
-                detalleCompraServicio.obtenerDetallesCodigo( publicacionProducto.getCompras() ),
-                obtenerListaComentarios( publicacionProducto.getComentarios() ),
                 publicacionProducto.getProducto().getCodigo(),
-                publicacionProducto.getEstado().toString(),
-                obtenerCiudadesCodigo(publicacionProducto.getCiudades())
+                publicacionProducto.getEstado().toString()
         );
         return publicacionProductoGetDTO;
     }
 
-    @Override
-    public List<String> obtenerListaComentarios(List<Comentario> comentarios) {
-        List<String> comentariosString = new ArrayList<>();
-        for (Comentario c:comentarios) {
-            comentariosString.add(c.getTexto());
-        }
-        return comentariosString;
-    }
 
     @Override
     public List<PublicacionProductoGetDTO> listarPublicacionProductoCategoria(Categoria categoria) throws Exception {

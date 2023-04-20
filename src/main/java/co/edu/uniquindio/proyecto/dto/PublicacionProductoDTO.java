@@ -37,13 +37,6 @@ public class PublicacionProductoDTO {
     @Length(max=100, message = "descripcion maximo 100 caracteres")
     private String descripcion;
     public int codigoVendedor;
-    private List<Integer> codigoUsuarioFavoritos;
-    private List<Integer> codigoModeradores;
-    private List<Integer> codigoDetalleCompras;
-    private List<String> comentarios;
     private int codigoProducto;
 
-    //private Estado estado;
-    private String estado;
-    public List<Integer> codigosCiudades;
 }

@@ -3,6 +3,7 @@ package co.edu.uniquindio.proyecto.servicios.implementacion;
 import co.edu.uniquindio.proyecto.dto.DetalleCompraDTO;
 import co.edu.uniquindio.proyecto.dto.DetalleCompraGetDTO;
 import co.edu.uniquindio.proyecto.modelo.DetalleCompra;
+import co.edu.uniquindio.proyecto.modelo.Producto;
 import co.edu.uniquindio.proyecto.repositorios.DetalleCompraRepo;
 import co.edu.uniquindio.proyecto.servicios.interfaces.DetalleCompraServicio;
 import lombok.AllArgsConstructor;
@@ -16,14 +17,6 @@ import java.util.Optional;
 @AllArgsConstructor
 public class DetalleCompraServicioImpl implements DetalleCompraServicio {
     DetalleCompraRepo detalleCompraRepo;
-    @Override
-    public DetalleCompraDTO obtenerProducto(int codigoCompra) {
-        DetalleCompra detalleCompra= new DetalleCompra();
-        detalleCompra.getPublicacionProducto().getProducto();
-
-
-        return null;
-    }
 
     @Override
     public List<DetalleCompraGetDTO> listarProductosUsuario(int codigoUsuario) {
@@ -47,16 +40,15 @@ public class DetalleCompraServicioImpl implements DetalleCompraServicio {
     }
 
     @Override
-    public DetalleCompra obtenerDetalleCompra(int codigoDetalleCompra) throws Exception {
+    public DetalleCompraGetDTO obtenerDetalleCompra(int codigoDetalleCompra) throws Exception {
         Optional<DetalleCompra> detalleCompra = detalleCompraRepo.findById(codigoDetalleCompra);
 
         if(detalleCompra.isEmpty() ){
             throw new Exception("El código "+codigoDetalleCompra+" no está asociado a ningún producto");
         }
 
-        return detalleCompra.get();
+        return convertir(detalleCompra.get());
     }
-
 
     private DetalleCompraGetDTO convertir(DetalleCompra detalleCompra) {
         DetalleCompraGetDTO detalleCompraGetDTO = new DetalleCompraGetDTO(

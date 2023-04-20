@@ -40,7 +40,7 @@ public class UsuarioTest {
 
          int codigo = usuarioServicio.crearUsuario(usuarioDTO);
 
-         Usuario usuario = usuarioServicio.obtenerUsuario(codigo);
+         Usuario usuario = usuarioServicio.obtenerUsuarioU(codigo);
 
          Assertions.assertEquals("Anderson", usuario.getNombre());
 
@@ -61,14 +61,14 @@ public class UsuarioTest {
 @Sql("classpath:dataset.sql")
  public void actualizar() throws Exception {
 
-    Usuario usuario = usuarioServicio.obtenerUsuario(1);
+    Usuario usuario = usuarioServicio.obtenerUsuarioU(1);
 
     UsuarioDTO usuarioDTO = new UsuarioDTO(usuario.getNombre(), usuario.getApellido(),
             "calle 20", usuario.getTelefono(), usuario.getEmail(), usuario.getPassword());
 
     int codigo = usuarioServicio.actualizarUsuario(1,usuarioDTO);
 
-    Usuario actualizado = usuarioServicio.obtenerUsuario(codigo);
+    Usuario actualizado = usuarioServicio.obtenerUsuarioU(codigo);
 
     Assertions.assertEquals("calle 20", actualizado.getDireccion());
 
@@ -78,7 +78,7 @@ public class UsuarioTest {
  @Sql("classpath:dataset.sql")
  public void obtener() throws Exception {
 
-     Usuario usuario = usuarioServicio.obtenerUsuario(1);
+     Usuario usuario = usuarioServicio.obtenerUsuarioU(1);
 
      Assertions.assertNotNull(usuario);
 

@@ -41,7 +41,7 @@ public class CompraServicioImpl implements CompraServicio {
             detalle.add(detalleCompra);
         }
         Compra compra = new Compra();
-        compra.setUsuario( usuarioServicio.obtenerUsuario( compraDTO.getCodigoUsuario()));
+        compra.setUsuario( usuarioServicio.obtenerUsuarioU( compraDTO.getCodigoUsuario()));
         compra.setFecha_creacion(LocalDateTime.now());
         compra.setMetodoPagos( compraDTO.getMetodoPago() );
         compra.setTotal(total);

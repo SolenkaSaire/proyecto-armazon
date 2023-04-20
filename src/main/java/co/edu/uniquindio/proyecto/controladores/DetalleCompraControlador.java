@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyecto.controladores;
 
 import co.edu.uniquindio.proyecto.dto.DetalleCompraDTO;
+import co.edu.uniquindio.proyecto.dto.DetalleCompraGetDTO;
 import co.edu.uniquindio.proyecto.modelo.DetalleCompra;
 import co.edu.uniquindio.proyecto.servicios.interfaces.DetalleCompraServicio;
 import lombok.AllArgsConstructor;
@@ -18,9 +19,9 @@ public class DetalleCompraControlador {
 
     private final DetalleCompraServicio detalleCompraServicio;
 
-    @GetMapping("/obtenerProducto/{codigo}")
-    DetalleCompraDTO obtenerProducto(@PathVariable int codigoCompra){
-        return detalleCompraServicio.obtenerProducto(codigoCompra);
+    @GetMapping("/obtenerDetalleCompra/{codigo}")
+    DetalleCompraGetDTO obtenerDetalleCompra(@PathVariable int codigoCompra) throws Exception {
+        return detalleCompraServicio.obtenerDetalleCompra(codigoCompra);
     }
 
 }

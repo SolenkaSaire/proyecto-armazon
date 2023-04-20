@@ -74,8 +74,4 @@ public class PublicacionProducto implements Serializable {
     @ManyToMany
     private List<Ciudad> ciudades;
 
-
-
-
-
 }

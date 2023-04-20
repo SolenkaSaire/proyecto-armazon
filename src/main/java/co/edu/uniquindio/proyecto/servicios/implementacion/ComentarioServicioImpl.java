@@ -37,7 +37,7 @@ public class ComentarioServicioImpl implements ComentarioServicio {
         nuevoComentario.setFecha_creacion(LocalDateTime.now());
         nuevoComentario.setTexto(comentarioDTO.getTexto());
         nuevoComentario.setEstrellas(comentarioDTO.getEstrellas());
-        nuevoComentario.setUsuario(usuarioServicio.obtenerUsuario(comentarioDTO.getCodigoUsuario()));
+        nuevoComentario.setUsuario(usuarioServicio.obtenerUsuarioU(comentarioDTO.getCodigoUsuario()));
         nuevoComentario.setPublicacionProducto(publicacionProductoServicio.obtenerPublicacionProductoP(comentarioDTO.getCodigoPublicacionProducto()));
         comentarioRepo.save(nuevoComentario);
         double promedio=0;
@@ -74,7 +74,7 @@ public class ComentarioServicioImpl implements ComentarioServicio {
         Comentario comentario = new Comentario();
         comentario.setTexto(comentarioDTO.getTexto());
         comentario.setEstrellas(comentarioDTO.getEstrellas());
-        comentario.setUsuario(usuarioServicio.obtenerUsuario(comentarioDTO.getCodigoUsuario()));
+        comentario.setUsuario(usuarioServicio.obtenerUsuarioU(comentarioDTO.getCodigoUsuario()));
         comentario.setPublicacionProducto(publicacionProductoServicio.obtenerPublicacionProductoP(comentarioDTO.getCodigoPublicacionProducto()));
 
         return comentario;

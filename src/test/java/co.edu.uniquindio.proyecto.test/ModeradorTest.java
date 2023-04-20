@@ -58,16 +58,5 @@ public class ModeradorTest {
         Assertions.assertEquals(estado.toString(), publicacionProducto.getEstado().toString());
 
     }
-    @Test
-    @Sql("classpath:dataset.sql")
-    public void obtenerModeradoresCodigo() throws Exception {
-
-        List<ProductoModerador> lista = moderadorRepo.listarProductoModerador(1);
-
-        List<Integer> list = moderadorServicio.obtenerModeradoresCodigo(lista);
-
-        System.out.println(list);
-
-    }
 
 }

@@ -4,6 +4,7 @@ import co.edu.uniquindio.proyecto.modelo.Comentario;
 import co.edu.uniquindio.proyecto.modelo.Compra;
 import co.edu.uniquindio.proyecto.modelo.PublicacionProducto;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -28,15 +29,16 @@ public class UsuarioDTO {
     private String apellido;
     @NotBlank
     @NotNull
-    @Length(max=50, message = "direccion maximo 50 caracteres")
+    @Length(max=50, message = "direccion maximo 100 caracteres")
     private String direccion;
     @NotBlank
     @NotNull
-    @Length(max=10, message = "telefono maximo 20 caracteres")
+    @Length(max=10, message = "telefono maximo 12 caracteres")
     private String telefono;
 
     @NotBlank
     @NotNull
+    @Email(message = "Error con la estructura del correo")
     @Length(max=100, message = "email maximo 150 caracteres")
     private String email;
     @NotBlank

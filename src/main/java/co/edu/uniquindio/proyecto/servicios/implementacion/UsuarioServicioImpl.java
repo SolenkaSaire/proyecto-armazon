@@ -33,7 +33,6 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
         return usuarioRepo.save(usuario).getCodigo();
 
-
     }
 
     @Override

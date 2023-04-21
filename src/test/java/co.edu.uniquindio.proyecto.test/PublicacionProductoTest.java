@@ -18,6 +18,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootTest
@@ -36,7 +37,18 @@ public class PublicacionProductoTest {
         LocalDateTime fechaActual = LocalDateTime.now();
 
         PublicacionProductoDTO publicacionProductoDTO = new PublicacionProductoDTO(3.5, fechaActual, 300000,
-                5, "Terreneitor", 2, 2);
+                5, "Terreneitor carro 4x4", 2, 2);
+
+        List<Categoria> listaCategorias = new ArrayList<>();
+
+        listaCategorias.add(Categoria.HERRAMIENTAS);
+        listaCategorias.add(Categoria.HOGAR);
+        listaCategorias.add(Categoria.COCHES);
+
+        List<String> listaImagenes = new ArrayList<>();
+
+        ProductoDTO productoDTO = new ProductoDTO("Terreneitor", listaCategorias, listaImagenes);
+
     }
 
     public void actualizarPublicacionProducto(int codigoPublicacion, PublicacionProductoDTO publicacionProductoDTO, ProductoDTO productoDTO) throws Exception {

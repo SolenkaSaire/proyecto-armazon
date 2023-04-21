@@ -21,19 +21,13 @@ public class ProductoDTO {
     @NotNull
     @Length(max=50, message = "nombre maximo 50 caracteres")
     private String nombre;
+
     @NotBlank
     @NotNull
-    @Length(max=50, message = "categoria maximo 50 caracteres")
-    //private List<String> categorias;
-
-
     private List<Categoria> categorias;
     @NotBlank
     @NotNull
     @Length(max=50, message = "imagenes maximo 50 caracteres")
     private List<String> imagenes;
-
-    private List<Integer> codigoPublicacionProductos;
-
 
 }

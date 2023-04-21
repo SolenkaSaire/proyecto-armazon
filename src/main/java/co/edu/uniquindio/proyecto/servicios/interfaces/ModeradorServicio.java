@@ -11,7 +11,7 @@ public interface ModeradorServicio {
 
 
 
-    void aprobarProducto(PublicacionProducto publicacionProducto) throws Exception;
+    void aprobarProducto(PublicacionProducto publicacionProducto, ProductoModerador productoModerador) throws Exception;
 
     void rechazarProducto(PublicacionProducto publicacionProducto) throws Exception;
 

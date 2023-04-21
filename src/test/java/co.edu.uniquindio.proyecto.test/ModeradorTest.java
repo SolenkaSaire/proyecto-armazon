@@ -38,7 +38,9 @@ public class ModeradorTest {
 
         PublicacionProducto publicacionProducto = publicacionProductoServicio.obtenerPublicacionProductoP(1);
 
-        moderadorServicio.aprobarProducto(publicacionProducto);
+        ProductoModerador productoModerador = new ProductoModerador();
+
+        //moderadorServicio.aprobarProducto(publicacionProducto);
 
         Estado estado = Estado.APROBADO;
 

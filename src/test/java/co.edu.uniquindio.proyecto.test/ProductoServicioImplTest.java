@@ -4,6 +4,7 @@ import co.edu.uniquindio.proyecto.dto.ProductoDTO;
 import co.edu.uniquindio.proyecto.dto.ProductoGetDTO;
 import co.edu.uniquindio.proyecto.modelo.Categoria;
 import co.edu.uniquindio.proyecto.modelo.Producto;
+import co.edu.uniquindio.proyecto.modelo.PublicacionProducto;
 import co.edu.uniquindio.proyecto.repositorios.ProductoRepo;
 import co.edu.uniquindio.proyecto.repositorios.UsuarioRepo;
 import co.edu.uniquindio.proyecto.servicios.interfaces.ProductoServicio;
@@ -54,8 +55,6 @@ class ProductoServicioImplTest {
             throw new RuntimeException(e);
         }
 
-        System.out.println(creado);
-
         Producto producto = new Producto();
 
         try {
@@ -70,16 +69,46 @@ class ProductoServicioImplTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    public void actualizarProducto() {
+    public void actualizarProducto() throws Exception {
 
-        ProductoDTO productoDTO= new ProductoDTO()
+        Producto producto = new Producto();
+
+        try {
+            producto = productoServicio.obtenerProductoP(1);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        ProductoDTO productoDTO= new ProductoDTO("Terreneitor 2.0", producto.getCategoria(), producto.getImagenes());
+
+        int actualizado;
+
+        actualizado = productoServicio.actualizarProducto(1, productoDTO);
+
+        producto = productoServicio.obtenerProductoP(actualizado);
+
+        Assertions.assertEquals("Terreneitor 2.0", producto.getNombre());
 
     }
 
     @Test
     @Sql("classpath:dataset.sql")
-    public void actualizarUnidades() {
+    public void actualizarUnidades() throws Exception {
 
+        int codigo = productoServicio.actualizarUnidades(1,7);
+
+        Producto producto = productoServicio.obtenerProductoP(1);
+
+        int actualizado = 0;
+
+        for (PublicacionProducto p :producto.getPublicacionProductos() ) {
+            if (producto.getCodigo() == 1) {
+                actualizado = p.getDisponibilidad();
+                break;
+            }
+        }
+
+        Assertions.assertEquals(7, actualizado);
 
     }
 
@@ -87,7 +116,7 @@ class ProductoServicioImplTest {
     @Sql("classpath:dataset.sql")
     public void actualizarEstado() {
 
-
+        int codigo = productoServicio.actualizarEstado(1,7);
 
     }
 

@@ -23,8 +23,11 @@ public class ModeradorServicioImpl implements ModeradorServicio{
     //cambios
     //private final PublicacionProductoServicio publicacionProductoServicio;
     @Override
-    public void aprobarProducto(PublicacionProducto publicacionProducto){
+    public void aprobarProducto(PublicacionProducto publicacionProducto, ProductoModerador productoModerador){
         publicacionProducto.setEstado(Estado.APROBADO);
+
+        //productoModerador
+
     }
 
     @Override

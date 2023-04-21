@@ -23,4 +23,7 @@ public interface UsuarioServicio {
 
     public UsuarioGetDTO obtenerUsuario(int codigoUsuario) throws Exception;
     void validarExiste(int codigoUsuario) throws Exception;
-}
+
+
+
+   }

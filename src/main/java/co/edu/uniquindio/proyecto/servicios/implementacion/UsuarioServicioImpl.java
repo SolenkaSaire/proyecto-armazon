@@ -21,6 +21,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     private final UsuarioRepo usuarioRepo;
     private final PasswordEncoder passwordEncoder;
 
+
     @Override
     public int crearUsuario(UsuarioDTO usuarioDTO) throws Exception {
 
@@ -149,5 +150,10 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         );
         return usuarioGetDTO;
     }
+    ////////////////////////////////////////////////
+
+
+
+
 }
 

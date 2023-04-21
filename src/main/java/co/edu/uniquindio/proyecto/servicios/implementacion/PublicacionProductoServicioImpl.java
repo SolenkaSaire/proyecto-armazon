@@ -71,7 +71,6 @@ public class PublicacionProductoServicioImpl implements PublicacionProductoServi
         PublicacionProducto publicacionProducto = new PublicacionProducto();
         publicacionProducto.setPromedioEstrellas(publicacionProductoDTO.getPromedioEstrellas());
         publicacionProducto.setFechaLimite(publicacionProductoDTO.getFechaLimite());
-        publicacionProducto.setEstado(Estado.valueOf(publicacionProductoDTO.getEstado()));
         publicacionProducto.setPrecio(publicacionProductoDTO.getPrecio());
         publicacionProducto.setDisponibilidad(publicacionProductoDTO.getDisponibilidad());
         publicacionProducto.setDescripcion(publicacionProductoDTO.getDescripcion());

@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyecto.test;
 
+import co.edu.uniquindio.proyecto.dto.ProductoModeradorDTO;
 import co.edu.uniquindio.proyecto.modelo.Usuario;
 import co.edu.uniquindio.proyecto.modelo.*;
 import co.edu.uniquindio.proyecto.repositorios.ModeradorRepo;
@@ -38,9 +39,9 @@ public class ModeradorTest {
 
         PublicacionProducto publicacionProducto = publicacionProductoServicio.obtenerPublicacionProductoP(1);
 
-        ProductoModerador productoModerador = new ProductoModerador();
+        ProductoModeradorDTO productoModeradorDTO = new ProductoModeradorDTO("Me gusta el Terreneitor", 2);
 
-        //moderadorServicio.aprobarProducto(publicacionProducto);
+        moderadorServicio.aprobarProducto(publicacionProducto, productoModeradorDTO);
 
         Estado estado = Estado.APROBADO;
 
@@ -53,7 +54,9 @@ public class ModeradorTest {
 
         PublicacionProducto publicacionProducto = publicacionProductoServicio.obtenerPublicacionProductoP(1);
 
-        moderadorServicio.rechazarProducto(publicacionProducto);
+        ProductoModeradorDTO productoModeradorDTO = new ProductoModeradorDTO("No me gusto el color", 2);
+
+        moderadorServicio.rechazarProducto(publicacionProducto, productoModeradorDTO);
 
         Estado estado = Estado.NO_APROBADO;
 

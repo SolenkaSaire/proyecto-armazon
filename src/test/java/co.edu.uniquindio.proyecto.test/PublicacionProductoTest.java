@@ -49,9 +49,13 @@ public class PublicacionProductoTest {
 
         ProductoDTO productoDTO = new ProductoDTO("Terreneitor", listaCategorias, listaImagenes);
 
+
+
     }
 
     public void actualizarPublicacionProducto(int codigoPublicacion, PublicacionProductoDTO publicacionProductoDTO, ProductoDTO productoDTO) throws Exception {
+
+
 
     }
 

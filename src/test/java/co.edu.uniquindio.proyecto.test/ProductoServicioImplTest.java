@@ -32,7 +32,7 @@ class ProductoServicioImplTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    public void crearProducto() {
+    public void crearProducto() throws Exception{
 
         List<Categoria> listaCategorias = new ArrayList<>();
 
@@ -49,19 +49,12 @@ class ProductoServicioImplTest {
         ProductoDTO productoDTO = new ProductoDTO("Terreneitor", listaCategorias, listaImagenes);
 
         int creado;
-        try {
-            creado = productoServicio.crearProducto(productoDTO);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+
+        creado = productoServicio.crearProducto(productoDTO);
 
         Producto producto = new Producto();
 
-        try {
-            producto = productoServicio.obtenerProductoP(creado);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        producto = productoServicio.obtenerProductoP(creado);
 
         Assertions.assertEquals("Terreneitor", producto.getNombre());
 
@@ -69,21 +62,27 @@ class ProductoServicioImplTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    public void actualizarProducto() throws Exception {
+    public void actualizarProducto() throws Exception{
 
-        Producto producto = new Producto();
+        List<Categoria> listaCategorias = new ArrayList<>();
 
-        try {
-            producto = productoServicio.obtenerProductoP(1);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        listaCategorias.add(Categoria.HERRAMIENTAS);
+        listaCategorias.add(Categoria.HOGAR);
+        listaCategorias.add(Categoria.COCHES);
 
-        ProductoDTO productoDTO= new ProductoDTO("Terreneitor 2.0", producto.getCategoria(), producto.getImagenes());
+        List<String> listaImagenes = new ArrayList<>();
+
+        listaImagenes.add("Imagen1");
+        listaImagenes.add("Imagen2");
+        listaImagenes.add("Imagen3");
+
+        ProductoDTO productoDTO= new ProductoDTO("Terreneitor 2.0", listaCategorias, listaImagenes);
 
         int actualizado;
 
         actualizado = productoServicio.actualizarProducto(1, productoDTO);
+
+        Producto producto = new Producto();
 
         producto = productoServicio.obtenerProductoP(actualizado);
 
@@ -93,44 +92,22 @@ class ProductoServicioImplTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    public void actualizarUnidades() throws Exception {
+    public void actualizarUnidades() throws Exception{
 
-        int codigo = productoServicio.actualizarUnidades(1,7);
+        int actualizado = productoServicio.actualizarUnidades(1, 7);
 
-        Producto producto = productoServicio.obtenerProductoP(1);
+        Producto producto = productoServicio.obtenerProductoP(actualizado);
 
-        int actualizado = 0;
+        int actualizadoProducto = 0;
 
         for (PublicacionProducto p :producto.getPublicacionProductos() ) {
-            if (producto.getCodigo() == 1) {
-                actualizado = p.getDisponibilidad();
+            if (producto.getCodigo() == actualizado) {
+                actualizadoProducto = p.getDisponibilidad();
                 break;
             }
         }
 
-        Assertions.assertEquals(7, actualizado);
-
-    }
-
-    @Test
-    @Sql("classpath:dataset.sql")
-    public void actualizarEstado() {
-
-        int codigo = productoServicio.actualizarEstado(1,7);
-
-    }
-
-    public void obtenerProducto() throws Exception {
-
-    }
-
-    public void obtenerProductoP() throws Exception {
-
-    }
-
-    public void listarProductosNombre() {
-
-
+        Assertions.assertEquals(7, actualizadoProducto);
 
     }
 

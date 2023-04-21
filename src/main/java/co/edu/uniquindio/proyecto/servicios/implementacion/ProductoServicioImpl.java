@@ -66,20 +66,6 @@ public class ProductoServicioImpl implements ProductoServicio {
     }
 
     @Override
-    public int actualizarEstado(int codigoProducto, Estado estado) throws Exception{
-        Producto producto= obtenerProductoP(codigoProducto);
-
-        for (PublicacionProducto p :producto.getPublicacionProductos() ) {
-            if (producto.getCodigo() == codigoProducto) {
-                p.setEstado(estado);
-                break;
-            }
-        }
-        return productoRepo.save(producto).getCodigo();
-    }
-
-
-    @Override
     public ProductoGetDTO obtenerProducto(int codigoProducto) throws Exception{
         return convertir( obtenerProductoP(codigoProducto) );
     }
@@ -119,19 +105,6 @@ public class ProductoServicioImpl implements ProductoServicio {
             listaCategoria.add(String.valueOf(categoria));
         }
         return listaCategoria;
-    }
-
-    @Override
-    public List<ProductoGetDTO> listarProductosNombre(String nombre) {
-
-        List<Producto> lista = productoRepo.listarProductosNombre(nombre);
-        List<ProductoGetDTO> respuesta = new ArrayList<>();
-
-        for(Producto p : lista){
-            respuesta.add( convertir(p) );
-        }
-
-        return respuesta;
     }
 
     public void validarExiste(int codigoProducto) {

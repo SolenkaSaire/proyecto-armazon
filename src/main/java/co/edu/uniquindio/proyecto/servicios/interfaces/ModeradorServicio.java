@@ -1,7 +1,10 @@
 package co.edu.uniquindio.proyecto.servicios.interfaces;
 
+import co.edu.uniquindio.proyecto.dto.ProductoModeradorDTO;
 import co.edu.uniquindio.proyecto.dto.PublicacionProductoGetDTO;
+import co.edu.uniquindio.proyecto.dto.UsuarioGetDTO;
 import co.edu.uniquindio.proyecto.modelo.Estado;
+import co.edu.uniquindio.proyecto.modelo.Moderador;
 import co.edu.uniquindio.proyecto.modelo.ProductoModerador;
 import co.edu.uniquindio.proyecto.modelo.PublicacionProducto;
 
@@ -11,8 +14,10 @@ public interface ModeradorServicio {
 
 
 
-    void aprobarProducto(PublicacionProducto publicacionProducto, ProductoModerador productoModerador) throws Exception;
+    int aprobarProducto(PublicacionProducto publicacionProducto, ProductoModeradorDTO productoModeradorDTO) throws Exception;
 
-    void rechazarProducto(PublicacionProducto publicacionProducto) throws Exception;
+    int rechazarProducto(PublicacionProducto publicacionProducto, ProductoModeradorDTO productoModeradorDTO) throws Exception;
+
+    public Moderador obtenerModerador(int codigoModerador) throws Exception;
 
 }

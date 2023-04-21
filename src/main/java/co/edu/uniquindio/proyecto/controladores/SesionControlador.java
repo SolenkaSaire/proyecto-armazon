@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/api/auth")
+@RequestMapping("/api/sesion")
 @AllArgsConstructor
 public class SesionControlador {
 

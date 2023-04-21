@@ -29,11 +29,11 @@ public class ProductoControlador {
     int actualizarUnidades(@PathVariable int codigoProducto,@PathVariable int unidades) throws Exception{
         return productoServicio.actualizarUnidades(codigoProducto,unidades);
     }
-
+/*
     @PutMapping("/actualizarEstado/{codigo}")
     int actualizarEstado(@PathVariable int codigoProducto,@RequestBody Estado estado) throws Exception{
         return productoServicio.actualizarEstado(codigoProducto,estado);
-    }
+    }*/
 
     @GetMapping("/obtenerProducto/{codigo}")
     ProductoGetDTO obtenerProducto(@PathVariable int codigoProducto) throws Exception{

@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyecto.servicios.implementacion;
 
+import co.edu.uniquindio.proyecto.dto.EmailDTO;
 import co.edu.uniquindio.proyecto.dto.UsuarioDTO;
 import co.edu.uniquindio.proyecto.dto.UsuarioGetDTO;
 import co.edu.uniquindio.proyecto.modelo.Comentario;
@@ -7,6 +8,7 @@ import co.edu.uniquindio.proyecto.modelo.Compra;
 import co.edu.uniquindio.proyecto.modelo.PublicacionProducto;
 import co.edu.uniquindio.proyecto.modelo.Usuario;
 import co.edu.uniquindio.proyecto.repositorios.UsuarioRepo;
+import co.edu.uniquindio.proyecto.servicios.interfaces.EmailServicio;
 import co.edu.uniquindio.proyecto.servicios.interfaces.UsuarioServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -20,7 +22,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
     private final UsuarioRepo usuarioRepo;
     private final PasswordEncoder passwordEncoder;
-
+    private final EmailServicio emailServicio;
 
     @Override
     public int crearUsuario(UsuarioDTO usuarioDTO) throws Exception {
@@ -29,6 +31,13 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         if (buscado != null) {
             throw new Exception("El correo " + usuarioDTO.getEmail() + " ya está en uso");
         }
+        String email= "<h1>Creacion de cuenta exitosa</h1><h2><p>En tu cuenta de Armazon</p></h2><img src='https://i.ibb.co/mHSHGmn/Imagen-de-Whats-App-2023-04-21-a-las-11-31-00.jpg' width='300' height='200'>";
+
+        emailServicio.enviarEmail(new EmailDTO(
+                "TestMail-Html",
+                email,
+                usuarioDTO.getEmail()));
+
         Usuario usuario = convertir(usuarioDTO);
         usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
         return usuarioRepo.save(usuario).getCodigo();

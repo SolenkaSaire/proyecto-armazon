@@ -35,6 +35,9 @@ public class PublicacionProductoServicioImpl implements PublicacionProductoServi
         PublicacionProducto publicacionProducto= new PublicacionProducto();
         publicacionProducto.setPromedioEstrellas(publicacionProductoDTO.getPromedioEstrellas());
         publicacionProducto.setFechaLimite(publicacionProductoDTO.getFechaLimite());
+
+        publicacionProducto.setFecha_publicacion(LocalDateTime.now());
+
         publicacionProducto.setEstado(Estado.NO_APROBADO);
         publicacionProducto.setPrecio(publicacionProductoDTO.getPrecio());
         publicacionProducto.setDisponibilidad(publicacionProductoDTO.getDisponibilidad());
@@ -69,8 +72,14 @@ public class PublicacionProductoServicioImpl implements PublicacionProductoServi
     private PublicacionProducto convertir(PublicacionProductoDTO publicacionProductoDTO) throws Exception {
 
         PublicacionProducto publicacionProducto = new PublicacionProducto();
+        publicacionProducto.setEstado(Estado.NO_APROBADO);
+        publicacionProducto.setFecha_publicacion(LocalDateTime.now());
+        //fechapublicaicon
+        //fecha creacion
         publicacionProducto.setPromedioEstrellas(publicacionProductoDTO.getPromedioEstrellas());
-        publicacionProducto.setFechaLimite(publicacionProductoDTO.getFechaLimite());
+
+        publicacionProducto.setFechaCreacion(publicacionProductoDTO.getFechaLimite());//prueba fecha creacion
+
         publicacionProducto.setPrecio(publicacionProductoDTO.getPrecio());
         publicacionProducto.setDisponibilidad(publicacionProductoDTO.getDisponibilidad());
         publicacionProducto.setDescripcion(publicacionProductoDTO.getDescripcion());

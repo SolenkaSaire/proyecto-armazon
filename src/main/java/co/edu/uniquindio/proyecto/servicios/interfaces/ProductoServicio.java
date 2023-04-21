@@ -17,10 +17,7 @@ public interface ProductoServicio {
 
     int actualizarUnidades(int codigoProducto, int unidades) throws Exception;
 
-    int actualizarEstado(int codigoProducto, Estado estado) throws Exception;
-
     ProductoGetDTO obtenerProducto(int codigoProducto) throws Exception;
     Producto obtenerProductoP(int codigoProducto) throws Exception;
 
-    List<ProductoGetDTO> listarProductosNombre(String nombre);
 }

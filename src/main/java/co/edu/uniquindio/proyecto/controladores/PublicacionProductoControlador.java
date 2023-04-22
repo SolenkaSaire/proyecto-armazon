@@ -30,14 +30,13 @@ public class PublicacionProductoControlador {
     }
 
     @PutMapping("/actualizarUnidades/{codigoPublicacion}/{unidades}")
-    int actualizarUnidades(@PathVariable int codigoPublicacion,@PathVariable int unidades) throws Exception{
-    return publicacionProductoServicio.actualizarUnidades(codigoPublicacion,unidades);
+    public ResponseEntity<MensajeDTO> actualizarUnidadesPublicacion(@PathVariable int codigoPublicacion,@PathVariable int unidades)  throws Exception{
+        return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false, "Unidades de la Publicacion actualizada exitosamente! Código: "+publicacionProductoServicio.actualizarUnidades(codigoPublicacion,unidades)) );
     }
 
-    @PutMapping("/actualizarEstado/{codigo}")
-    int actualizarEstado(@PathVariable int codigoPublicacion,@RequestBody Estado estado) throws Exception{
-    return publicacionProductoServicio.actualizarEstado(codigoPublicacion,estado);
-
+    @PutMapping("/actualizarEstado/{codigoPublicacion}")
+    public ResponseEntity<MensajeDTO> actualizarEstadoPublicacion(@PathVariable int codigoPublicacion,@RequestBody Estado estado)  throws Exception{
+        return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false, "Estado Publicacion actualizada exitosamente! Código: "+publicacionProductoServicio.actualizarEstado(codigoPublicacion,estado)) );
     }
 
     @DeleteMapping("/eliminar/{codigoPublicacion}")
@@ -48,9 +47,9 @@ public class PublicacionProductoControlador {
     }
 
 
-    @DeleteMapping("/eliminarAll/{codigo}")
-    int eliminarTodaPublicacionProducto(@PathVariable int codigoProducto) throws Exception{
-    return publicacionProductoServicio.eliminarTodaPublicacionProducto(codigoProducto);
+    @DeleteMapping("/eliminarAll/{codigoProducto}")
+    public ResponseEntity<MensajeDTO> eliminarTodaPublicacionProducto(@PathVariable int codigoProducto) throws Exception{
+        return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false, "Publicaciones asociadas al codigo del producto eliminadas correctamente, codigo: " + publicacionProductoServicio.eliminarTodaPublicacionProducto(codigoProducto)) );
 
     }
 

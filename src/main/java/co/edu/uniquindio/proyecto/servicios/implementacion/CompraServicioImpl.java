@@ -87,11 +87,10 @@ public class CompraServicioImpl implements CompraServicio {
     Optional<Compra> compra = compraRepo.findById(codigoCompra);
 
         if(compra.isEmpty()){
-            try {
+
                 throw new Exception("El código "+codigoCompra+" no está asociado a ningún producto");
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
+
+
         }
 
         return compra.get();

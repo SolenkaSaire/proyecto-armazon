@@ -2,6 +2,7 @@ package co.edu.uniquindio.proyecto.test;
 
 import co.edu.uniquindio.proyecto.dto.DetalleCompraDTO;
 import co.edu.uniquindio.proyecto.dto.DetalleCompraGetDTO;
+import co.edu.uniquindio.proyecto.modelo.Compra;
 import co.edu.uniquindio.proyecto.modelo.DetalleCompra;
 import co.edu.uniquindio.proyecto.modelo.Producto;
 import co.edu.uniquindio.proyecto.repositorios.DetalleCompraRepo;
@@ -33,6 +34,16 @@ public class DetalleCompraTest {
         List<DetalleCompraGetDTO> list = detalleCompraServicio.listarProductosUsuario(1);
 
         System.out.println(list);
+
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void obtener() throws Exception {
+
+        DetalleCompraGetDTO detalleCompra = detalleCompraServicio.obtenerDetalleCompra(1);
+
+        Assertions.assertNotNull(detalleCompra);
 
     }
 

@@ -16,6 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class BeansConfig {
     @Bean
     public UserDetailsService userDetailsService() {
+
         return new UserDetailsServiceImpl();
     }
     @Bean
@@ -32,6 +33,7 @@ public class BeansConfig {
     }
     @Bean
     public PasswordEncoder passwordEncoder() {
+
         return new BCryptPasswordEncoder();
     }
 }

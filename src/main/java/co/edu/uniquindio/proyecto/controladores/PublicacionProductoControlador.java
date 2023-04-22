@@ -55,7 +55,7 @@ public class PublicacionProductoControlador {
 
     @GetMapping("/obtener/{codigoPublicacion}")
     public ResponseEntity<MensajeDTO> obtenerPublicacionProducto(@PathVariable int codigoPublicacion) throws Exception{
-     return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false, publicacionProductoServicio.obtenerPublicacionProducto(codigoPublicacion)));
+     return ResponseEntity.status(200).body( new MensajeDTO(HttpStatus.OK, false, publicacionProductoServicio.obtenerPublicacionProducto(codigoPublicacion)));
     }
 
 

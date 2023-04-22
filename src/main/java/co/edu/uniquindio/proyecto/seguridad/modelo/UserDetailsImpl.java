@@ -1,4 +1,5 @@
 package co.edu.uniquindio.proyecto.seguridad.modelo;
+
 import co.edu.uniquindio.proyecto.modelo.Cuenta;
 import co.edu.uniquindio.proyecto.modelo.Moderador;
 import co.edu.uniquindio.proyecto.modelo.Usuario;
@@ -24,14 +25,17 @@ public class UserDetailsImpl implements UserDetails {
     }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
+
         return authorities;
     }
     @Override
     public String getPassword() {
+
         return password;
     }
     @Override
     public String getUsername() {
+
         return username;
     }
     @Override

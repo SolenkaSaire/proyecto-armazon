@@ -31,17 +31,15 @@ public class PublicacionProductoTest {
     @Autowired
     private PublicacionProductoServicio publicacionProductoServicio;
 
+
+
     @Test
     @Sql("classpath:dataset.sql")
     public void crearPublicacionProducto() throws Exception{
 
         LocalDateTime fechaActual = LocalDateTime.now();
 
-        PublicacionProductoDTO publicacionProductoDTO = new PublicacionProductoDTO(3.5, fechaActual, 300000,
-                5, "Terreneitor carro 4x4", 2, 2);
-
         List<Categoria> listaCategorias = new ArrayList<>();
-
         listaCategorias.add(Categoria.HERRAMIENTAS);
         listaCategorias.add(Categoria.HOGAR);
         listaCategorias.add(Categoria.COCHES);
@@ -49,6 +47,9 @@ public class PublicacionProductoTest {
         List<String> listaImagenes = new ArrayList<>();
 
         ProductoDTO productoDTO = new ProductoDTO("Terreneitor", listaCategorias, listaImagenes);
+
+        PublicacionProductoDTO publicacionProductoDTO = new PublicacionProductoDTO(3.5, fechaActual, 300000,
+                5, "Terreneitor carro 4x4", 2, 2, productoDTO);
 
         int creado = publicacionProductoServicio.crearPublicacionProducto(publicacionProductoDTO,productoDTO);
 
@@ -63,9 +64,6 @@ public class PublicacionProductoTest {
 
         LocalDateTime fechaActual = LocalDateTime.now();
 
-        PublicacionProductoDTO publicacionProductoDTO = new PublicacionProductoDTO(3.5, fechaActual, 300000,
-                5, "Terreneitor carro 4x4", 2, 2);
-
         List<Categoria> listaCategorias = new ArrayList<>();
 
         listaCategorias.add(Categoria.HERRAMIENTAS);
@@ -75,6 +73,9 @@ public class PublicacionProductoTest {
         List<String> listaImagenes = new ArrayList<>();
 
         ProductoDTO productoDTO = new ProductoDTO("Terreneitor 2.0", listaCategorias, listaImagenes);
+
+        PublicacionProductoDTO publicacionProductoDTO = new PublicacionProductoDTO(3.5, fechaActual, 300000,
+                5, "Terreneitor carro 4x4", 2, 2, productoDTO);
 
         int actualizado = publicacionProductoServicio.actualizarPublicacionProducto(1,publicacionProductoDTO,productoDTO);
 
@@ -127,7 +128,21 @@ public class PublicacionProductoTest {
     @Sql("classpath:dataset.sql")
     public void listarPublicacionProductoCategoria() throws Exception {
 
-        List<PublicacionProductoGetDTO> list = publicacionProductoServicio.listarPublicacionProductoCategoria(Categoria.COCHES);
+        List<PublicacionProductoGetDTO> list = publicacionProductoServicio.listarPublicacionProductoCategoria(Categoria.HERRAMIENTAS);
+
+
+        for (PublicacionProductoGetDTO p: list) {
+
+            System.out.println(p.getDescripcion() + " Listado terminado");
+
+        }
+
+    }
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void listarPublicacionProductoEstado() throws Exception {
+
+        List<PublicacionProductoGetDTO> list = publicacionProductoServicio.listarPublicacionProductosPorEstado(Estado.NO_APROBADO);
 
         for (PublicacionProductoGetDTO p: list) {
 
@@ -167,11 +182,11 @@ public class PublicacionProductoTest {
     @Sql("classpath:dataset.sql")
     public void listarPublicacionProductosPrecio() throws Exception {
 
-        List<PublicacionProductoGetDTO> list = publicacionProductoServicio.listarPublicacionProductosPrecio(1000000,4000000);
+        List<PublicacionProductoGetDTO> list;
+        list = publicacionProductoServicio.listarPublicacionProductosPrecio(130000,151000);
 
         for (PublicacionProductoGetDTO p: list) {
-
-            System.out.println(p.getDescripcion() + " Listado terminado");
+            System.out.println(p.getDescripcion()+" tiene un precio de: "+p.getPrecio() + " Listado terminado");
 
         }
 

@@ -56,7 +56,7 @@ public class CompraTest {
 
         System.out.println("Esta es el precio: "+compra.getTotal());
 
-        Assertions.assertEquals(1240910000, compra.getTotal());
+        Assertions.assertEquals(250000, compra.getTotal());
 
     }
     @Test

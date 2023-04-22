@@ -39,4 +39,6 @@ public class PublicacionProductoDTO {
     public int codigoVendedor;
     private int codigoProducto;
 
+    private ProductoDTO productoDTO;
+
 }

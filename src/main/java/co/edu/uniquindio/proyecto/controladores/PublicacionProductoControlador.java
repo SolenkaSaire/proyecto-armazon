@@ -18,34 +18,18 @@ public class PublicacionProductoControlador {
 
     private final PublicacionProductoServicio publicacionProductoServicio;
 
-/*
-    @PostMapping("/crear")
-    int crearPublicacionProducto(@RequestBody PublicacionProductoDTO publicacionProductoDTO,@RequestBody ProductoDTO productoDTO) throws Exception{
-        return publicacionProductoServicio.crearPublicacionProducto(publicacionProductoDTO,productoDTO);
 
-    }*/
     @PostMapping("/crear")
-    public ResponseEntity<MensajeDTO> crearPublicacionProducto(@RequestBody PublicacionProductoRequestDTO request)  throws Exception{
-        int newCodigo=0;
-        newCodigo = publicacionProductoServicio.crearPublicacionProducto(request.getPublicacionProductoDTO(), request.getProductoDTO());
-        return ResponseEntity.status(200).body( new MensajeDTO(HttpStatus.OK, false, "Publicacion producto creado exitosamente! Código: "+newCodigo) );
+    public ResponseEntity<MensajeDTO> crearPublicacionProducto(@RequestBody PublicacionProductoDTO publicacionProductoDTO) throws Exception{
+        return ResponseEntity.status(200).body( new MensajeDTO(HttpStatus.OK, false, "Publicacion producto creado exitosamente! Código: "+ publicacionProductoServicio.crearPublicacionProducto(publicacionProductoDTO, publicacionProductoDTO.getProductoDTO()) ));
+
     }
-/*
-    @PutMapping("/actualizarPublicacionProducto/{codigo}")
-    int actualizarPublicacionProducto(@PathVariable int codigoPublicacion,@RequestBody PublicacionProductoDTO publicacionProductoDTO,@RequestBody ProductoDTO productoDTO) throws Exception{
-        return publicacionProductoServicio.actualizarPublicacionProducto(codigoPublicacion,publicacionProductoDTO,productoDTO);
-
-    }*/
     @PutMapping("/actualizar/{codigoPublicacion}")
-    public ResponseEntity<MensajeDTO> actualizarPublicacionProducto(@PathVariable int codigoPublicacion,@RequestBody PublicacionProductoRequestDTO request)  throws Exception{
-        int newCodigo=0;
-        newCodigo =   publicacionProductoServicio.actualizarPublicacionProducto( codigoPublicacion, request.getPublicacionProductoDTO() , request.getProductoDTO());
-       // return publicacionProductoServicio.actualizarPublicacionProducto(codigoPublicacion,publicacionProductoDTO,productoDTO);
-        return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false, "Publicacion producto actualizada exitosamente! Código: "+newCodigo) );
-
+    public ResponseEntity<MensajeDTO> actualizarPublicacionProducto(@PathVariable int codigoPublicacion,@RequestBody PublicacionProductoDTO publicacionProductoDTO)  throws Exception{
+        return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false, "Publicacion producto actualizada exitosamente! Código: "+publicacionProductoServicio.actualizarPublicacionProducto( codigoPublicacion, publicacionProductoDTO , publicacionProductoDTO.getProductoDTO())) );
     }
 
-    @PutMapping("/actualizarUnidades/{codigo}")
+    @PutMapping("/actualizarUnidades/{codigoPublicacion}/{unidades}")
     int actualizarUnidades(@PathVariable int codigoPublicacion,@PathVariable int unidades) throws Exception{
     return publicacionProductoServicio.actualizarUnidades(codigoPublicacion,unidades);
     }

@@ -22,7 +22,7 @@ public interface PublicacionProductoServicio {
     List<PublicacionProductoGetDTO> listarPublicacionProductosPorEstado(Estado estado) throws Exception;
     List<PublicacionProductoGetDTO> listarPublicacionProductosFavoritos(int codigoUsuario) throws Exception;
     List<PublicacionProductoGetDTO> listarPublicacionProductosNombre(String nombre) throws Exception;
-    List<PublicacionProductoGetDTO> listarPublicacionProductosPrecio(float precioMinimo, float precioMaximo) throws Exception;
+    List<PublicacionProductoGetDTO> listarPublicacionProductosPrecio(double precioMinimo, double precioMaximo) throws Exception;
     List<Integer> obtenerCiudadesCodigo(List<Ciudad> ciudades);
     void validarExiste(int codigoPublicacion);
 }

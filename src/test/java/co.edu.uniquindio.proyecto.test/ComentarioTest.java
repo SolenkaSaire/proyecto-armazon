@@ -4,9 +4,11 @@ import co.edu.uniquindio.proyecto.dto.ComentarioDTO;
 import co.edu.uniquindio.proyecto.dto.ComentarioGetDTO;
 import co.edu.uniquindio.proyecto.dto.UsuarioDTO;
 import co.edu.uniquindio.proyecto.modelo.Comentario;
+import co.edu.uniquindio.proyecto.modelo.PublicacionProducto;
 import co.edu.uniquindio.proyecto.modelo.Usuario;
 import co.edu.uniquindio.proyecto.repositorios.ComentarioRepo;
 import co.edu.uniquindio.proyecto.servicios.interfaces.ComentarioServicio;
+import co.edu.uniquindio.proyecto.servicios.interfaces.PublicacionProductoServicio;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -25,19 +27,31 @@ public class ComentarioTest {
     private ComentarioRepo comentarioRepo;
     @Autowired
     private ComentarioServicio comentarioServicio;
+    @Autowired
+    private PublicacionProductoServicio publicacionProductoServicio;
     @Test
     @Sql("classpath:dataset.sql")
     public void crear() throws Exception {
 
         LocalDateTime fechaActual = LocalDateTime.now();
 
-        ComentarioDTO comentarioDTO = new ComentarioDTO("Hola",2,1,1);
+        ComentarioDTO comentarioDTO1 = new ComentarioDTO("Hola1",0,1,1);
 
-        int guardado = comentarioServicio.crearComentario(comentarioDTO);
+        int guardado1 = comentarioServicio.crearComentario(comentarioDTO1);
 
-        ComentarioGetDTO comentario = comentarioServicio.obtenerComentario(guardado);
+        ComentarioDTO comentarioDTO2 = new ComentarioDTO("Hola2",0,1,1);
 
-        Assertions.assertEquals("Hola", comentario.getTexto());
+        int guardado2 = comentarioServicio.crearComentario(comentarioDTO2);
+
+        ComentarioDTO comentarioDTO3 = new ComentarioDTO("Hola3",0,1,1);
+
+        int guardado3 = comentarioServicio.crearComentario(comentarioDTO3);
+
+       // ComentarioGetDTO comentario = comentarioServicio.obtenerComentario(guardado);
+
+        PublicacionProducto publicacionProducto =publicacionProductoServicio.obtenerPublicacionProductoP(1);
+
+        Assertions.assertEquals(0, publicacionProducto.getPromedioEstrellas());
 
     }
     @Test

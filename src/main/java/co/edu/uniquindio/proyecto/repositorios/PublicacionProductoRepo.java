@@ -15,28 +15,33 @@ public interface PublicacionProductoRepo extends JpaRepository<PublicacionProduc
     @Query("select p from PublicacionProducto p where p.vendedor.codigo = :codigoUsuario")
     List<PublicacionProducto> listarProductosUsuario(int codigoUsuario);
 
-    @Query("select p from PublicacionProducto p where p.producto.categoria = :categoria")
+
+/*
+*   @Query("select p from PublicacionProducto p where p.producto.categoria = :categoria")
+    List<PublicacionProducto> listarProductosCategoria(Categoria categoria);
+*
+* */
+
+    @Query("select p from PublicacionProducto p where :categoria member of p.producto.categoria")
     List<PublicacionProducto> listarProductosCategoria(Categoria categoria);
 
-    @Query("select p from PublicacionProducto p where p.producto.nombre like concat( '%', :nombre, '%' ) and p.estado = 1")
+    /*@Query("select p from PublicacionProducto p where p.producto.nombre like concat( '%', :nombre, '%' ) and p.estado = 1")
+    List<PublicacionProducto> listarProductosNombre(String nombre);*/
+    @Query("select p from PublicacionProducto p where p.producto.nombre = :nombre and p.estado = 1")
     List<PublicacionProducto> listarProductosNombre(String nombre);
+
 
     @Query("select p from PublicacionProducto p where p.estado = :estado")
     List<PublicacionProducto> listarProductosEstado(Estado estado);
-
-
     @Query("select p.producto.nombre, p.ciudades from PublicacionProducto p where p.ciudades = :codigo")
     List<Object[]> obtenerProductos(int codigo);
 
     @Query("select p from PublicacionProducto p where p.producto.codigo = :codigoProducto")
     PublicacionProducto buscarProducto(int codigoProducto);
-
-    @Query("select p from PublicacionProducto p where p.favoritos = :codigoUsuario")
+    @Query("select p from PublicacionProducto p join p.favoritos f where f.codigo = :codigoUsuario")
     List<PublicacionProducto> listarProductosFavoritos(int codigoUsuario);
-
-    @Query("select p from PublicacionProducto p where p.precio > :precioMinimo AND p.precio < :precioMaximo")
+    @Query("select p from PublicacionProducto p where p.precio > :precioMinimo and p.precio < :precioMaximo")
     List<PublicacionProducto> listarProductoPrecio(double precioMinimo, double precioMaximo);
-
     @Query("select  p from PublicacionProducto p where p.ciudades = :ciudad ")
     List<PublicacionProducto> listarProductoCiudad(String ciudad);
 

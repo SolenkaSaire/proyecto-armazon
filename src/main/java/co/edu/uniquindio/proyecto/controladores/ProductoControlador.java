@@ -1,11 +1,14 @@
 package co.edu.uniquindio.proyecto.controladores;
 
+import co.edu.uniquindio.proyecto.dto.MensajeDTO;
 import co.edu.uniquindio.proyecto.dto.ProductoDTO;
 import co.edu.uniquindio.proyecto.dto.ProductoGetDTO;
 import co.edu.uniquindio.proyecto.modelo.Estado;
 import co.edu.uniquindio.proyecto.modelo.Producto;
 import co.edu.uniquindio.proyecto.servicios.interfaces.ProductoServicio;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,8 +19,8 @@ public class ProductoControlador {
     private final ProductoServicio productoServicio;
 
     @PostMapping("/crear")
-    int crearProducto(@RequestBody ProductoDTO productoDTO) throws Exception{
-        return productoServicio.crearProducto(productoDTO);
+    public ResponseEntity<MensajeDTO> crearProducto(@RequestBody ProductoDTO productoDTO) throws Exception{
+        return ResponseEntity.status(200).body( new MensajeDTO(HttpStatus.OK, false, "Producto creado exitosamente! Código: "+ productoServicio.crearProducto(productoDTO)) );
     }
 
     @PutMapping("/actualizarProductos/{codigo}")

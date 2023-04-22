@@ -16,11 +16,12 @@ insert into producto values (3,"Xbox One");
 insert into producto values (4,"Play 5");
 insert into producto values (5,"terreneitor");
 
-insert into publicacion_producto values (1,"El carro de Toreto",13,1,"2015-11-01 14:40:25","2015-11-01 14:40:25","2015-11-01 14:40:25",475455000,4.5,1,1);
-insert into publicacion_producto values (2,"Moto FZ 250",5,1,"2015-11-01 14:40:25","2015-11-01 14:40:25","2015-11-01 14:40:25",765455000,5,2,1);
-insert into publicacion_producto values (3,"La consola mas economica del mercado",6,2,"2012-11-01 14:40:25","2011-11-01 14:40:25","2015-11-01 14:40:25",1255000,4,3,3);
-insert into publicacion_producto values (4,"El plus sigue siendo caro...",4,2,"2012-11-01 14:40:25","2013-11-01 14:40:25","2014-11-01 14:40:25",3455000,2,4,5);
-insert into publicacion_producto values (5,"TERRENEITOR, el coche mas poderoso que ha existido, con traccion 4X4 y 2 turbo motores",2,1,"2018-11-01 14:40:25","2017-11-01 14:40:25","2016-11-01 14:40:25",1000,5,5,5);
+insert into publicacion_producto values (1,"El carro de Toreto",13,1,"2015-11-01 14:40:25","2015-11-01 14:40:25","2015-11-01 14:40:25",100000,0,1,1);
+insert into publicacion_producto values (2,"Moto FZ 250",5,1,"2015-11-01 14:40:25","2015-11-01 14:40:25","2015-11-01 14:40:25",150000,5,2,1);
+insert into publicacion_producto values (3,"La consola mas economica del mercado",6,1,"2012-11-01 14:40:25","2011-11-01 14:40:25","2015-11-01 14:40:25",125000,4,3,3);
+insert into publicacion_producto values (4,"El plus sigue siendo caro...",4,1,"2012-11-01 14:40:25","2013-11-01 14:40:25","2014-11-01 14:40:25",134000,2,4,4);
+insert into publicacion_producto values (5,"TERRENEITOR rojo basico, el coche basico , con traccion 4X4 y 2 turbo motores",2,1,"2018-11-01 14:40:25","2017-11-01 14:40:25","2016-11-01 14:40:25",115000,5,5,5);
+
 
 insert into comentario values (1,2,"2020-10-01 12:24:25","Me gusto pero le hace falta llantas",1,1);
 insert into comentario values (2,4,"2019-10-01 12:24:25","Me gusto pero no puedo montar a las motomamis",2,1);

@@ -32,27 +32,52 @@ public class ComentarioServicioImpl implements ComentarioServicio {
 
     @Override
     public int crearComentario(ComentarioDTO comentarioDTO) throws Exception {
+
         PublicacionProducto publicacionProducto = publicacionProductoServicio.obtenerPublicacionProductoP(comentarioDTO.getCodigoPublicacionProducto());
+
+
         Comentario nuevoComentario= new Comentario();
         nuevoComentario.setFecha_creacion(LocalDateTime.now());
         nuevoComentario.setTexto(comentarioDTO.getTexto());
         nuevoComentario.setEstrellas(comentarioDTO.getEstrellas());
         nuevoComentario.setUsuario(usuarioServicio.obtenerUsuarioU(comentarioDTO.getCodigoUsuario()));
-        nuevoComentario.setPublicacionProducto(publicacionProductoServicio.obtenerPublicacionProductoP(comentarioDTO.getCodigoPublicacionProducto()));
-        comentarioRepo.save(nuevoComentario);
-        double promedio=0;
-        /*for (Comentario p : publicacionProducto.getComentarios() ) {
-            promedio+= p.getEstrellas();
-        }*/
-        for (int i = 0; i < publicacionProducto.getComentarios().size()-1; i++) {
-            Comentario aux = publicacionProducto.getComentarios().get(i);
-            promedio+=aux.getEstrellas();
-            if(publicacionProducto.getComentarios().size()-1==i){
-                promedio=promedio/5;
-                publicacionProducto.setPromedioEstrellas(promedio);
-            }
-        }
+        nuevoComentario.setPublicacionProducto(publicacionProducto);
 
+        System.out.println("El comentario es: "+ comentarioDTO.getTexto());
+
+        comentarioRepo.save(nuevoComentario);
+        int cantidad = publicacionProducto.getComentarios().size();
+        System.out.println("cantidad: " +cantidad);
+        double promActual = publicacionProducto.getPromedioEstrellas();
+
+        System.out.println("prom anterior: " +promActual);
+        //promActual *= 5;
+        promActual= promActual * (cantidad-1);
+
+        promActual+= nuevoComentario.getEstrellas();
+
+        System.out.println("nueva suma: "+promActual+ "  ---LA CANTIDAD A DIVIDIR ES: "+(cantidad));
+        promActual = promActual/ cantidad;
+        System.out.println("promedio nuevo:" +promActual);
+        publicacionProducto.setPromedioEstrellas(promActual);
+
+/*
+        double promedio=0;
+        for (int i = 0; i < publicacionProducto.getComentarios().size(); i++) {
+
+            Comentario aux = publicacionProducto.getComentarios().get(i);
+            System.out.println("El comentario es: "+ aux.getTexto() +" y su num de estrellas es: " + aux.getEstrellas());
+            promedio+=aux.getEstrellas();
+            System.out.println("El promedio hasta ahora es: "+ promedio);
+            //System.out.println("El comentario es: "+ aux.getTexto());
+
+        }
+        System.out.println("-----FIN DEL FOR----");
+
+            promedio=promedio/5;
+            publicacionProducto.setPromedioEstrellas(promedio);
+            System.out.println("El numero de estrellas promedio: "+ publicacionProducto.getPromedioEstrellas());
+*/
         if (publicacionProducto.getCodigo() == comentarioDTO.getCodigoPublicacionProducto()) {
             publicacionProducto.getComentarios().add(nuevoComentario);
             publicacionProductoRepo.save(publicacionProducto);

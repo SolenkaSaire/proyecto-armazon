@@ -214,7 +214,7 @@ public class PublicacionProductoServicioImpl implements PublicacionProductoServi
     }
 
     @Override
-    public List<PublicacionProductoGetDTO> listarPublicacionProductosPrecio(float precioMinimo, float precioMaximo) throws Exception {
+    public List<PublicacionProductoGetDTO> listarPublicacionProductosPrecio(double precioMinimo, double precioMaximo) throws Exception {
         List<PublicacionProducto> lista = publicacionProductoRepo.listarProductoPrecio(precioMinimo, precioMaximo);
         List<PublicacionProductoGetDTO> respuesta= new ArrayList<>();
 

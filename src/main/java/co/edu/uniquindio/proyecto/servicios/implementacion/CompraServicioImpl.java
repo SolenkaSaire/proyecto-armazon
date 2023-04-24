@@ -23,30 +23,29 @@ public class CompraServicioImpl implements CompraServicio {
     private final DetalleCompraRepo detalleCompraRepo;
     private final UsuarioServicio usuarioServicio;
     private final PublicacionProductoServicio publicacionProductoServicio;
-    //private final PublicacionProductoServicio publicacionProductoServicio;
     private final DetalleCompraServicio detalleCompraServicio;
 
     @Override
     public int crearCompra(CompraDTO compraDTO) throws Exception {
         List<DetalleCompra> detalle = new ArrayList<>();
         double total = 0;
-        for(DetalleCompraDTO de : compraDTO.getDetalleCompraDTO() ){
+        for (DetalleCompraDTO de : compraDTO.getDetalleCompraDTO()) {
             DetalleCompra detalleCompra = new DetalleCompra();
             PublicacionProducto pp = publicacionProductoServicio.obtenerPublicacionProductoP(de.getCodigoPublicacionProducto());
             detalleCompra.setPublicacionProducto(pp);
 
-            detalleCompra.setUnidades( de.getUnidades() );
-            detalleCompra.setPrecio( pp.getPrecio() );
+            detalleCompra.setUnidades(de.getUnidades());
+            detalleCompra.setPrecio(pp.getPrecio());
             total += pp.getPrecio() * de.getUnidades();
             detalle.add(detalleCompra);
         }
         Compra compra = new Compra();
-        compra.setUsuario( usuarioServicio.obtenerUsuarioU( compraDTO.getCodigoUsuario()));
+        compra.setUsuario(usuarioServicio.obtenerUsuarioU(compraDTO.getCodigoUsuario()));
         compra.setFecha_creacion(LocalDateTime.now());
-        compra.setMetodoPagos( compraDTO.getMetodoPago() );
+        compra.setMetodoPagos(compraDTO.getMetodoPago());
         compra.setTotal(total);
         Compra compraGuardada = compraRepo.save(compra);
-        for (DetalleCompra d: detalle ) {
+        for (DetalleCompra d : detalle) {
             d.setCompra(compraGuardada);
             detalleCompraRepo.save(d);
         }
@@ -57,7 +56,7 @@ public class CompraServicioImpl implements CompraServicio {
     public List<CompraGetDTO> listarCompras(int codigoProducto) {
         List<Compra> lista = compraRepo.listarCompras(codigoProducto);
         List<CompraGetDTO> respuesta = new ArrayList<>();
-        for (Compra p : lista){
+        for (Compra p : lista) {
             respuesta.add(convertir(p));
         }
         return respuesta;
@@ -65,7 +64,7 @@ public class CompraServicioImpl implements CompraServicio {
     }
 
 
-    private CompraGetDTO convertir(Compra compra){
+    private CompraGetDTO convertir(Compra compra) {
         //codigo, fecha, total, codigoUsuario, metodoPago, list<>drtalleCompraDTO
         CompraGetDTO compraGetDTO = new CompraGetDTO(
                 compra.getTotal(),
@@ -77,23 +76,17 @@ public class CompraServicioImpl implements CompraServicio {
     }
 
 
+    public Compra obtener(int codigoCompra) throws Exception {
+        Optional<Compra> compra = compraRepo.findById(codigoCompra);
+        if (compra.isEmpty()) {
+            throw new Exception("El código " + codigoCompra + " no está asociado a ningún producto");
+        }
+        System.out.println("compra existe");
+        return compra.get();
+    }
+
     @Override
     public CompraGetDTO obtenerCompra(int codigoCompra) throws Exception {
         return convertir(obtener(codigoCompra));
     }
-
-
-    public Compra obtener(int codigoCompra) throws Exception{
-    Optional<Compra> compra = compraRepo.findById(codigoCompra);
-
-        if(compra.isEmpty()){
-
-                throw new Exception("El código "+codigoCompra+" no está asociado a ningún producto");
-
-
-        }
-
-        return compra.get();
-    }
-
 }

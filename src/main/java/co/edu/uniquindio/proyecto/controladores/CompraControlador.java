@@ -29,7 +29,7 @@ public class CompraControlador {
 
     @GetMapping("/obtenerCompra/{codigoCompra}")
     public ResponseEntity<MensajeDTO>  obtenerCompra(@PathVariable int codigoCompra) throws Exception{
-        return ResponseEntity.status(200).body( new MensajeDTO(HttpStatus.OK, false, compraServicio.obtener(codigoCompra)));
+        return ResponseEntity.status(200).body( new MensajeDTO(HttpStatus.OK, false, compraServicio.obtenerCompra(codigoCompra)));
     }
 
 

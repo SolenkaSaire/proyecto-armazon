@@ -5,7 +5,6 @@ import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -19,15 +18,22 @@ public class CloudinaryServicioImpl implements CloudinaryServicio {
     //public CloudinaryServicio(){
     public CloudinaryServicioImpl(){
         // Configure
-        Map config = new HashMap();
-        config.put("cloud_name", "dwkkkwnpr");
-        config.put("api_key", "668466614745114");
-        config.put("api_secret", "ROdCofg2ZvIBk1a1zKtsuHRbbhw");
-        Cloudinary cloudinary = new Cloudinary(config);
+        Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap("cloud_name", "dwkkkwnpr","api_key", "668466614745114","api_secret", "ROdCofg2ZvIBk1a1zKtsuHRbbhw"));
+
     }
     @Override
     public Map subirImagen(File file, String carpeta) throws Exception{
-        return cloudinary.uploader().upload(file, ObjectUtils.asMap("folder", String.format("proyecto/%s", carpeta)));
+        Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap("cloud_name", "dwkkkwnpr","api_key", "668466614745114","api_secret", "ROdCofg2ZvIBk1a1zKtsuHRbbhw"));
+
+        Map<String, Object> uploadResult = cloudinary.uploader().upload(file, ObjectUtils.asMap(
+                "folder", "imagenes",
+                "use_filename", true,
+                "unique_filename", false));
+        System.out.println(uploadResult.toString());
+
+        return uploadResult;
+
+        //return cloudinary.uploader().upload(file, ObjectUtils.asMap("folder", String.format("proyecto/%s", carpeta)));
     }
     @Override
     public Map eliminarImagen(String idImagen) throws Exception{

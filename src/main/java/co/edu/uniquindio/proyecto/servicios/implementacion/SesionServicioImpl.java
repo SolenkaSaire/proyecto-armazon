@@ -42,7 +42,6 @@ public class SesionServicioImpl implements SesionServicio {
     public String solicitarCambioContrasena(String email){
 
         Usuario buscado = usuarioRepo.buscarUsuario(email);
-
         String respuesta = "El token se a enviado a su correo exitosamente.";
 
         if (buscado == null) {

@@ -32,8 +32,10 @@ public class EmailServicioImpl implements EmailServicio {
         SimpleMailMessage mensaje = new SimpleMailMessage();
         mensaje.setFrom("cristianr.gonzalezi@uqvirtual.edu.co");
         mensaje.setTo(usuario.getEmail());
-        mensaje.setSubject("Confirmación de cambio de contraseña");
-        mensaje.setText("Para confirmar el cambio de contraseña, por favor haga clic en el siguiente enlace:\n\n" + "http://localhost:8081/api/auth/confirmarCambio?token=" + token + "&contrasena=" + "TuNuevaContraseña");
+        String titulo= "<h1>Confirmacion de cambio de contraseña</h1><h2><p>En tu cuenta de Armazon</p></h2><img src='https://res.cloudinary.com/dwkkkwnpr/image/upload/v1682391603/co/edu/uniquindio/proyecto/Imagen_de_WhatsApp_2023-04-21_a_las_11.31.00.jpg' width='300' height='200'>";
+        String cuerpo= "<h1>Para confirmar el cambio de contraseña, por favor haga clic en el siguiente enlace:</h1><h2><p>En tu cuenta de Armazon</p></h2><h3>http://localhost:8081/api/auth/confirmarCambio?token=</h3>" +  token +"<h1>&contrasena=TuNuevaContrasenia<h1>";
+        mensaje.setSubject(titulo);
+        mensaje.setText(cuerpo);
 
         javaMailSender.send(mensaje);
     }

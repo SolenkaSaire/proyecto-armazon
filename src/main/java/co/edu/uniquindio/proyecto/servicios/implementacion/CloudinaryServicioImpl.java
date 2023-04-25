@@ -1,11 +1,16 @@
 package co.edu.uniquindio.proyecto.servicios.implementacion;
 
+import co.edu.uniquindio.proyecto.dto.PublicacionProductoGetDTO;
+import co.edu.uniquindio.proyecto.modelo.Producto;
 import co.edu.uniquindio.proyecto.modelo.PublicacionProducto;
+import co.edu.uniquindio.proyecto.repositorios.ProductoRepo;
 import co.edu.uniquindio.proyecto.repositorios.PublicacionProductoRepo;
 import co.edu.uniquindio.proyecto.servicios.interfaces.CloudinaryServicio;
 import co.edu.uniquindio.proyecto.servicios.interfaces.PublicacionProductoServicio;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
@@ -17,19 +22,30 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Service
+@AllArgsConstructor
 public class CloudinaryServicioImpl implements CloudinaryServicio {
+
     private Cloudinary cloudinary;
-    PublicacionProductoServicio publicacionProductoServicio;
-    PublicacionProductoRepo publicacionProductoRepo;
+
+    private PublicacionProductoServicio publicacionProductoServicio;
+
+    private PublicacionProductoRepo publicacionProductoRepo;
+
+    private ProductoRepo productoRepo;
+
     private Map<String, String> config;
     //public CloudinaryServicio(){
+
     public CloudinaryServicioImpl(){
         // Configure
         Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap("cloud_name", "dwkkkwnpr","api_key", "668466614745114","api_secret", "ROdCofg2ZvIBk1a1zKtsuHRbbhw"));
 
     }
+
     @Override
     public Map subirImagen(File file, String carpeta, int codigoPublicacion) throws Exception{
+
+
         Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap("cloud_name", "dwkkkwnpr","api_key", "668466614745114","api_secret", "ROdCofg2ZvIBk1a1zKtsuHRbbhw"));
 
         Map<String, Object> uploadResult = cloudinary.uploader().upload(file, ObjectUtils.asMap(
@@ -37,39 +53,32 @@ public class CloudinaryServicioImpl implements CloudinaryServicio {
                 "use_filename", true,
                 "unique_filename", false));
 
-        System.out.println(uploadResult.toString());
         String rutaRaw = uploadResult.toString();
-        ////////////////
-        /*
-        String cadena = uploadResult.toString();
-        int inicio = cadena.indexOf("http://res.cloudinary.com/dwkkkwnpr/image/upload/v1682389379/");
-        int fin = cadena.lastIndexOf(".jpg,");
-        String subcadena = cadena.substring(inicio, fin);
-        System.out.println(subcadena);
-        PublicacionProducto publicacionProducto = publicacionProductoServicio.obtenerPublicacionProductoP(codigoPublicacion);
-        publicacionProducto.getProducto().getImagenes().add(subcadena);
-        publicacionProductoRepo.save(publicacionProducto);
-        */
-        String urlRegex = "https://res\\.cloudinary\\.com/dwkkkwnpr/image/upload/v\\d+/[a-zA-Z]+/[a-zA-Z]+/[a-zA-Z]+\\.jpg";
-        Pattern pattern = Pattern.compile(urlRegex);
+
+        Pattern pattern = Pattern.compile("https://res.cloudinary.com/.+?\\.jpg");
         Matcher matcher = pattern.matcher(rutaRaw);
-        String rutaNew;
+
         if (matcher.find()) {
-            rutaNew= matcher.group(0);
-            System.out.println("esta la nueva ruta: "+rutaNew);
-            PublicacionProducto publicacionProducto = publicacionProductoServicio.obtenerPublicacionProductoP(codigoPublicacion);
-            publicacionProducto.getProducto().getImagenes().add(rutaNew);
-            publicacionProductoRepo.save(publicacionProducto);
-        } else {
-            rutaNew= null;
+
+
+            String imageURL = matcher.group();
+            System.out.println("la ruta es: "+imageURL);
+            //publicacionProducto pun= publicacionProductoServicio.crearPublicacionProducto()
+
+
+            PublicacionProducto publicacionProducto = new PublicacionProducto();
+            publicacionProducto = publicacionProductoServicio.obtenerPublicacionProductoP(codigoPublicacion);
+            Producto producto = publicacionProducto.getProducto();
+            if (publicacionProducto.getCodigo() == codigoPublicacion) {
+                System.out.println("el codigo es el mismo, procede a guardar img");
+                producto.getImagenes().add(imageURL);
+                productoRepo.save(producto);
+
+             }
+
+
         }
-
-
-
-
         return uploadResult;
-
-
     }
     @Override
     public Map eliminarImagen(String idImagen) throws Exception{

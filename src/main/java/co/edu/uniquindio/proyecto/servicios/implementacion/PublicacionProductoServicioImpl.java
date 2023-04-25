@@ -1,9 +1,6 @@
 package co.edu.uniquindio.proyecto.servicios.implementacion;
 
-import co.edu.uniquindio.proyecto.dto.ProductoDTO;
-import co.edu.uniquindio.proyecto.dto.ProductoGetDTO;
-import co.edu.uniquindio.proyecto.dto.PublicacionProductoDTO;
-import co.edu.uniquindio.proyecto.dto.PublicacionProductoGetDTO;
+import co.edu.uniquindio.proyecto.dto.*;
 import co.edu.uniquindio.proyecto.modelo.*;
 import co.edu.uniquindio.proyecto.repositorios.PublicacionProductoRepo;
 import co.edu.uniquindio.proyecto.servicios.interfaces.*;
@@ -126,6 +123,7 @@ public class PublicacionProductoServicioImpl implements PublicacionProductoServi
     @Override
     public PublicacionProducto obtenerPublicacionProductoP(int codigoPublicacion) throws Exception{
         Optional<PublicacionProducto> publicacionProducto = publicacionProductoRepo.findById(codigoPublicacion);
+        System.out.println("SI EXISTE EL POST" + publicacionProducto.get().getDescripcion());
         if(publicacionProducto.isEmpty() ){
             try {
                 throw new Exception("El código "+codigoPublicacion+" no está asociado a ningún producto");
@@ -156,11 +154,26 @@ public class PublicacionProductoServicioImpl implements PublicacionProductoServi
                 publicacionProducto.getVendedor().getCodigo(),
                 publicacionProducto.getProducto().getCodigo(),
                 publicacionProducto.getEstado().toString(),
-                convertirProducto(publicacionProducto.getProducto())
+                convertirProducto(publicacionProducto.getProducto()),
+                convertirComentarios(publicacionProducto.getComentarios())
         );
         return publicacionProductoGetDTO;
     }
+    private List<ComentarioGetDTO> convertirComentarios(List<Comentario> comentarios) throws Exception {
+        List<ComentarioGetDTO> respuestas = new ArrayList<>();
+        for (Comentario c:comentarios) {
+            ComentarioGetDTO comentarioGetDTO = new ComentarioGetDTO(
+                    c.getTexto(),
+                    c.getEstrellas(),
+                    c.getUsuario().getCodigo(),
+                    c.getPublicacionProducto().getCodigo()
 
+            );
+            respuestas.add(comentarioGetDTO);
+        }
+
+        return respuestas;
+    }
     private ProductoGetDTO convertirProducto(Producto producto) throws Exception {
         ProductoGetDTO productoGetDTO = new ProductoGetDTO(
                 producto.getNombre(),

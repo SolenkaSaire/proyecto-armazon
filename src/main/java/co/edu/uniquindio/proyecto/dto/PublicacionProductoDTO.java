@@ -41,4 +41,7 @@ public class PublicacionProductoDTO {
 
     private ProductoDTO productoDTO;
 
+    private List<ComentarioDTO> comentarioDTO;
+
+
 }

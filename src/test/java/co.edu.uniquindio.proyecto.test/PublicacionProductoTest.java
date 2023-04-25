@@ -1,8 +1,6 @@
 package co.edu.uniquindio.proyecto.test;
 
-import co.edu.uniquindio.proyecto.dto.ProductoDTO;
-import co.edu.uniquindio.proyecto.dto.PublicacionProductoDTO;
-import co.edu.uniquindio.proyecto.dto.PublicacionProductoGetDTO;
+import co.edu.uniquindio.proyecto.dto.*;
 import co.edu.uniquindio.proyecto.modelo.*;
 import co.edu.uniquindio.proyecto.repositorios.PublicacionProductoRepo;
 import co.edu.uniquindio.proyecto.repositorios.UsuarioRepo;
@@ -16,8 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @SpringBootTest
 @Transactional
@@ -50,8 +47,11 @@ public class PublicacionProductoTest {
 
         ProductoDTO productoDTO = new ProductoDTO("Terreneitor", listaCategorias, listaImagenes, listaCiudad);
 
+
+        List<ComentarioDTO> comentarioDTO = new ArrayList<>();
+
         PublicacionProductoDTO publicacionProductoDTO = new PublicacionProductoDTO(3.5, fechaActual, 300000,
-                5, "Terreneitor carro 4x4", 2, 2, productoDTO);
+                5, "Terreneitor carro 4x4", 2, 2, productoDTO,comentarioDTO);
 
         int creado = publicacionProductoServicio.crearPublicacionProducto(publicacionProductoDTO,productoDTO);
 
@@ -81,8 +81,9 @@ public class PublicacionProductoTest {
 
         ProductoDTO productoDTO = new ProductoDTO("Terreneitor 2.0", listaCategorias, listaImagenes, listaCiudad);
 
+        List<ComentarioDTO> comentarioGetDTO = new ArrayList<>();
         PublicacionProductoDTO publicacionProductoDTO = new PublicacionProductoDTO(3.5, fechaActual, 300000,
-                5, "Terreneitor carro 4x4", 2, 2, productoDTO);
+                5, "Terreneitor carro 4x4", 2, 2, productoDTO,comentarioGetDTO);
 
         int actualizado = publicacionProductoServicio.actualizarPublicacionProducto(1,publicacionProductoDTO,productoDTO);
 

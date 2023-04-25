@@ -28,5 +28,5 @@ public class PublicacionProductoGetDTO {
 
     private ProductoGetDTO productoGetDTO;
 
-
+    private List<ComentarioGetDTO> comentarioGetDTO;
 }

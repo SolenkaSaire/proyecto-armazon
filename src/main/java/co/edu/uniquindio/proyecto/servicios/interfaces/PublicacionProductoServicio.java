@@ -11,7 +11,6 @@ public interface PublicacionProductoServicio {
     int crearPublicacionProducto(PublicacionProductoDTO publicacionProductoDTO, ProductoDTO productoDTO) throws Exception;
     int actualizarPublicacionProducto(int codigoPublicacion,PublicacionProductoDTO publicacionProductoDTO, ProductoDTO productoDTO) throws Exception;
     int actualizarUnidades(int codigoPublicacion, int unidades) throws Exception;
-    int actualizarEstado(int codigoPublicacion, Estado estado) throws Exception;
     int eliminarPublicacion(int codigoPublicacion) throws Exception;
     int eliminarTodaPublicacionProducto(int codigoProducto) throws Exception;
     PublicacionProductoGetDTO obtenerPublicacionProducto(int codigoPublicacion) throws Exception;
@@ -21,9 +20,10 @@ public interface PublicacionProductoServicio {
     List<PublicacionProductoGetDTO> listarPublicacionProductoCategoria(Categoria categoria) throws Exception;
     List<PublicacionProductoGetDTO> listarPublicacionProductosPorEstado(Estado estado) throws Exception;
     List<PublicacionProductoGetDTO> listarPublicacionProductosFavoritos(int codigoUsuario) throws Exception;
+    List<PublicacionProductoGetDTO> listarPublicacionProductosCiudad(Ciudad ciudad) throws Exception;
+
     List<PublicacionProductoGetDTO> listarPublicacionProductosNombre(String nombre) throws Exception;
     List<PublicacionProductoGetDTO> listarPublicacionProductosPrecio(double precioMinimo, double precioMaximo) throws Exception;
-    List<Integer> obtenerCiudadesCodigo(List<Ciudad> ciudades);
     void validarExiste(int codigoPublicacion);
 }
 

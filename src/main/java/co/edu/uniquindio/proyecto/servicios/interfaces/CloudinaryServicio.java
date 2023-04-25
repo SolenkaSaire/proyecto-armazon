@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.Map;
 
 public interface CloudinaryServicio {
-    Map subirImagen(File file, String carpeta) throws Exception;
+    Map subirImagen(File file, String carpeta, int codigoPublocacion) throws Exception;
     Map eliminarImagen(String idImagen) throws Exception;
     File convertir(MultipartFile imagen) throws IOException;
 }

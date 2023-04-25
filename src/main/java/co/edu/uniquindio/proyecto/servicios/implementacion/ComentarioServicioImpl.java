@@ -98,6 +98,7 @@ public class ComentarioServicioImpl implements ComentarioServicio {
 
         Comentario comentario = new Comentario();
         comentario.setTexto(comentarioDTO.getTexto());
+        comentario.setFecha_creacion(LocalDateTime.now());
         comentario.setEstrellas(comentarioDTO.getEstrellas());
         comentario.setUsuario(usuarioServicio.obtenerUsuarioU(comentarioDTO.getCodigoUsuario()));
         comentario.setPublicacionProducto(publicacionProductoServicio.obtenerPublicacionProductoP(comentarioDTO.getCodigoPublicacionProducto()));
@@ -145,7 +146,7 @@ public class ComentarioServicioImpl implements ComentarioServicio {
     }
 
     private ComentarioGetDTO convertir(Comentario comentario){
-    //codigo, fecha, mensaje, codigoUsuario, codigoProducto
+        //codigo, fecha, mensaje, codigoUsuario, codigoProducto
         ComentarioGetDTO comentarioGetDTO = new ComentarioGetDTO(
                 comentario.getTexto(),
                 comentario.getEstrellas(),

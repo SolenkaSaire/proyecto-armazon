@@ -26,11 +26,17 @@ public class CompraControlador {
         return ResponseEntity.status(200).body( new MensajeDTO(HttpStatus.OK, false, "compra creada exitosamente! Código: "+ compraServicio.crearCompra(compraDTO)) );
     }
 
-
+/*
     @GetMapping("/obtenerCompra/{codigoCompra}")
     public ResponseEntity<MensajeDTO>  obtenerCompra(@PathVariable int codigoCompra) throws Exception{
         return ResponseEntity.status(200).body( new MensajeDTO(HttpStatus.OK, false, compraServicio.obtenerCompra(codigoCompra)));
     }
+    */
 
-
+    @GetMapping("/obtener/{codidoProducto}")
+    public ResponseEntity<MensajeDTO> obtenerComentario(@PathVariable int codidoProducto) throws Exception{
+        return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false, compraServicio.obtenerCompra(codidoProducto)));
     }
+
+
+}

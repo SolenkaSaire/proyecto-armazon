@@ -52,26 +52,15 @@ public class PublicacionProducto implements Serializable {
 
     @ManyToMany(mappedBy = "publicacionesFavoritas")
     private List<Usuario> favoritos;
-
     @OneToMany(mappedBy = "publicacionProducto")
     private List<ProductoModerador> moderadores;
-
     @OneToMany(mappedBy = "publicacionProducto")
     private List<DetalleCompra> compras;
-
     @OneToMany(mappedBy = "publicacionProducto")
     private List<Comentario> comentarios;
-
     @ManyToOne
     private Producto producto;
-
-
     @Column(nullable = false)
     private Estado estado;
-
-    ///////////////////
-
-    @ManyToMany
-    private List<Ciudad> ciudades;
 
 }

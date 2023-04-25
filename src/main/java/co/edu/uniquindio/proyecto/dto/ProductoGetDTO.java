@@ -16,6 +16,7 @@ public class ProductoGetDTO {
     private List<String> categorias;
     private List<String> imagenes;
     private List<Integer> codigoPublicacionProductos;
+    private List<String> ciudades;
 
 
 }

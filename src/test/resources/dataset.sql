@@ -1,8 +1,4 @@
-insert into ciudad values (1,"Calarca");
-insert into ciudad values (2,"Pereira");
-insert into ciudad values (3,"Tebaida");
-insert into ciudad values (4,"Circacia");
-insert into ciudad values (5,"Armenia");
+
 
 insert into usuario () values (1, "anderson@gmail.com","contraseña","Peña","avenida pepito","Anderson","3193192323");
 insert into usuario () values (2, "felipe@gmail.com","contra123","Amaya","avenida lujuria","Felipe","3202342121");
@@ -17,8 +13,8 @@ insert into producto values (4,"Play 5");
 insert into producto values (5,"terreneitor");
 
 insert into publicacion_producto values (1,"El carro de Toreto",13,1,"2015-11-01 14:40:25","2015-11-01 14:40:25","2015-11-01 14:40:25",100000,0,1,1);
-insert into publicacion_producto values (2,"Moto FZ 250",5,1,"2015-11-01 14:40:25","2015-11-01 14:40:25","2015-11-01 14:40:25",150000,5,2,1);
-insert into publicacion_producto values (3,"La consola mas economica del mercado",6,1,"2012-11-01 14:40:25","2011-11-01 14:40:25","2015-11-01 14:40:25",125000,4,3,3);
+insert into publicacion_producto values (2,"Moto FZ 250",5,1,"2015-11-01 14:40:25","2015-11-01 14:40:25","2015-11-01 14:40:25",150000,5,1,1);
+insert into publicacion_producto values (3,"La consola mas economica del mercado",6,1,"2012-11-01 14:40:25","2011-11-01 14:40:25","2015-11-01 14:40:25",125000,4,1,1);
 insert into publicacion_producto values (4,"El plus sigue siendo caro...",4,1,"2012-11-01 14:40:25","2013-11-01 14:40:25","2014-11-01 14:40:25",134000,2,4,4);
 insert into publicacion_producto values (5,"TERRENEITOR rojo basico, el coche basico , con traccion 4X4 y 2 turbo motores",2,1,"2018-11-01 14:40:25","2017-11-01 14:40:25","2016-11-01 14:40:25",115000,5,5,5);
 
@@ -54,6 +50,12 @@ insert into producto_categoria values (3,"HOGAR");
 insert into producto_categoria values (4,"TECNOLOGIA");
 insert into producto_categoria values (5,"COCHES");
 
+insert into producto_ciudad values (1,"ARMENIA");
+insert into producto_ciudad values (2,"BARRANCABERMEJA");
+insert into producto_ciudad values (3,"BARRANQUILLA");
+insert into producto_ciudad values (4,"BOGOTA");
+insert into producto_ciudad values (5,"BUCARAMANGA");
+
 insert into producto_imagenes values (1,"imagen1");
 insert into producto_imagenes values (2,"imagen2");
 insert into producto_imagenes values (3,"imagen3");
@@ -66,14 +68,7 @@ insert into producto_moderador values (3,1,"2013-11-01 14:40:25","Todo correcto"
 insert into producto_moderador values (4,2,"2012-11-01 13:40:25","Y yo que me alegro",1,4);
 insert into producto_moderador values (5,1,"2011-11-01 12:40:25","TERRENEITOR",1,5);
 
-insert into publicacion_producto_ciudades values (1,1);
-insert into publicacion_producto_ciudades values (2,1);
-insert into publicacion_producto_ciudades values (3,2);
-insert into publicacion_producto_ciudades values (4,3);
-insert into publicacion_producto_ciudades values (5,1);
 
 insert into usuario_publicaciones_favoritas values (1,1);
-insert into usuario_publicaciones_favoritas values (2,1);
-insert into usuario_publicaciones_favoritas values (3,2);
-insert into usuario_publicaciones_favoritas values (4,3);
-insert into usuario_publicaciones_favoritas values (5,1);
+insert into usuario_publicaciones_favoritas values (1,2);
+insert into usuario_publicaciones_favoritas values (1,3);

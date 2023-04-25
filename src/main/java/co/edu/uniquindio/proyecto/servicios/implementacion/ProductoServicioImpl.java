@@ -28,6 +28,7 @@ public class ProductoServicioImpl implements ProductoServicio {
         producto.setNombre(productoDTO.getNombre());
         producto.setCategoria(productoDTO.getCategorias());
         producto.setImagenes(productoDTO.getImagenes());
+        producto.setCiudad(productoDTO.getCiudades());
 
         return productoRepo.save(producto).getCodigo();
     }
@@ -86,25 +87,36 @@ public class ProductoServicioImpl implements ProductoServicio {
                 producto.getNombre(),
                 convertirCategoria(producto.getCategoria()),
                 producto.getImagenes(),
-                convertirPublicaciones( producto.getPublicacionProductos() ) );
+                convertirPublicaciones( producto.getPublicacionProductos() ),
+                convertirCiudades(producto.getCiudad()));
 
         return productoGetDTO;
     }
 
-    private List<Integer> convertirPublicaciones(List<PublicacionProducto> publicaciones) {
+    @Override
+    public List<Integer> convertirPublicaciones(List<PublicacionProducto> publicaciones) {
         List<Integer> listaPublicacion = new ArrayList<>();
         for (PublicacionProducto pub: publicaciones) {
             listaPublicacion.add(pub.getCodigo());
         }
         return listaPublicacion;
     }
-
-    private List<String> convertirCategoria(List<Categoria> categorias) {
+    @Override
+    public List<String> convertirCategoria(List<Categoria> categorias) {
         List<String> listaCategoria = new ArrayList<>();
         for (Categoria categoria: categorias) {
             listaCategoria.add(String.valueOf(categoria));
         }
         return listaCategoria;
+    }
+
+    @Override
+    public List<String> convertirCiudades(List<Ciudad> ciudades) {
+        List<String> listaCiudad = new ArrayList<>();
+        for (Ciudad ciudad: ciudades) {
+            listaCiudad.add(String.valueOf(ciudad));
+        }
+        return listaCiudad;
     }
 
     public void validarExiste(int codigoProducto) {

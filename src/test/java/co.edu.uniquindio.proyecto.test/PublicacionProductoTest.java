@@ -3,10 +3,7 @@ package co.edu.uniquindio.proyecto.test;
 import co.edu.uniquindio.proyecto.dto.ProductoDTO;
 import co.edu.uniquindio.proyecto.dto.PublicacionProductoDTO;
 import co.edu.uniquindio.proyecto.dto.PublicacionProductoGetDTO;
-import co.edu.uniquindio.proyecto.modelo.Categoria;
-import co.edu.uniquindio.proyecto.modelo.Estado;
-import co.edu.uniquindio.proyecto.modelo.PublicacionProducto;
-import co.edu.uniquindio.proyecto.modelo.Usuario;
+import co.edu.uniquindio.proyecto.modelo.*;
 import co.edu.uniquindio.proyecto.repositorios.PublicacionProductoRepo;
 import co.edu.uniquindio.proyecto.repositorios.UsuarioRepo;
 import co.edu.uniquindio.proyecto.servicios.interfaces.PublicacionProductoServicio;
@@ -44,9 +41,14 @@ public class PublicacionProductoTest {
         listaCategorias.add(Categoria.HOGAR);
         listaCategorias.add(Categoria.COCHES);
 
+        List<Ciudad> listaCiudad = new ArrayList<>();
+        listaCiudad.add(Ciudad.ARMENIA);
+        listaCiudad.add(Ciudad.BUGA);
+        listaCiudad.add(Ciudad.IBAGUE);
+
         List<String> listaImagenes = new ArrayList<>();
 
-        ProductoDTO productoDTO = new ProductoDTO("Terreneitor", listaCategorias, listaImagenes);
+        ProductoDTO productoDTO = new ProductoDTO("Terreneitor", listaCategorias, listaImagenes, listaCiudad);
 
         PublicacionProductoDTO publicacionProductoDTO = new PublicacionProductoDTO(3.5, fechaActual, 300000,
                 5, "Terreneitor carro 4x4", 2, 2, productoDTO);
@@ -70,9 +72,14 @@ public class PublicacionProductoTest {
         listaCategorias.add(Categoria.HOGAR);
         listaCategorias.add(Categoria.COCHES);
 
+        List<Ciudad> listaCiudad = new ArrayList<>();
+        listaCiudad.add(Ciudad.ARMENIA);
+        listaCiudad.add(Ciudad.BUGA);
+        listaCiudad.add(Ciudad.IBAGUE);
+
         List<String> listaImagenes = new ArrayList<>();
 
-        ProductoDTO productoDTO = new ProductoDTO("Terreneitor 2.0", listaCategorias, listaImagenes);
+        ProductoDTO productoDTO = new ProductoDTO("Terreneitor 2.0", listaCategorias, listaImagenes, listaCiudad);
 
         PublicacionProductoDTO publicacionProductoDTO = new PublicacionProductoDTO(3.5, fechaActual, 300000,
                 5, "Terreneitor carro 4x4", 2, 2, productoDTO);
@@ -156,7 +163,6 @@ public class PublicacionProductoTest {
     public void listarPublicacionProductosFavoritos() throws Exception {
 
         List<PublicacionProductoGetDTO> list = publicacionProductoServicio.listarPublicacionProductosFavoritos(1);
-
         for (PublicacionProductoGetDTO p: list) {
 
             System.out.println(p.getDescripcion() + " Listado terminado");

@@ -10,9 +10,10 @@ public interface CompraServicio {
 
     int crearCompra(CompraDTO compraDTO) throws Exception;
 
+
     CompraGetDTO obtenerCompra(int codigoCompra) throws Exception;
 
-    Compra obtener(int codigoCompra) throws Exception;
+
 
 
     List<CompraGetDTO> listarCompras(int codigoUsuario);

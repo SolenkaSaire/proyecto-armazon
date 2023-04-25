@@ -76,17 +76,22 @@ public class CompraServicioImpl implements CompraServicio {
     }
 
 
-    public Compra obtener(int codigoCompra) throws Exception {
+    @Override
+    public CompraGetDTO obtenerCompra(int codigoCompra) throws Exception {
+        return convertir(obtenerU(codigoCompra));
+    }
+
+
+    private Compra obtenerU(int codigoCompra) throws Exception {
         Optional<Compra> compra = compraRepo.findById(codigoCompra);
         if (compra.isEmpty()) {
-            throw new Exception("El código " + codigoCompra + " no está asociado a ningún producto");
+            try {
+                throw new Exception("El código " + codigoCompra + " no está asociado a ningún producto");
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         }
         System.out.println("compra existe");
         return compra.get();
-    }
-
-    @Override
-    public CompraGetDTO obtenerCompra(int codigoCompra) throws Exception {
-        return convertir(obtener(codigoCompra));
     }
 }

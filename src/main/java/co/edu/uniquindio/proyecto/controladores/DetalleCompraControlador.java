@@ -4,6 +4,7 @@ import co.edu.uniquindio.proyecto.dto.DetalleCompraDTO;
 import co.edu.uniquindio.proyecto.dto.DetalleCompraGetDTO;
 import co.edu.uniquindio.proyecto.dto.MensajeDTO;
 import co.edu.uniquindio.proyecto.modelo.DetalleCompra;
+import co.edu.uniquindio.proyecto.servicios.interfaces.CompraServicio;
 import co.edu.uniquindio.proyecto.servicios.interfaces.DetalleCompraServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -23,12 +24,17 @@ public class DetalleCompraControlador {
 
 
     private final DetalleCompraServicio detalleCompraServicio;
+    private final CompraServicio compraServicio;
 
     @GetMapping("/obtenerDetalleCompra/{codigoCompra}")
     public ResponseEntity<MensajeDTO> obtenerDetalleCompra(@PathVariable int codigoCompra) throws Exception {
         return ResponseEntity.status(200).body( new MensajeDTO(HttpStatus.OK, false, detalleCompraServicio.obtenerDetalleCompra(codigoCompra)));
     }
 
+    @GetMapping("/obtenerCompra/{codigoCompra}")
+    public ResponseEntity<MensajeDTO> obtenerCompra(@PathVariable int codigoCompra) throws Exception {
+        return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false, compraServicio.obtenerCompra(codigoCompra)));
+    }
 
 
 

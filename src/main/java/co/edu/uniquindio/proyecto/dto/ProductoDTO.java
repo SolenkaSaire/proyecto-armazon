@@ -1,7 +1,7 @@
 package co.edu.uniquindio.proyecto.dto;
 
 import co.edu.uniquindio.proyecto.modelo.Categoria;
-import co.edu.uniquindio.proyecto.modelo.PublicacionProducto;
+import co.edu.uniquindio.proyecto.modelo.Ciudad;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -30,4 +30,7 @@ public class ProductoDTO {
     @Length(max=50, message = "imagenes maximo 50 caracteres")
     private List<String> imagenes;
 
+    @NotBlank
+    @NotNull
+    private List<Ciudad> ciudades;
 }

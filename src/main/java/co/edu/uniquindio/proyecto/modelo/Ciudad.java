@@ -1,29 +1,33 @@
 package co.edu.uniquindio.proyecto.modelo;
 
-import jakarta.persistence.*;
-import lombok.*;
+public enum Ciudad {
 
-import java.io.Serializable;
-import java.util.List;
-
-@Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Ciudad implements Serializable{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @EqualsAndHashCode.Include
-    @Column(nullable = false, length = 50)
-    private int codigo;
-
-    @Column(nullable = false, length = 50)
-    private String ciudad;
-
-    @ManyToMany(mappedBy = "ciudades")
-    private List<PublicacionProducto> producto;
-
+    ARMENIA,
+    BARRANCABERMEJA,
+    BARRANQUILLA,
+    BOGOTA,
+    BUCARAMANGA,
+    BUGA,
+    CALI,
+    CARTAGENA,
+    CUCUTA,
+    GIRARDOT,
+    IBAGUE,
+    LETICIA,
+    MANIZALES,
+    MEDELLIN,
+    MONTERIA,
+    NEIVA,
+    PAMPLOA,
+    PASTO,
+    PEREIRA,
+    SANTA_MARTA,
+    SEVILLA,
+    TULUA,
+    TUMACO,
+    TUNJA,
+    VALLEDUPAR,
+    VILLAVICENCIO,
+    YOPAL,
+    ZIPAQUIRA;
 }

@@ -52,7 +52,7 @@ public class CompraTest {
 
         //System.out.println("Esta es el precio de la compra: "+compraDTO.getTotal());
 
-        Compra compra = compraServicio.obtener(codigo);
+        CompraGetDTO compra = compraServicio.obtenerCompra(codigo);
 
         System.out.println("Esta es el precio: "+compra.getTotal());
 
@@ -72,7 +72,7 @@ public class CompraTest {
     @Sql("classpath:dataset.sql")
     public void obtener() throws Exception {
 
-        Compra compra = compraServicio.obtener(1);
+        CompraGetDTO compra = compraServicio.obtenerCompra(1);
 
         Assertions.assertNotNull(compra);
 

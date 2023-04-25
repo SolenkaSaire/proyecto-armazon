@@ -2,9 +2,7 @@ package co.edu.uniquindio.proyecto.servicios.interfaces;
 
 import co.edu.uniquindio.proyecto.dto.ProductoDTO;
 import co.edu.uniquindio.proyecto.dto.ProductoGetDTO;
-import co.edu.uniquindio.proyecto.modelo.Categoria;
-import co.edu.uniquindio.proyecto.modelo.Estado;
-import co.edu.uniquindio.proyecto.modelo.Producto;
+import co.edu.uniquindio.proyecto.modelo.*;
 
 import java.util.List;
 
@@ -20,4 +18,9 @@ public interface ProductoServicio {
     ProductoGetDTO obtenerProducto(int codigoProducto) throws Exception;
     Producto obtenerProductoP(int codigoProducto) throws Exception;
 
+    List<Integer> convertirPublicaciones(List<PublicacionProducto> publicaciones);
+
+    List<String> convertirCategoria(List<Categoria> categorias);
+
+    List<String> convertirCiudades(List<Ciudad> ciudades);
 }

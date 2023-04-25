@@ -1,7 +1,7 @@
 package co.edu.uniquindio.proyecto.servicios.implementacion;
 
-import co.edu.uniquindio.proyecto.dto.ComentarioDTO;
 import co.edu.uniquindio.proyecto.dto.ProductoDTO;
+import co.edu.uniquindio.proyecto.dto.ProductoGetDTO;
 import co.edu.uniquindio.proyecto.dto.PublicacionProductoDTO;
 import co.edu.uniquindio.proyecto.dto.PublicacionProductoGetDTO;
 import co.edu.uniquindio.proyecto.modelo.*;
@@ -96,13 +96,6 @@ public class PublicacionProductoServicioImpl implements PublicacionProductoServi
     }
 
     @Override
-    public int actualizarEstado(int codigoPublicacion, Estado estado) throws Exception {
-        PublicacionProducto publicacionProducto = obtenerPublicacionProductoP(codigoPublicacion);
-        publicacionProducto.setEstado(estado);
-        return publicacionProductoRepo.save(publicacionProducto).getCodigo();
-    }
-
-    @Override
     public int eliminarPublicacion(int codigoPublicacion) throws Exception {
         validarExiste(codigoPublicacion);
         publicacionProductoRepo.deleteById(codigoPublicacion);
@@ -162,9 +155,21 @@ public class PublicacionProductoServicioImpl implements PublicacionProductoServi
                 publicacionProducto.getDescripcion(),
                 publicacionProducto.getVendedor().getCodigo(),
                 publicacionProducto.getProducto().getCodigo(),
-                publicacionProducto.getEstado().toString()
+                publicacionProducto.getEstado().toString(),
+                convertirProducto(publicacionProducto.getProducto())
         );
         return publicacionProductoGetDTO;
+    }
+
+    private ProductoGetDTO convertirProducto(Producto producto) throws Exception {
+        ProductoGetDTO productoGetDTO = new ProductoGetDTO(
+                producto.getNombre(),
+                productoServicio.convertirCategoria(producto.getCategoria()),
+                producto.getImagenes(),
+                productoServicio.convertirPublicaciones(producto.getPublicacionProductos()),
+                productoServicio.convertirCiudades(producto.getCiudad())
+        );
+        return productoGetDTO;
     }
 
 
@@ -191,6 +196,8 @@ public class PublicacionProductoServicioImpl implements PublicacionProductoServi
         return respuesta;
     }
 
+
+
     @Override
     public List<PublicacionProductoGetDTO> listarPublicacionProductosFavoritos(int codigoUsuario) throws Exception {
         List<PublicacionProducto> listaPublicaciones = publicacionProductoRepo.listarProductosFavoritos(codigoUsuario);
@@ -200,6 +207,18 @@ public class PublicacionProductoServicioImpl implements PublicacionProductoServi
         }
         return respuesta;
     }
+
+    @Override
+    public List<PublicacionProductoGetDTO> listarPublicacionProductosCiudad(Ciudad ciudad) throws Exception {
+        List<PublicacionProducto> listaPublicaciones = publicacionProductoRepo.listarProductosCiudad(ciudad);
+        List<PublicacionProductoGetDTO> respuesta = new ArrayList<>();
+        for (PublicacionProducto p :listaPublicaciones) {
+            respuesta.add(convertir(p));
+
+        }
+        return respuesta;
+    }
+
 
     @Override
     public List<PublicacionProductoGetDTO> listarPublicacionProductosNombre(String nombre) throws Exception {
@@ -223,7 +242,7 @@ public class PublicacionProductoServicioImpl implements PublicacionProductoServi
         }
         return respuesta;
     }
-
+/*
     @Override
     public List<Integer> obtenerCiudadesCodigo(List<Ciudad> ciudades) {
         List<Integer> codigosCiudades = new ArrayList<>();
@@ -232,7 +251,7 @@ public class PublicacionProductoServicioImpl implements PublicacionProductoServi
 
         }
         return codigosCiudades;
-    }
+    }*/
 
     public void validarExiste(int codigoPublicacion) {
         boolean existe = publicacionProductoRepo.existsById(codigoPublicacion);

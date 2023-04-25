@@ -22,18 +22,20 @@ public class ComentarioControlador {
         return ResponseEntity.status(200).body(new MensajeDTO(HttpStatus.OK,false,"comentario creado"+ comentarioServicio.crearComentario(comentarioDTO)));
     }
 
-    @PutMapping("/actualizar/{codigo}")
+    @PutMapping("/actualizar/{codigoProducto}")
     public ResponseEntity<MensajeDTO> actualizarComentario( @PathVariable int codigoProducto,@RequestBody ComentarioDTO comentarioDTO) throws Exception{
-    return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false, comentarioServicio.actualizarComentario(codigoProducto, comentarioDTO)));}
+        return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false, comentarioServicio.actualizarComentario(codigoProducto, comentarioDTO)));}
 
 
-    @DeleteMapping("/eliminar/{codigo}")
+    @DeleteMapping("/eliminar/{codigoComentario}")
     public ResponseEntity<MensajeDTO> eliminarComentario(@PathVariable int codigoComentario) throws Exception{
-        return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false, comentarioServicio.eliminarComentario(codigoComentario)));}
+        // comentarioServicio.eliminarComentario(1);
+        comentarioServicio.eliminarComentario(codigoComentario);
+        return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false,"se elimino correctamente el comentario " + codigoComentario));}
 
 
 
-    @GetMapping("/obtener/{codigo}")
+    @GetMapping("/obtener/{codidoProducto}")
     public ResponseEntity<MensajeDTO> obtenerComentario(@PathVariable int codidoProducto) throws Exception{
         return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false, comentarioServicio.obtenerComentario(codidoProducto)));
     }

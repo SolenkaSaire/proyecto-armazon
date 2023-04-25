@@ -24,9 +24,9 @@ public class PublicacionProductoGetDTO {
     private String descripcion;
     public int codigoVendedor;
     private int codigoProducto;
-
-
     private String estado;
+
+    private ProductoGetDTO productoGetDTO;
 
 
 }

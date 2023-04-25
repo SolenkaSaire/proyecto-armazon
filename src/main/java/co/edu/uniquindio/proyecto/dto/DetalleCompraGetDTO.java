@@ -1,6 +1,5 @@
 package co.edu.uniquindio.proyecto.dto;
 
-import co.edu.uniquindio.proyecto.modelo.DetalleCompra;
 import co.edu.uniquindio.proyecto.modelo.MetodoPago;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,6 +19,16 @@ public class DetalleCompraGetDTO {
     private double precio;
     private int codigoPublicacionProducto;
     private int codigoCompra;
+
+    private double total;
+
+    MetodoPago metodoPago;
+
+    private LocalDateTime fecha;
+
+    private int usuario;
+
+    private String nombreUsuario;
 
 
 }

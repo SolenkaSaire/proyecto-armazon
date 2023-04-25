@@ -3,6 +3,7 @@ package co.edu.uniquindio.proyecto.test;
 import co.edu.uniquindio.proyecto.dto.ProductoDTO;
 import co.edu.uniquindio.proyecto.dto.ProductoGetDTO;
 import co.edu.uniquindio.proyecto.modelo.Categoria;
+import co.edu.uniquindio.proyecto.modelo.Ciudad;
 import co.edu.uniquindio.proyecto.modelo.Producto;
 import co.edu.uniquindio.proyecto.modelo.PublicacionProducto;
 import co.edu.uniquindio.proyecto.repositorios.ProductoRepo;
@@ -46,7 +47,12 @@ class ProductoServicioImplTest {
         listaImagenes.add("Imagen2");
         listaImagenes.add("Imagen3");
 
-        ProductoDTO productoDTO = new ProductoDTO("Terreneitor", listaCategorias, listaImagenes);
+        List<Ciudad> listaCiudad = new ArrayList<>();
+        listaCiudad.add(Ciudad.ARMENIA);
+        listaCiudad.add(Ciudad.BUGA);
+        listaCiudad.add(Ciudad.IBAGUE);
+
+        ProductoDTO productoDTO = new ProductoDTO("Terreneitor", listaCategorias, listaImagenes, listaCiudad);
 
         int creado;
 
@@ -76,7 +82,12 @@ class ProductoServicioImplTest {
         listaImagenes.add("Imagen2");
         listaImagenes.add("Imagen3");
 
-        ProductoDTO productoDTO= new ProductoDTO("Terreneitor 2.0", listaCategorias, listaImagenes);
+        List<Ciudad> listaCiudad = new ArrayList<>();
+        listaCiudad.add(Ciudad.ARMENIA);
+        listaCiudad.add(Ciudad.BUGA);
+        listaCiudad.add(Ciudad.IBAGUE);
+
+        ProductoDTO productoDTO= new ProductoDTO("Terreneitor 2.0", listaCategorias, listaImagenes, listaCiudad);
 
         int actualizado;
 

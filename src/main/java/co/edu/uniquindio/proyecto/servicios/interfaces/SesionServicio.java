@@ -9,4 +9,8 @@ public interface SesionServicio {
 
     void logout(int codigoUsuario);
 
+    String solicitarCambioContrasena(String email);
+
+    String cambiarContrasena(String token, String nuevaContrasena);
+
 }

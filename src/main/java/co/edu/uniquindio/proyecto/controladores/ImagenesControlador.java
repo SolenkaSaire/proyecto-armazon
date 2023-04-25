@@ -13,16 +13,16 @@ import java.util.Map;
 @AllArgsConstructor
 public class ImagenesControlador {
     private final CloudinaryServicio cloudinaryServicio;
-    @PostMapping("/upload")
-    public ResponseEntity<MensajeDTO> subirImagen(@RequestParam("file") MultipartFile file) throws Exception{
+    @PostMapping("/upload/{codigoPublicacion}")
+    public ResponseEntity<MensajeDTO> subirImagen(@RequestParam("file") MultipartFile file,@PathVariable int codigoPublicacion) throws Exception{
         File imagen = cloudinaryServicio.convertir(file);
-        Map respuesta = cloudinaryServicio.subirImagen(imagen, "proyecto");
+        Map respuesta = cloudinaryServicio.subirImagen(imagen, "co/edu/uniquindio/proyecto", codigoPublicacion);
         return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false, respuesta ) );
     }
     @DeleteMapping("/eliminar")
     public ResponseEntity<MensajeDTO> eliminarImagen(@PathVariable String id) throws Exception{
+        id= "imagenes/Captura_de_pantalla_4_.png11414006616483813673";
         Map respuesta = cloudinaryServicio.eliminarImagen(id);
-        return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false,
-                respuesta ) );
+        return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false, respuesta ) );
     }
 }

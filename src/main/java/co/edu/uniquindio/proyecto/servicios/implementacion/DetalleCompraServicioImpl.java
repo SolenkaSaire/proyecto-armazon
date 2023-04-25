@@ -3,7 +3,6 @@ package co.edu.uniquindio.proyecto.servicios.implementacion;
 import co.edu.uniquindio.proyecto.dto.DetalleCompraDTO;
 import co.edu.uniquindio.proyecto.dto.DetalleCompraGetDTO;
 import co.edu.uniquindio.proyecto.modelo.DetalleCompra;
-import co.edu.uniquindio.proyecto.modelo.Producto;
 import co.edu.uniquindio.proyecto.repositorios.DetalleCompraRepo;
 import co.edu.uniquindio.proyecto.servicios.interfaces.DetalleCompraServicio;
 import lombok.AllArgsConstructor;
@@ -55,8 +54,13 @@ public class DetalleCompraServicioImpl implements DetalleCompraServicio {
                 detalleCompra.getUnidades(),
                 detalleCompra.getPrecio(),
                 detalleCompra.getPublicacionProducto().getCodigo(),
-                detalleCompra.getCompra().getCodigo()
-                );
+                detalleCompra.getCompra().getCodigo(),
+                detalleCompra.getCompra().getTotal(),
+                detalleCompra.getCompra().getMetodoPagos(),
+                detalleCompra.getCompra().getFecha_creacion(),
+                detalleCompra.getCompra().getUsuario().getCodigo(),
+                detalleCompra.getCompra().getUsuario().getNombre()
+        );
         return detalleCompraGetDTO;
     }
 

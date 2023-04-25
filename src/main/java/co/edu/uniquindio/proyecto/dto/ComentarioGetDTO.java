@@ -17,6 +17,7 @@ public class ComentarioGetDTO {
     private int codigoUsuario;
 
     private int codigoPublicacionProducto;
-    
+
+
 
 }

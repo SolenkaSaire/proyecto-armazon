@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyecto.repositorios;
 
 import co.edu.uniquindio.proyecto.modelo.Categoria;
+import co.edu.uniquindio.proyecto.modelo.Ciudad;
 import co.edu.uniquindio.proyecto.modelo.Estado;
 import co.edu.uniquindio.proyecto.modelo.PublicacionProducto;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -33,8 +34,6 @@ public interface PublicacionProductoRepo extends JpaRepository<PublicacionProduc
 
     @Query("select p from PublicacionProducto p where p.estado = :estado")
     List<PublicacionProducto> listarProductosEstado(Estado estado);
-    @Query("select p.producto.nombre, p.ciudades from PublicacionProducto p where p.ciudades = :codigo")
-    List<Object[]> obtenerProductos(int codigo);
 
     @Query("select p from PublicacionProducto p where p.producto.codigo = :codigoProducto")
     PublicacionProducto buscarProducto(int codigoProducto);
@@ -42,7 +41,12 @@ public interface PublicacionProductoRepo extends JpaRepository<PublicacionProduc
     List<PublicacionProducto> listarProductosFavoritos(int codigoUsuario);
     @Query("select p from PublicacionProducto p where p.precio > :precioMinimo and p.precio < :precioMaximo")
     List<PublicacionProducto> listarProductoPrecio(double precioMinimo, double precioMaximo);
+    /*
     @Query("select  p from PublicacionProducto p where p.ciudades = :ciudad ")
-    List<PublicacionProducto> listarProductoCiudad(String ciudad);
+    List<PublicacionProducto> listarProductoCiudad(String ciudad);*/
+
+    @Query("select p from PublicacionProducto p where :ciudad member of p.producto.ciudad")
+    List<PublicacionProducto> listarProductosCiudad(Ciudad ciudad);
+
 
 }

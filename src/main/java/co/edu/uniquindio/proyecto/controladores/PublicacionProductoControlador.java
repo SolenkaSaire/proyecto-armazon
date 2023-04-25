@@ -49,10 +49,11 @@ public class PublicacionProductoControlador {
 
     }
 
-    @GetMapping("/obtener/{codigoPublicacion}")
+    @GetMapping("/obtenerByCodigo/{codigoPublicacion}")
     public ResponseEntity<MensajeDTO> obtenerPublicacionProducto(@PathVariable int codigoPublicacion) throws Exception{
      return ResponseEntity.status(200).body( new MensajeDTO(HttpStatus.OK, false, publicacionProductoServicio.obtenerPublicacionProducto(codigoPublicacion)));
     }
+
 
     @GetMapping("/listarMisPublicaciones/{codigoUsuario}")
     public ResponseEntity<MensajeDTO> listarMisPublicaciones(@PathVariable int codigoUsuario) throws Exception{
@@ -74,6 +75,15 @@ public class PublicacionProductoControlador {
         return ResponseEntity.status(200).body( new MensajeDTO(HttpStatus.OK, false, publicacionProductoServicio.listarPublicacionProductosCiudad(ciudad)));
     }
 
+    @GetMapping("/listarPublicacionesPrecio/{minimo}/{maximo}")
+    public ResponseEntity<MensajeDTO> listarPublicacionesPrecio(@PathVariable double minimo,@PathVariable double maximo) throws Exception{
+        return ResponseEntity.status(200).body( new MensajeDTO(HttpStatus.OK, false, publicacionProductoServicio.listarPublicacionProductosPrecio(minimo, maximo)));
+    }
+
+    @GetMapping("/listarPublicacionesNombre/{nombre}")
+    public ResponseEntity<MensajeDTO> listarPublicacionesPrecio(@PathVariable String nombre) throws Exception{
+        return ResponseEntity.status(200).body( new MensajeDTO(HttpStatus.OK, false, publicacionProductoServicio.listarPublicacionProductosNombre(nombre)));
+    }
 
 
 

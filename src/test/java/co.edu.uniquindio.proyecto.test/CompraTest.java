@@ -63,7 +63,7 @@ public class CompraTest {
     @Sql("classpath:dataset.sql")
     public void listar() throws Exception {
 
-        List<CompraGetDTO> listaCompra = compraServicio.listarCompras(1);
+        List<CompraGetDTO> listaCompra = compraServicio.listarMisCompras(1);
 
         System.out.println(listaCompra);
 

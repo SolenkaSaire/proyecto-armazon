@@ -19,7 +19,7 @@ public class PublicacionProductoServicioImpl implements PublicacionProductoServi
     private final UsuarioServicio usuarioServicio;
     private final PublicacionProductoRepo publicacionProductoRepo;
     ///cambios
-    private final ModeradorServicio moderadorServicio;
+    //private final ModeradorServicio moderadorServicio;
     private final DetalleCompraServicio detalleCompraServicio;
     //private final ComentarioServicio comentarioServicio;
     private final ProductoServicio productoServicio;
@@ -119,7 +119,6 @@ public class PublicacionProductoServicioImpl implements PublicacionProductoServi
     public PublicacionProductoGetDTO obtenerPublicacionProducto(int codigoPublicacion) throws Exception {
         return convertir( obtenerPublicacionProductoP(codigoPublicacion) );
     }
-
     @Override
     public PublicacionProducto obtenerPublicacionProductoP(int codigoPublicacion) throws Exception{
         Optional<PublicacionProducto> publicacionProducto = publicacionProductoRepo.findById(codigoPublicacion);
@@ -144,8 +143,11 @@ public class PublicacionProductoServicioImpl implements PublicacionProductoServi
         return respuesta;
     }
 
+
+
     private PublicacionProductoGetDTO convertir(PublicacionProducto publicacionProducto) throws Exception {
         PublicacionProductoGetDTO publicacionProductoGetDTO = new PublicacionProductoGetDTO(
+                publicacionProducto.getCodigo(),
                 publicacionProducto.getPromedioEstrellas(),
                 publicacionProducto.getFechaLimite(),
                 publicacionProducto.getPrecio(),
@@ -191,8 +193,9 @@ public class PublicacionProductoServicioImpl implements PublicacionProductoServi
         List<PublicacionProducto> listaPublicaciones = publicacionProductoRepo.listarProductosCategoria(categoria);
         List<PublicacionProductoGetDTO> respuesta = new ArrayList<>();
         for (PublicacionProducto p :listaPublicaciones) {
-            respuesta.add(convertir(p));
-
+            if (!p.getFechaLimite().isBefore(LocalDateTime.now())) {
+                respuesta.add(convertir(p));
+            }
         }
         return respuesta;
     }
@@ -203,13 +206,20 @@ public class PublicacionProductoServicioImpl implements PublicacionProductoServi
         List<PublicacionProductoGetDTO> respuesta = new ArrayList<>();
 
         for (PublicacionProducto p: listaPublicaciones) {
-            respuesta.add(convertir(p));
+            if (!p.getFechaLimite().isBefore(LocalDateTime.now())) {
+                respuesta.add(convertir(p));
+            }
         }
 
         return respuesta;
     }
 
+    public boolean tiempoLimite(PublicacionProducto publicacionProducto) {
+        LocalDateTime fechaActual = LocalDateTime.now();
+        LocalDateTime fechaLimite = publicacionProducto.getFechaLimite();
 
+        return fechaActual.isAfter(fechaLimite);
+    }
 
     @Override
     public List<PublicacionProductoGetDTO> listarPublicacionProductosFavoritos(int codigoUsuario) throws Exception {

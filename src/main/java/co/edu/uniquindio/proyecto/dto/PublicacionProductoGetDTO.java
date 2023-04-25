@@ -17,6 +17,7 @@ import java.util.List;
 @Getter
 @Setter
 public class PublicacionProductoGetDTO {
+    private int codigo;
     private double promedioEstrellas;
     private LocalDateTime fechaLimite;
     private double precio;

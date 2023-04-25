@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyecto.dto;
 
+import co.edu.uniquindio.proyecto.modelo.Estado;
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -20,5 +21,9 @@ public class ProductoModeradorDTO {
     @NotBlank
     @NotNull
     private int idModerador;
+
+    private Estado estado;
+
+    private int codigoPublicacion;
 
 }

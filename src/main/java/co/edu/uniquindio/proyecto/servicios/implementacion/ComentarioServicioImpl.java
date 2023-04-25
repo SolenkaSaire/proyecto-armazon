@@ -6,6 +6,7 @@ import co.edu.uniquindio.proyecto.modelo.Comentario;
 import co.edu.uniquindio.proyecto.modelo.PublicacionProducto;
 import co.edu.uniquindio.proyecto.repositorios.*;
 import co.edu.uniquindio.proyecto.servicios.interfaces.ComentarioServicio;
+import co.edu.uniquindio.proyecto.servicios.interfaces.EmailServicio;
 import co.edu.uniquindio.proyecto.servicios.interfaces.PublicacionProductoServicio;
 import co.edu.uniquindio.proyecto.servicios.interfaces.UsuarioServicio;
 import lombok.AllArgsConstructor;
@@ -21,14 +22,12 @@ import java.util.Optional;
 public class ComentarioServicioImpl implements ComentarioServicio {
 
     private final ComentarioRepo comentarioRepo;
-    /*
     private final UsuarioRepo usuarioRepo;
-    private final DetalleCompraRepo detalleCompraRepo;
-    private  final ProductoRepo productoRepo;
-*/
+
     private final PublicacionProductoServicio publicacionProductoServicio;
     private final UsuarioServicio usuarioServicio;
     private final PublicacionProductoRepo publicacionProductoRepo;
+    private final EmailServicio emailServicio;
 
     @Override
     public int crearComentario(ComentarioDTO comentarioDTO) throws Exception {
@@ -44,6 +43,13 @@ public class ComentarioServicioImpl implements ComentarioServicio {
         nuevoComentario.setPublicacionProducto(publicacionProducto);
 
         System.out.println("El comentario es: "+ comentarioDTO.getTexto());
+
+        String email= "<h1>han añadido un nuevo mensaje a su publicacion</h1><h2><p>En tu producto de Armazon</p></h2><img src='https://i.ibb.co/mHSHGmn/Imagen-de-Whats-App-2023-04-21-a-las-11-31-00.jpg' width='300' height='200'>";
+
+        emailServicio.enviarEmail(new EmailDTO(
+                "TestMail-Html",
+                email,
+                publicacionProducto.getVendedor().getEmail()));
 
         comentarioRepo.save(nuevoComentario);
         int cantidad = publicacionProducto.getComentarios().size();
@@ -61,23 +67,7 @@ public class ComentarioServicioImpl implements ComentarioServicio {
         System.out.println("promedio nuevo:" +promActual);
         publicacionProducto.setPromedioEstrellas(promActual);
 
-/*
-        double promedio=0;
-        for (int i = 0; i < publicacionProducto.getComentarios().size(); i++) {
 
-            Comentario aux = publicacionProducto.getComentarios().get(i);
-            System.out.println("El comentario es: "+ aux.getTexto() +" y su num de estrellas es: " + aux.getEstrellas());
-            promedio+=aux.getEstrellas();
-            System.out.println("El promedio hasta ahora es: "+ promedio);
-            //System.out.println("El comentario es: "+ aux.getTexto());
-
-        }
-        System.out.println("-----FIN DEL FOR----");
-
-            promedio=promedio/5;
-            publicacionProducto.setPromedioEstrellas(promedio);
-            System.out.println("El numero de estrellas promedio: "+ publicacionProducto.getPromedioEstrellas());
-*/
         if (publicacionProducto.getCodigo() == comentarioDTO.getCodigoPublicacionProducto()) {
             publicacionProducto.getComentarios().add(nuevoComentario);
             publicacionProductoRepo.save(publicacionProducto);

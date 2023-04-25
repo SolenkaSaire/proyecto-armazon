@@ -35,6 +35,22 @@ public class ModeradorTest {
 
     @Test
     @Sql("classpath:dataset.sql")
+    public void autorizarPublicacion() throws Exception {
+
+        ProductoModeradorDTO productoModeradorDTO = new ProductoModeradorDTO("Me gusta el Terreneitor, lo apruebo", 2,Estado.APROBADO,1);
+
+        PublicacionProducto p = publicacionProductoServicio.obtenerPublicacionProductoP(productoModeradorDTO.getCodigoPublicacion());
+        System.out.println("el estado antiguo de la publi es: "+ p.getEstado().toString());
+        moderadorServicio.autorizarPublicacion(productoModeradorDTO);
+
+        Estado estado = Estado.APROBADO;
+
+        Assertions.assertEquals(estado.toString(), p.getEstado().toString());
+
+    }
+/*
+    @Test
+    @Sql("classpath:dataset.sql")
     public void aprobarProducto() throws Exception {
 
         PublicacionProducto publicacionProducto = publicacionProductoServicio.obtenerPublicacionProductoP(1);
@@ -62,6 +78,6 @@ public class ModeradorTest {
 
         Assertions.assertEquals(estado.toString(), publicacionProducto.getEstado().toString());
 
-    }
+    }*/
 
 }

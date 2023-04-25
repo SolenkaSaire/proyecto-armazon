@@ -34,7 +34,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         String email= "<h1>Creacion de cuenta exitosa</h1><h2><p>En tu cuenta de Armazon</p></h2><img src='https://i.ibb.co/mHSHGmn/Imagen-de-Whats-App-2023-04-21-a-las-11-31-00.jpg' width='300' height='200'>";
 
         emailServicio.enviarEmail(new EmailDTO(
-                "TestMail-Html",
+                "Creacion de cuenta",
                 email,
                 usuarioDTO.getEmail()));
 

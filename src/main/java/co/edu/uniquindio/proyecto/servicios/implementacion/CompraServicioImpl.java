@@ -4,6 +4,7 @@ import co.edu.uniquindio.proyecto.dto.*;
 import co.edu.uniquindio.proyecto.modelo.Compra;
 import co.edu.uniquindio.proyecto.modelo.DetalleCompra;
 import co.edu.uniquindio.proyecto.modelo.PublicacionProducto;
+import co.edu.uniquindio.proyecto.modelo.Usuario;
 import co.edu.uniquindio.proyecto.repositorios.CompraRepo;
 import co.edu.uniquindio.proyecto.repositorios.DetalleCompraRepo;
 import co.edu.uniquindio.proyecto.servicios.interfaces.*;
@@ -11,9 +12,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @AllArgsConstructor
@@ -22,6 +21,7 @@ public class CompraServicioImpl implements CompraServicio {
     private final CompraRepo compraRepo;
     private final DetalleCompraRepo detalleCompraRepo;
     private final UsuarioServicio usuarioServicio;
+    private final EmailServicio emailServicio;
     private final PublicacionProductoServicio publicacionProductoServicio;
     private final DetalleCompraServicio detalleCompraServicio;
 
@@ -29,6 +29,10 @@ public class CompraServicioImpl implements CompraServicio {
     public int crearCompra(CompraDTO compraDTO) throws Exception {
         List<DetalleCompra> detalle = new ArrayList<>();
         double total = 0;
+
+        Usuario comprador = new Usuario();
+        Set<String> emails = new HashSet<>();
+
         for (DetalleCompraDTO de : compraDTO.getDetalleCompraDTO()) {
             DetalleCompra detalleCompra = new DetalleCompra();
             PublicacionProducto pp = publicacionProductoServicio.obtenerPublicacionProductoP(de.getCodigoPublicacionProducto());
@@ -38,6 +42,9 @@ public class CompraServicioImpl implements CompraServicio {
             detalleCompra.setPrecio(pp.getPrecio());
             total += pp.getPrecio() * de.getUnidades();
             detalle.add(detalleCompra);
+
+            emails.add(pp.getVendedor().getEmail());
+
         }
         Compra compra = new Compra();
         compra.setUsuario(usuarioServicio.obtenerUsuarioU(compraDTO.getCodigoUsuario()));
@@ -49,12 +56,26 @@ public class CompraServicioImpl implements CompraServicio {
             d.setCompra(compraGuardada);
             detalleCompraRepo.save(d);
         }
+        String emailVendedor= "<h1>Has vendido un producto</h1><h2><p>En la pagian de Armazon</p></h2><img src='https://i.ibb.co/mHSHGmn/Imagen-de-Whats-App-2023-04-21-a-las-11-31-00.jpg' width='300' height='200'>";
+        String emailComprador= "<h1>Has comprado un producto en la pagina de Armazon</h1><h2><p>¡¡Felicidades!!</p></h2><img src='https://i.ibb.co/mHSHGmn/Imagen-de-Whats-App-2023-04-21-a-las-11-31-00.jpg' width='300' height='200'>";
+
+        comprador = usuarioServicio.obtenerUsuarioU(compraDTO.getCodigoUsuario());
+        String emailC = comprador.getEmail();
+
+
+        for (String email : emails) {
+            EmailDTO emailDTO = new EmailDTO("Producto vendido", emailVendedor, email);
+            emailServicio.enviarEmail(emailDTO);
+        }
+        EmailDTO emailDTO = new EmailDTO("Producto comprado", emailComprador, emailC);
+        emailServicio.enviarEmail(emailDTO);
+
         return compraGuardada.getCodigo();
     }
 
     @Override
-    public List<CompraGetDTO> listarCompras(int codigoProducto) {
-        List<Compra> lista = compraRepo.listarCompras(codigoProducto);
+    public List<CompraGetDTO> listarMisCompras(int codigoUsuario) {
+        List<Compra> lista = compraRepo.listarMisCompras(codigoUsuario);
         List<CompraGetDTO> respuesta = new ArrayList<>();
         for (Compra p : lista) {
             respuesta.add(convertir(p));

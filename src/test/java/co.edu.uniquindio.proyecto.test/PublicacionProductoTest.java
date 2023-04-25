@@ -19,14 +19,10 @@ import java.util.*;
 @SpringBootTest
 @Transactional
 public class PublicacionProductoTest {
-
     @Autowired
     private PublicacionProductoRepo publicacionProductoRepo;
     @Autowired
     private PublicacionProductoServicio publicacionProductoServicio;
-
-
-
     @Test
     @Sql("classpath:dataset.sql")
     public void crearPublicacionProducto() throws Exception{

@@ -18,4 +18,5 @@ public class Moderador  extends Cuenta implements Serializable {
     @OneToMany(mappedBy="moderador")
     private List<ProductoModerador> productoModeradors;
 
+
 }

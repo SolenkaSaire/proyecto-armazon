@@ -25,22 +25,11 @@ import java.util.regex.Pattern;
 @AllArgsConstructor
 public class CloudinaryServicioImpl implements CloudinaryServicio {
 
-    private Cloudinary cloudinary;
+    private final PublicacionProductoServicio publicacionProductoServicio;
 
-    private PublicacionProductoServicio publicacionProductoServicio;
-
-    private PublicacionProductoRepo publicacionProductoRepo;
-
-    private ProductoRepo productoRepo;
+    private final ProductoRepo productoRepo;
 
     private Map<String, String> config;
-    //public CloudinaryServicio(){
-
-    public CloudinaryServicioImpl(){
-        // Configure
-        Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap("cloud_name", "dwkkkwnpr","api_key", "668466614745114","api_secret", "ROdCofg2ZvIBk1a1zKtsuHRbbhw"));
-
-    }
 
     @Override
     public Map subirImagen(File file, String carpeta, int codigoPublicacion) throws Exception{
@@ -59,13 +48,8 @@ public class CloudinaryServicioImpl implements CloudinaryServicio {
         Matcher matcher = pattern.matcher(rutaRaw);
 
         if (matcher.find()) {
-
-
             String imageURL = matcher.group();
             System.out.println("la ruta es: "+imageURL);
-            //publicacionProducto pun= publicacionProductoServicio.crearPublicacionProducto()
-
-
             PublicacionProducto publicacionProducto = new PublicacionProducto();
             publicacionProducto = publicacionProductoServicio.obtenerPublicacionProductoP(codigoPublicacion);
             Producto producto = publicacionProducto.getProducto();
@@ -90,9 +74,6 @@ public class CloudinaryServicioImpl implements CloudinaryServicio {
         System.out.println(deleteResult.toString());
 
         return deleteResult;
-
-
-        //return cloudinary.uploader().destroy(idImagen, ObjectUtils.emptyMap());
     }
     @Override
     public File convertir(MultipartFile imagen) throws IOException {

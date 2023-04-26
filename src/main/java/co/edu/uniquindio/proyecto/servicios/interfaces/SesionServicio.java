@@ -7,6 +7,8 @@ public interface SesionServicio {
 
     TokenDTO login(SesionDTO sesionDTO);
 
+    String crearModerador();
+
     void logout(int codigoUsuario);
 
     String solicitarCambioContrasena(String email);

@@ -18,12 +18,12 @@ public class ProductoModeradorDTO {
     @Column(nullable = false, length = 50)
     private String motivo;
 
-    @NotBlank
-    @NotNull
+
     private int idModerador;
 
     private Estado estado;
 
     private int codigoPublicacion;
+
 
 }

@@ -3,6 +3,7 @@ package co.edu.uniquindio.proyecto.controladores;
 import co.edu.uniquindio.proyecto.dto.SesionDTO;
 import co.edu.uniquindio.proyecto.dto.TokenDTO;
 import co.edu.uniquindio.proyecto.servicios.interfaces.SesionServicio;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +19,7 @@ public class SesionControlador {
     private final SesionServicio sesionServicio;
 
     @PostMapping("/login")
-    TokenDTO login(@RequestBody  SesionDTO sesionDTO){
+    TokenDTO login(  @RequestBody  SesionDTO sesionDTO){
 
         return sesionServicio.login(sesionDTO);
     }

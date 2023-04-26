@@ -16,7 +16,7 @@ import java.util.List;
 @Setter
 public class PublicacionProductoDTO {
 
-    @NotBlank
+
     @NotNull
     private double promedioEstrellas;
 
@@ -24,11 +24,9 @@ public class PublicacionProductoDTO {
     @NotNull
     private LocalDateTime fechaLimite;
 
-    @NotBlank
-    @NotNull
     private double precio;
 
-    @NotBlank
+
     @NotNull
     private int disponibilidad;
 

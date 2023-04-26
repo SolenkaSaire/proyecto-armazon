@@ -73,20 +73,10 @@ public class CompraServicioImpl implements CompraServicio {
         return compraGuardada.getCodigo();
     }
 
-    @Override
-    public List<CompraGetDTO> listarMisCompras(int codigoUsuario) {
-        List<Compra> lista = compraRepo.listarMisCompras(codigoUsuario);
-        List<CompraGetDTO> respuesta = new ArrayList<>();
-        for (Compra p : lista) {
-            respuesta.add(convertir(p));
-        }
-        return respuesta;
 
-    }
 
 
     private CompraGetDTO convertir(Compra compra) {
-        //codigo, fecha, total, codigoUsuario, metodoPago, list<>drtalleCompraDTO
         CompraGetDTO compraGetDTO = new CompraGetDTO(
                 compra.getTotal(),
                 compra.getMetodoPagos(),

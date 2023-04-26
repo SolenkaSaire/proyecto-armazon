@@ -17,13 +17,13 @@ public class FavoritoControlador {
 
     private final FavoritoServicio favoritoServicio;
 
-    @PostMapping("/agregar")
+    @PostMapping("/agregar/{idUsuario}/{idPublicacion}")
     public ResponseEntity<MensajeDTO> agregarPublicacionFavorita(@PathVariable int idUsuario,@PathVariable int idPublicacion){
         return ResponseEntity.status(200).body(new MensajeDTO(HttpStatus.OK,false,"favorito agregado del usuario con codigo: "+ favoritoServicio.agregarPublicacionFavorita(idUsuario,idPublicacion)));
     }
 
 
-    @PostMapping("/eliminar")
+    @PostMapping("/eliminar/{idUsuario}/{idPublicacion}")
     public ResponseEntity<MensajeDTO> eliminarPublicacionFavorita(@PathVariable int idUsuario,@PathVariable int idPublicacion){
         return ResponseEntity.status(200).body(new MensajeDTO(HttpStatus.OK,false,"favorito eliminado del usuario con codigo: "+ favoritoServicio.eliminarPublicacionFavorita(idUsuario,idPublicacion)));
     }

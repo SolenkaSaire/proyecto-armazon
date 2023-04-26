@@ -146,7 +146,7 @@ public class PublicacionProductoTest {
     @Sql("classpath:dataset.sql")
     public void listarPublicacionProductoEstado() throws Exception {
 
-        List<PublicacionProductoGetDTO> list = publicacionProductoServicio.listarPublicacionProductosPorEstado(Estado.NO_APROBADO);
+        List<PublicacionProductoGetDTO> list = publicacionProductoServicio.listarPublicacionProductosPorEstado("NO_APROBADO");
 
         for (PublicacionProductoGetDTO p: list) {
 
@@ -186,7 +186,7 @@ public class PublicacionProductoTest {
     public void listarPublicacionProductosPrecio() throws Exception {
 
         List<PublicacionProductoGetDTO> list;
-        list = publicacionProductoServicio.listarPublicacionProductosPrecio(130000,151000);
+        list = publicacionProductoServicio.listarPublicacionProductosPrecio(120000,151000);
 
         for (PublicacionProductoGetDTO p: list) {
             System.out.println(p.getDescripcion()+" tiene un precio de: "+p.getPrecio() + " Listado terminado");

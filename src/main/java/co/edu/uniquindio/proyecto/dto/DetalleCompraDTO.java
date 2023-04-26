@@ -14,11 +14,11 @@ import org.hibernate.validator.constraints.Length;
 @NoArgsConstructor
 public class DetalleCompraDTO {
 
-    @NotBlank
+
     @NotNull
     private int unidades;
 
-    @NotBlank
+
     @NotNull
     private int codigoPublicacionProducto;
 }

@@ -21,7 +21,7 @@ public class EmailServicioImpl implements EmailServicio {
             helper.setSubject(emailDTO.getAsunto());
             helper.setText(emailDTO.getCuerpo(), true);
             helper.setTo(emailDTO.getDestinatario());
-            helper.setFrom("cristianr.gonzalezi@uqvirtual.edu.co");//"no_reply@dominio.com");
+            helper.setFrom("cristianr.gonzalezi@uqvirtual.edu.co");
             javaMailSender.send(mensaje);
         }catch (Exception e){
             e.printStackTrace();

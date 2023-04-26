@@ -17,10 +17,6 @@ public interface ModeradorServicio {
 
     int autorizarPublicacion(ProductoModeradorDTO productoModeradorDTO) throws Exception;
 
-    //int aprobarProducto(PublicacionProducto publicacionProducto, ProductoModeradorDTO productoModeradorDTO) throws Exception;
-
-    //int rechazarProducto(PublicacionProducto publicacionProducto, ProductoModeradorDTO productoModeradorDTO) throws Exception;
-
     public Moderador obtenerModerador(int codigoModerador) throws Exception;
 
 }

@@ -18,7 +18,7 @@ public interface PublicacionProductoServicio {
     List<PublicacionProductoGetDTO> listarProductosPublicacionUsuario(int codigoUsuario) throws Exception;
 
     List<PublicacionProductoGetDTO> listarPublicacionProductoCategoria(Categoria categoria) throws Exception;
-    List<PublicacionProductoGetDTO> listarPublicacionProductosPorEstado(Estado estado) throws Exception;
+    List<PublicacionProductoGetDTO> listarPublicacionProductosPorEstado(String estado) throws Exception;
     List<PublicacionProductoGetDTO> listarPublicacionProductosFavoritos(int codigoUsuario) throws Exception;
     List<PublicacionProductoGetDTO> listarPublicacionProductosCiudad(Ciudad ciudad) throws Exception;
 

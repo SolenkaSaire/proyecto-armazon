@@ -37,7 +37,7 @@ public class UsuarioDTO {
     private String telefono;
 
     @NotBlank
-    @NotNull
+    @NotNull(message = "No puede ser null")
     @Email(message = "Error con la estructura del correo")
     @Length(max=100, message = "email maximo 150 caracteres")
     private String email;

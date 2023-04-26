@@ -19,7 +19,6 @@ public class FavoritoServicioImpl implements FavoritoServicio {
 
     private UsuarioRepo usuarioRepo;
     private PublicacionProductoRepo publicacionProductoRepo;
-    private final UsuarioServicio usuarioServicio;
 
     @Override
     public int agregarPublicacionFavorita(int idUsuario, int idPublicacion) {

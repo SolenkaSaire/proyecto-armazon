@@ -15,13 +15,12 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 public class PublicacionProductoServicioImpl implements PublicacionProductoServicio {
-    //private final ProductoRepo productoRepo;
+
     private final UsuarioServicio usuarioServicio;
     private final PublicacionProductoRepo publicacionProductoRepo;
-    ///cambios
-    //private final ModeradorServicio moderadorServicio;
+
     private final DetalleCompraServicio detalleCompraServicio;
-    //private final ComentarioServicio comentarioServicio;
+
     private final ProductoServicio productoServicio;
     @Override
     public int crearPublicacionProducto(PublicacionProductoDTO publicacionProductoDTO, ProductoDTO productoDTO) throws Exception {
@@ -71,12 +70,8 @@ public class PublicacionProductoServicioImpl implements PublicacionProductoServi
         PublicacionProducto publicacionProducto = new PublicacionProducto();
         publicacionProducto.setEstado(Estado.NO_APROBADO);
         publicacionProducto.setFecha_publicacion(LocalDateTime.now());
-        //fechapublicaicon
-        //fecha creacion
         publicacionProducto.setPromedioEstrellas(publicacionProductoDTO.getPromedioEstrellas());
-
-        publicacionProducto.setFechaCreacion(publicacionProductoDTO.getFechaLimite());//prueba fecha creacion
-
+        publicacionProducto.setFechaCreacion(publicacionProductoDTO.getFechaLimite());
         publicacionProducto.setPrecio(publicacionProductoDTO.getPrecio());
         publicacionProducto.setDisponibilidad(publicacionProductoDTO.getDisponibilidad());
         publicacionProducto.setDescripcion(publicacionProductoDTO.getDescripcion());
@@ -105,8 +100,6 @@ public class PublicacionProductoServicioImpl implements PublicacionProductoServi
 
         for (PublicacionProducto p :producto.getPublicacionProductos() ) {
             if (producto.getCodigo() == codigoProducto) {
-                /*no se puede eliminar solamente el producto, si se elimina el producto,tmb se elimina
-                la publicacion, por tanto, eliminamos todas las publicaciones que incluyen este producto*/
                 publicacionProductoRepo.deleteById( p.getCodigo() );
                 break;
             }
@@ -201,8 +194,9 @@ public class PublicacionProductoServicioImpl implements PublicacionProductoServi
     }
 
     @Override
-    public List<PublicacionProductoGetDTO> listarPublicacionProductosPorEstado(Estado estado) throws Exception {
-        List<PublicacionProducto> listaPublicaciones = publicacionProductoRepo.listarProductosEstado(estado);
+    public List<PublicacionProductoGetDTO> listarPublicacionProductosPorEstado(String estado) throws Exception {
+        Estado nuevoEstado = Estado.valueOf(estado);
+        List<PublicacionProducto> listaPublicaciones = publicacionProductoRepo.listarProductosEstado(nuevoEstado);
         List<PublicacionProductoGetDTO> respuesta = new ArrayList<>();
 
         for (PublicacionProducto p: listaPublicaciones) {
@@ -265,16 +259,7 @@ public class PublicacionProductoServicioImpl implements PublicacionProductoServi
         }
         return respuesta;
     }
-/*
-    @Override
-    public List<Integer> obtenerCiudadesCodigo(List<Ciudad> ciudades) {
-        List<Integer> codigosCiudades = new ArrayList<>();
-        for (Ciudad c: ciudades) {
-            codigosCiudades.add( c.getCodigo() );
 
-        }
-        return codigosCiudades;
-    }*/
 
     public void validarExiste(int codigoPublicacion) {
         boolean existe = publicacionProductoRepo.existsById(codigoPublicacion);

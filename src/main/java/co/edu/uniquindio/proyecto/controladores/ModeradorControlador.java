@@ -19,20 +19,9 @@ import org.springframework.web.bind.annotation.*;
 public class ModeradorControlador {
 
     private final ModeradorServicio moderadorServicio;
-/*
-    @PutMapping("/aprobarPublicacion/{codigo}")
-    public ResponseEntity<MensajeDTO> aprobarProducto(PublicacionProducto publicacionProducto, ProductoModeradorDTO productoModeradorDTO) throws Exception{
-        return ResponseEntity.status(200).body( new MensajeDTO(HttpStatus.OK, false, moderadorServicio.aprobarProducto(publicacionProducto,productoModeradorDTO)));
+    @PutMapping("/autorizacionPublicacion")
+    public ResponseEntity<MensajeDTO> autorizacionPublicacion( @RequestBody ProductoModeradorDTO productoModeradorDTO) throws Exception{
+        return ResponseEntity.status(200).body( new MensajeDTO(HttpStatus.OK, false, moderadorServicio.autorizarPublicacion(productoModeradorDTO)));
     }
-
-
-    @PutMapping("/rechazar/{codigo}")
-    void rechazarProducto(@RequestBody PublicacionProducto publicacionProducto) throws Exception{
-
-    }*/
-@PutMapping("/autorizacionPublicacion")
-public ResponseEntity<MensajeDTO> autorizacionPublicacion(@Valid @RequestBody ProductoModeradorDTO productoModeradorDTO) throws Exception{
-    return ResponseEntity.status(200).body( new MensajeDTO(HttpStatus.OK, false, moderadorServicio.autorizarPublicacion(productoModeradorDTO)));
-}
 
 }

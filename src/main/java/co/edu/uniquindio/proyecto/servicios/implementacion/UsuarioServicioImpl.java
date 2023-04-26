@@ -102,40 +102,6 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         }
 
     }
-
-    public List<Integer> obtenerCodCompras(Usuario usuario) {
-        List<Integer> compras = new ArrayList<>();
-        for (Compra miCompra : usuario.getCompra()) {
-            compras.add(miCompra.getCodigo());
-        }
-        return compras;
-    }
-
-
-    public List<Integer> obtenerCodPublicacionesFavoritas(Usuario usuario) {
-        List<Integer> publicacionesFavoritas = new ArrayList<>();
-        for (PublicacionProducto misFavoritos : usuario.getPublicacionesFavoritas()) {
-            publicacionesFavoritas.add(misFavoritos.getCodigo());
-        }
-        return publicacionesFavoritas;
-    }
-
-    public List<Integer> obtenerCodPublicaciones(Usuario usuario) {
-        List<Integer> publicaciones = new ArrayList<>();
-        for (PublicacionProducto misPublicaciones : usuario.getMisProductos()) {
-            publicaciones.add(misPublicaciones.getCodigo());
-        }
-        return publicaciones;
-    }
-
-    public List<String> obtenerComentariosUsuario(Usuario usuario) {
-        List<String> comentarios = new ArrayList<>();
-        for (Comentario comentario : usuario.getComentario()) {
-            comentarios.add(comentario.getTexto());
-        }
-        return comentarios;
-    }
-
     private Usuario convertir(UsuarioDTO usuarioDTO) {
         Usuario usuario = new Usuario();
         usuario.setNombre(usuarioDTO.getNombre());

@@ -31,9 +31,9 @@ public class DetalleCompraControlador {
         return ResponseEntity.status(200).body( new MensajeDTO(HttpStatus.OK, false, detalleCompraServicio.obtenerDetalleCompra(codigoCompra)));
     }
 
-    @GetMapping("/obtenerCompra/{codigoCompra}")
-    public ResponseEntity<MensajeDTO> obtenerCompra(@PathVariable int codigoCompra) throws Exception {
-        return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false, compraServicio.obtenerCompra(codigoCompra)));
+    @GetMapping("/listarMisCompras/{codigoUsuario}")
+    public ResponseEntity<MensajeDTO> listarProductosUsuario(int codigoUsuario){
+        return ResponseEntity.status(200).body( new MensajeDTO(HttpStatus.OK, false, detalleCompraServicio.listarProductosUsuario(codigoUsuario)));
     }
 
 

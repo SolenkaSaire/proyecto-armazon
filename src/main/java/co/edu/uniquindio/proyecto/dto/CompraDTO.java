@@ -25,7 +25,7 @@ public class CompraDTO {
     @NotNull
     private MetodoPago metodoPago;
 
-    @NotBlank
+
     @NotNull
     private int codigoUsuario;
 

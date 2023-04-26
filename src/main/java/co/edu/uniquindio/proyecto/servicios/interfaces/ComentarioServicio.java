@@ -2,7 +2,7 @@ package co.edu.uniquindio.proyecto.servicios.interfaces;
 
 import co.edu.uniquindio.proyecto.dto.ComentarioDTO;
 import co.edu.uniquindio.proyecto.dto.ComentarioGetDTO;
-import co.edu.uniquindio.proyecto.modelo.Comentario;
+
 
 import java.util.List;
 

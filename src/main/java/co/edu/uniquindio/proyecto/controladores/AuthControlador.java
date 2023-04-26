@@ -17,13 +17,13 @@ public class AuthControlador {
     private final UsuarioServicio usuarioServicio;
     private final SesionServicio sesionServicio;
     @PostMapping("/login")
-    public ResponseEntity<MensajeDTO> login(@Valid @RequestBody SesionDTO loginUser) {
+    public ResponseEntity<MensajeDTO> login( @RequestBody SesionDTO loginUser) {
         TokenDTO jwtTokenDto = sesionServicio.login(loginUser);
         return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false, jwtTokenDto)  );
         //sesionServicio.login(loginUser))
     }
     @PostMapping("/registro")
-    public ResponseEntity<MensajeDTO> registrarUsuario(@Valid @RequestBody UsuarioDTO cliente) throws Exception {
+    public ResponseEntity<MensajeDTO> registrarUsuario( @RequestBody UsuarioDTO cliente) throws Exception {
         usuarioServicio.crearUsuario(cliente);
         return ResponseEntity.status(HttpStatus.CREATED).body(new MensajeDTO(HttpStatus.CREATED, false, "Cliente creado correctamente"));
     }
@@ -42,6 +42,12 @@ public class AuthControlador {
         String mensaje = sesionServicio.cambiarContrasena(token, nuevaContrasena);
         // Validar el token de cambio de contraseña
 
+        return ResponseEntity.ok(mensaje);
+    }
+
+    @PostMapping("/generar")
+    public ResponseEntity<?> inicializarModeradores() {
+        String mensaje = sesionServicio.crearModerador();
         return ResponseEntity.ok(mensaje);
     }
 

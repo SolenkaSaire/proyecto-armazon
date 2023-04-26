@@ -2,7 +2,9 @@ package co.edu.uniquindio.proyecto.servicios.implementacion;
 
 import co.edu.uniquindio.proyecto.dto.SesionDTO;
 import co.edu.uniquindio.proyecto.dto.TokenDTO;
+import co.edu.uniquindio.proyecto.modelo.Moderador;
 import co.edu.uniquindio.proyecto.modelo.Usuario;
+import co.edu.uniquindio.proyecto.repositorios.ModeradorRepo;
 import co.edu.uniquindio.proyecto.repositorios.UsuarioRepo;
 import co.edu.uniquindio.proyecto.seguridad.modelo.UserDetailsImpl;
 import co.edu.uniquindio.proyecto.seguridad.servicios.JwtService;
@@ -17,8 +19,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.UUID;
-
 @Service
 public class SesionServicioImpl implements SesionServicio {
 
@@ -28,14 +28,16 @@ public class SesionServicioImpl implements SesionServicio {
     private final PasswordEncoder passwordEncoder;
     private final EmailServicio emailServicio;
     private final UsuarioRepo usuarioRepo;
+    private final ModeradorRepo moderadorRepo;
 
 
-    public SesionServicioImpl(JwtService jwtService, AuthenticationManager authenticationManager, UsuarioServicio usuarioServicio, UsuarioRepo usuarioRepo, PasswordEncoder passwordEncoder, EmailServicio emailServicio) {
+    public SesionServicioImpl(JwtService jwtService, AuthenticationManager authenticationManager, UsuarioServicio usuarioServicio, UsuarioRepo usuarioRepo, PasswordEncoder passwordEncoder, EmailServicio emailServicio, ModeradorRepo moderadorRepo) {
         this.jwtService = jwtService;
         this.authenticationManager = authenticationManager;
         this.usuarioRepo = usuarioRepo;
         this.passwordEncoder = passwordEncoder;
         this.emailServicio = emailServicio;
+        this.moderadorRepo = moderadorRepo;
     }
 
 
@@ -72,19 +74,41 @@ public class SesionServicioImpl implements SesionServicio {
     }
 
 
+    @Override
+    public String crearModerador(){
+        Moderador moderador = new Moderador();
+        moderador.setEmail("crisgonza20@gmail.com");
+        moderador.setPassword("123548");
+        moderador.setPassword(passwordEncoder.encode(moderador.getPassword()));
+
+        moderadorRepo.save(moderador);
+
+        Moderador moderador1 = new Moderador();
+        moderador1.setEmail("andersonchuly@gmail.com");
+        moderador1.setPassword("tormenta");
+        moderador1.setPassword(passwordEncoder.encode(moderador1.getPassword()));
+
+        moderadorRepo.save(moderador1);
+
+        Moderador moderador2 = new Moderador();
+        moderador2.setEmail("solecito32@gmail.com");
+        moderador2.setPassword("na012sunny");
+        moderador2.setPassword(passwordEncoder.encode(moderador2.getPassword()));
+
+        moderadorRepo.save(moderador2);
+
+
+        return "Moderadores Generados";
+    }
+
+
 
     @Override
     public void logout(int codigoUsuario) {
 
 
     }
-/*
-    private boolean credencialesSonCorrectas(SesionDTO sesionDTO) {
-        String usuario = sesionDTO.getEmail();
-        String contrasenia = sesionDTO.getPassword();
 
-        return "usuario_correcto".equals(usuario) && "contrasenia_correcta".equals(contrasenia);
-    }*/
 
     public String cambiarContrasena(String token, String nuevaContrasena){
 

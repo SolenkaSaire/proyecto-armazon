@@ -4,6 +4,7 @@ import co.edu.uniquindio.proyecto.dto.ComentarioDTO;
 import co.edu.uniquindio.proyecto.dto.ComentarioGetDTO;
 import co.edu.uniquindio.proyecto.dto.MensajeDTO;
 import co.edu.uniquindio.proyecto.servicios.interfaces.ComentarioServicio;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,13 +19,13 @@ public class ComentarioControlador {
     private final ComentarioServicio comentarioServicio;
 
     @PostMapping("/crear")
-    public ResponseEntity<MensajeDTO>crearComentario(@RequestBody ComentarioDTO comentarioDTO) throws Exception{
+    public ResponseEntity<MensajeDTO>crearComentario( @RequestBody ComentarioDTO comentarioDTO) throws Exception{
         return ResponseEntity.status(200).body(new MensajeDTO(HttpStatus.OK,false,"comentario creado"+ comentarioServicio.crearComentario(comentarioDTO)));
     }
 
-    @PutMapping("/actualizar/{codigoProducto}")
-    public ResponseEntity<MensajeDTO> actualizarComentario( @PathVariable int codigoProducto,@RequestBody ComentarioDTO comentarioDTO) throws Exception{
-        return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false, comentarioServicio.actualizarComentario(codigoProducto, comentarioDTO)));}
+    @PutMapping("/actualizar/{codigoPublicacion}")
+    public ResponseEntity<MensajeDTO> actualizarComentario( @PathVariable int codigoPublicacion, @RequestBody ComentarioDTO comentarioDTO) throws Exception{
+        return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false, comentarioServicio.actualizarComentario(codigoPublicacion, comentarioDTO)));}
 
 
     @DeleteMapping("/eliminar/{codigoComentario}")
@@ -33,11 +34,9 @@ public class ComentarioControlador {
         comentarioServicio.eliminarComentario(codigoComentario);
         return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false,"se elimino correctamente el comentario " + codigoComentario));}
 
-
-
-    @GetMapping("/obtener/{codidoProducto}")
-    public ResponseEntity<MensajeDTO> obtenerComentario(@PathVariable int codidoProducto) throws Exception{
-        return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false, comentarioServicio.obtenerComentario(codidoProducto)));
+    @GetMapping("/obtener/{codigoPublicacion}")
+    public ResponseEntity<MensajeDTO> obtenerComentario(@PathVariable int codigoPublicacion) throws Exception{
+        return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false, comentarioServicio.obtenerComentario(codigoPublicacion)));
     }
 
 

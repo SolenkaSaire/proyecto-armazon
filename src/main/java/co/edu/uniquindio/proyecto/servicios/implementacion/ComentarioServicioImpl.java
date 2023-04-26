@@ -22,7 +22,6 @@ import java.util.Optional;
 public class ComentarioServicioImpl implements ComentarioServicio {
 
     private final ComentarioRepo comentarioRepo;
-    private final UsuarioRepo usuarioRepo;
 
     private final PublicacionProductoServicio publicacionProductoServicio;
     private final UsuarioServicio usuarioServicio;
@@ -44,29 +43,20 @@ public class ComentarioServicioImpl implements ComentarioServicio {
 
         System.out.println("El comentario es: "+ comentarioDTO.getTexto());
 
-        String email= "<h1>han añadido un nuevo mensaje a su publicacion</h1><h2><p>En tu producto de Armazon</p></h2><img src='https://i.ibb.co/mHSHGmn/Imagen-de-Whats-App-2023-04-21-a-las-11-31-00.jpg' width='300' height='200'>";
+        String email= "<h1>Se ha añadido un nuevo mensaje a su publicacion</h1><h2><p>En tu producto de Armazon</p></h2><img src='https://i.ibb.co/mHSHGmn/Imagen-de-Whats-App-2023-04-21-a-las-11-31-00.jpg' width='300' height='200'> <br>Resumen del Comentario:<br>Enviado por:" + nuevoComentario.getUsuario().getNombre() +"<br>Mensaje:"+nuevoComentario.getTexto();
 
         emailServicio.enviarEmail(new EmailDTO(
-                "TestMail-Html",
+                "Correo creado",
                 email,
                 publicacionProducto.getVendedor().getEmail()));
 
         comentarioRepo.save(nuevoComentario);
         int cantidad = publicacionProducto.getComentarios().size();
-        System.out.println("cantidad: " +cantidad);
         double promActual = publicacionProducto.getPromedioEstrellas();
-
-        System.out.println("prom anterior: " +promActual);
-        //promActual *= 5;
         promActual= promActual * (cantidad-1);
-
         promActual+= nuevoComentario.getEstrellas();
-
-        System.out.println("nueva suma: "+promActual+ "  ---LA CANTIDAD A DIVIDIR ES: "+(cantidad));
         promActual = promActual/ cantidad;
-        System.out.println("promedio nuevo:" +promActual);
         publicacionProducto.setPromedioEstrellas(promActual);
-
 
         if (publicacionProducto.getCodigo() == comentarioDTO.getCodigoPublicacionProducto()) {
             publicacionProducto.getComentarios().add(nuevoComentario);
@@ -78,9 +68,18 @@ public class ComentarioServicioImpl implements ComentarioServicio {
 
     @Override
     public ComentarioGetDTO actualizarComentario(int codigoProducto, ComentarioDTO comentarioDTO) throws Exception {
+        PublicacionProducto publicacionProducto = publicacionProductoServicio.obtenerPublicacionProductoP(comentarioDTO.getCodigoPublicacionProducto());
+
         validarExiste(codigoProducto);
         Comentario comentario= convertir(comentarioDTO);
         comentario.setCodigo(codigoProducto);
+
+        String email= "<h1>Se ha actualizado un comentario en su publicacion</h1><h2><p>En Armazon</p></h2><img src='https://i.ibb.co/mHSHGmn/Imagen-de-Whats-App-2023-04-21-a-las-11-31-00.jpg' width='300' height='200'> <br>Resumen del Comentario:<br>Enviado por:" + comentario.getUsuario().getNombre() +"<br>Mensaje:"+comentario.getTexto();
+
+        emailServicio.enviarEmail(new EmailDTO(
+                "Actualizacion de comentario",
+                email,
+                publicacionProducto.getVendedor().getEmail()));
         return convertir(comentarioRepo.save(comentario));
     }
 
@@ -136,7 +135,6 @@ public class ComentarioServicioImpl implements ComentarioServicio {
     }
 
     private ComentarioGetDTO convertir(Comentario comentario){
-        //codigo, fecha, mensaje, codigoUsuario, codigoProducto
         ComentarioGetDTO comentarioGetDTO = new ComentarioGetDTO(
                 comentario.getTexto(),
                 comentario.getEstrellas(),

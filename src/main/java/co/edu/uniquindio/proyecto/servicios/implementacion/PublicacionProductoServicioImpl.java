@@ -115,7 +115,7 @@ public class PublicacionProductoServicioImpl implements PublicacionProductoServi
     @Override
     public PublicacionProducto obtenerPublicacionProductoP(int codigoPublicacion) throws Exception{
         Optional<PublicacionProducto> publicacionProducto = publicacionProductoRepo.findById(codigoPublicacion);
-        System.out.println("SI EXISTE EL POST" + publicacionProducto.get().getDescripcion());
+
         if(publicacionProducto.isEmpty() ){
             try {
                 throw new Exception("El código "+codigoPublicacion+" no está asociado a ningún producto");

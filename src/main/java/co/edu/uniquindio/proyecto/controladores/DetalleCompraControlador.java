@@ -32,7 +32,7 @@ public class DetalleCompraControlador {
     }
 
     @GetMapping("/listarMisCompras/{codigoUsuario}")
-    public ResponseEntity<MensajeDTO> listarProductosUsuario(int codigoUsuario){
+    public ResponseEntity<MensajeDTO> listarProductosUsuario(@PathVariable int codigoUsuario){
         return ResponseEntity.status(200).body( new MensajeDTO(HttpStatus.OK, false, detalleCompraServicio.listarProductosUsuario(codigoUsuario)));
     }
 

@@ -32,7 +32,7 @@ insert into compra values (4,"2020-4-01 12:24:25",1,232.250,5);
 insert into compra values (5,"2018-6-01 12:24:25",1,423.250,5);
 
 insert into detalle_compra values (1,475455000,13,1,1);
-insert into detalle_compra values (2,765455000,5,2,2);
+insert into detalle_compra values (1,765455000,5,2,2);
 insert into detalle_compra values (3,1255000,6,3,3);
 insert into detalle_compra values (4,3455000,4,4,4);
 insert into detalle_compra values (5,1000,2,5,5);

@@ -36,6 +36,15 @@ public class DetalleCompraTest {
         System.out.println(list);
 
     }
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void listarProductosUsuarioRepetido(){
+
+        List<DetalleCompraGetDTO> list = detalleCompraServicio.listarProductosUsuario(1);
+
+        System.out.println(list);
+
+    }
 
     @Test
     @Sql("classpath:dataset.sql")

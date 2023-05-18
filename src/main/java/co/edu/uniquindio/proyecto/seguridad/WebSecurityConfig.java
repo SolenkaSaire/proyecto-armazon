@@ -22,7 +22,20 @@ public class WebSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.cors();
-        http.authorizeHttpRequests().requestMatchers("/api/auth/**","/api/usuario/crear").permitAll().anyRequest().authenticated();
+        http.authorizeHttpRequests().anyRequest().permitAll();
+        /*
+        http.authorizeHttpRequests().requestMatchers("/api/moderador/**").hasAuthority("MODERADOR");
+        http.authorizeHttpRequests().requestMatchers(
+                "/api/auth/**",
+                "/api/usuario/crear",
+                "/api/productos/obtener/**",
+                "/api/productos/listar/todos",
+                "/api/productos/listar/nombre/**",
+                "/api/productos/listar/categoria/**",
+                "/api/categorias/**",
+                "/api/mediospago/**",
+                "/api/comentarios/listar/**"
+                ).permitAll().anyRequest().authenticated();*/
        // http.authorizeHttpRequests().anyRequest().permitAll();
         http.exceptionHandling().authenticationEntryPoint(jwtEntryPoint);
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 public class AuthControlador {
     private final UsuarioServicio usuarioServicio;
     private final SesionServicio sesionServicio;
+
     @PostMapping("/login")
     public ResponseEntity<MensajeDTO> login( @RequestBody SesionDTO loginUser) {
         TokenDTO jwtTokenDto = sesionServicio.login(loginUser);
@@ -26,6 +27,12 @@ public class AuthControlador {
     public ResponseEntity<MensajeDTO> registrarUsuario( @RequestBody UsuarioDTO cliente) throws Exception {
         usuarioServicio.crearUsuario(cliente);
         return ResponseEntity.status(HttpStatus.CREATED).body(new MensajeDTO(HttpStatus.CREATED, false, "Cliente creado correctamente"));
+    }
+
+    @PostMapping("/refresh")
+    public ResponseEntity<MensajeDTO> refreshToken(@RequestBody TokenDTO tokenDTO) throws Exception {
+        sesionServicio.refreshToken(tokenDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(new MensajeDTO(HttpStatus.CREATED, false, "Token refresh correctamente"));
     }
 
     @PostMapping("/solicitar")

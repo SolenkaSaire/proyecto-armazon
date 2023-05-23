@@ -8,9 +8,11 @@ import co.edu.uniquindio.proyecto.repositorios.ModeradorRepo;
 import co.edu.uniquindio.proyecto.repositorios.UsuarioRepo;
 import co.edu.uniquindio.proyecto.seguridad.modelo.UserDetailsImpl;
 import co.edu.uniquindio.proyecto.seguridad.servicios.JwtService;
+import co.edu.uniquindio.proyecto.seguridad.servicios.UserDetailsServiceImpl;
 import co.edu.uniquindio.proyecto.servicios.interfaces.EmailServicio;
 import co.edu.uniquindio.proyecto.servicios.interfaces.SesionServicio;
 import co.edu.uniquindio.proyecto.servicios.interfaces.UsuarioServicio;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -29,6 +31,8 @@ public class SesionServicioImpl implements SesionServicio {
     private final EmailServicio emailServicio;
     private final UsuarioRepo usuarioRepo;
     private final ModeradorRepo moderadorRepo;
+    private UserDetailsServiceImpl userDetailsService;
+
 
 
     public SesionServicioImpl(JwtService jwtService, AuthenticationManager authenticationManager, UsuarioServicio usuarioServicio, UsuarioRepo usuarioRepo, PasswordEncoder passwordEncoder, EmailServicio emailServicio, ModeradorRepo moderadorRepo) {
@@ -70,7 +74,20 @@ public class SesionServicioImpl implements SesionServicio {
         );
         UserDetails user = (UserDetailsImpl) authentication.getPrincipal();
         String jwtToken = jwtService.generateToken(user);
-        return new TokenDTO(jwtToken);
+        String refreshToken = jwtService.generateRefreshToken(user);
+        return new TokenDTO(jwtToken, refreshToken);
+    }
+
+    @Override
+    public TokenDTO refreshToken(TokenDTO tokenDTO) throws Exception{
+
+        String email = jwtService.extractUsername(tokenDTO.getRefreshToken());
+        UserDetailsImpl user = (UserDetailsImpl) userDetailsService.loadUserByUsername(email);
+        if (jwtService.isTokenValid(tokenDTO.getRefreshToken(), user)) {
+            String token = jwtService.generateToken(user);
+            return new TokenDTO( token, tokenDTO.getRefreshToken() );
+        }
+        throw new Exception("Error construyendo el token");
     }
 
 

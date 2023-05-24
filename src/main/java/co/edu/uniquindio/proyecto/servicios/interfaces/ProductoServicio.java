@@ -9,6 +9,7 @@ import java.util.List;
 public interface ProductoServicio {
 
 
+
     int crearProducto(ProductoDTO productoDTO) throws Exception;
 
     int actualizarProducto(int codigoProducto, ProductoDTO productoDTO) throws Exception;
@@ -23,4 +24,8 @@ public interface ProductoServicio {
     List<String> convertirCategoria(List<Categoria> categorias);
 
     List<String> convertirCiudades(List<Ciudad> ciudades);
+
+    public List<Categoria> listarCategorias() throws Exception;
+
+    List<Ciudad> listarCiudades() throws Exception;
 }

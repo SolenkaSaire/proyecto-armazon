@@ -11,6 +11,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -130,4 +131,15 @@ public class ProductoServicioImpl implements ProductoServicio {
 
         }
     }
+
+    @Override
+    public List<Categoria> listarCategorias() throws Exception {
+        return new ArrayList<>(Arrays.asList(Categoria.values()));
+    }
+
+    @Override
+    public List<Ciudad> listarCiudades() throws Exception {
+        return new ArrayList<>(Arrays.asList(Ciudad.values()));
+    }
+
 }

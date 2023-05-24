@@ -42,4 +42,11 @@ public interface ProductoRepo extends JpaRepository<Producto, Integer> {
 
     @Query("select  p from PublicacionProducto p where p.precio=:codigoProducto")
     List<Producto> listarProductoPrecio(int codigoProducto);
+
+
+    //@Query("select distinct c from Categoria c")
+    //List<Categoria> listarCategorias1();
+
+    /*@Query("select c from co.edu.uniquindio.proyecto.modelo.Categoria c")
+    List<Categoria> listarCategorias();*/
 }

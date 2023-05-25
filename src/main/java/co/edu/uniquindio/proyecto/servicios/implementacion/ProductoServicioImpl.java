@@ -134,7 +134,9 @@ public class ProductoServicioImpl implements ProductoServicio {
 
     @Override
     public List<Categoria> listarCategorias() throws Exception {
+        //System.out.println("categorias"+Arrays.asList(Categoria.values()).toString());
         return new ArrayList<>(Arrays.asList(Categoria.values()));
+
     }
 
     @Override

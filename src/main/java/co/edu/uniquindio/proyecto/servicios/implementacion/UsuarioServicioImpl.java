@@ -8,6 +8,7 @@ import co.edu.uniquindio.proyecto.modelo.Compra;
 import co.edu.uniquindio.proyecto.modelo.PublicacionProducto;
 import co.edu.uniquindio.proyecto.modelo.Usuario;
 import co.edu.uniquindio.proyecto.repositorios.UsuarioRepo;
+import co.edu.uniquindio.proyecto.seguridad.servicios.JwtService;
 import co.edu.uniquindio.proyecto.servicios.interfaces.EmailServicio;
 import co.edu.uniquindio.proyecto.servicios.interfaces.UsuarioServicio;
 import lombok.AllArgsConstructor;
@@ -23,6 +24,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     private final UsuarioRepo usuarioRepo;
     private final PasswordEncoder passwordEncoder;
     private final EmailServicio emailServicio;
+    private final JwtService jwtService;
 
     @Override
     public int crearUsuario(UsuarioDTO usuarioDTO) throws Exception {
@@ -125,7 +127,18 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         return usuarioGetDTO;
     }
     ////////////////////////////////////////////////
+    @Override
+    public Integer obtenerCodigoUsuarioDesdeCorreo(String correo) {
 
+        System.out.println("El correo es: "+ correo);
+
+        Usuario usuario = usuarioRepo.buscarUsuario(correo);
+        if (usuario != null) {
+
+            return usuario.getCodigo();
+        }
+        return null;
+    }
 
 
 

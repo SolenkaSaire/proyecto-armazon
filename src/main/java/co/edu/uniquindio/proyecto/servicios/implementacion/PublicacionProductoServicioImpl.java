@@ -34,7 +34,7 @@ public class PublicacionProductoServicioImpl implements PublicacionProductoServi
 
         publicacionProducto.setFecha_publicacion(LocalDateTime.now());
 
-        publicacionProducto.setEstado(Estado.NO_APROBADO);
+        publicacionProducto.setEstado(Estado.NO_REVISADO);
         publicacionProducto.setPrecio(publicacionProductoDTO.getPrecio());
         publicacionProducto.setDisponibilidad(publicacionProductoDTO.getDisponibilidad());
         publicacionProducto.setDescripcion(publicacionProductoDTO.getDescripcion());

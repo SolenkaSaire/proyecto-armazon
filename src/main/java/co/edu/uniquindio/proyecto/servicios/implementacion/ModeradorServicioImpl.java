@@ -24,6 +24,8 @@ import java.util.Optional;
 public class ModeradorServicioImpl implements ModeradorServicio{
     private final ModeradorRepo moderadorRepo;
     private final ProductoModeradorRepo productoModeradorRepo;
+
+    private final PublicacionProductoRepo publicacionProductoRepo;
     private final EmailServicio emailServicio;
     private final PublicacionProductoServicio publicacionProductoServicio;
 
@@ -34,6 +36,8 @@ public class ModeradorServicioImpl implements ModeradorServicio{
         LocalDateTime fechaActual = LocalDateTime.now();
         PublicacionProducto publicacionProducto = publicacionProductoServicio.obtenerPublicacionProductoP(productoModeradorDTO.getCodigoPublicacion());
         publicacionProducto.setEstado(productoModeradorDTO.getEstado());
+
+        publicacionProductoRepo.save(publicacionProducto);
 
         ProductoModerador productoModerador = new ProductoModerador();
 

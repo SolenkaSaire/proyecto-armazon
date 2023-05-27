@@ -23,6 +23,8 @@ public class PublicacionProductoControlador {
 
     @PostMapping("/crear")
     public ResponseEntity<MensajeDTO> crearPublicacionProducto(@RequestBody PublicacionProductoDTO publicacionProductoDTO) throws Exception{
+
+        System.out.println("campo de pruebas: \nla publicacionproductoDTO es:"+publicacionProductoDTO.toString() +" y el producto es: "+publicacionProductoDTO.getProductoDTO().toString());
         return ResponseEntity.status(200).body( new MensajeDTO(HttpStatus.OK, false, "Publicacion producto creado exitosamente! Código: "+ publicacionProductoServicio.crearPublicacionProducto(publicacionProductoDTO, publicacionProductoDTO.getProductoDTO()) ));
 
     }

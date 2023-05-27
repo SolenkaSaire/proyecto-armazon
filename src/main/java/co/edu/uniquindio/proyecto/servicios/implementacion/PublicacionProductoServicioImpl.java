@@ -68,7 +68,7 @@ public class PublicacionProductoServicioImpl implements PublicacionProductoServi
     private PublicacionProducto convertir(PublicacionProductoDTO publicacionProductoDTO) throws Exception {
 
         PublicacionProducto publicacionProducto = new PublicacionProducto();
-        publicacionProducto.setEstado(Estado.NO_APROBADO);
+        publicacionProducto.setEstado(Estado.NO_REVISADO);
         publicacionProducto.setFecha_publicacion(LocalDateTime.now());
         publicacionProducto.setPromedioEstrellas(publicacionProductoDTO.getPromedioEstrellas());
         publicacionProducto.setFechaCreacion(publicacionProductoDTO.getFechaLimite());
@@ -190,7 +190,7 @@ public class PublicacionProductoServicioImpl implements PublicacionProductoServi
                 respuesta.add(convertir(p));
             }
         }
-        return respuesta;
+        return excluirEstados(respuesta);
     }
 
     @Override
@@ -222,7 +222,7 @@ public class PublicacionProductoServicioImpl implements PublicacionProductoServi
         for (PublicacionProducto p: listaPublicaciones) {
             respuesta.add(convertir(p));
         }
-        return respuesta;
+        return excluirEstados(respuesta);
     }
 
     @Override
@@ -233,7 +233,7 @@ public class PublicacionProductoServicioImpl implements PublicacionProductoServi
             respuesta.add(convertir(p));
 
         }
-        return respuesta;
+        return excluirEstados(respuesta);
     }
 
 
@@ -246,7 +246,7 @@ public class PublicacionProductoServicioImpl implements PublicacionProductoServi
             respuesta.add(convertir(p));
         }
 
-        return respuesta;
+        return excluirEstados(respuesta);
     }
 
     @Override
@@ -257,7 +257,7 @@ public class PublicacionProductoServicioImpl implements PublicacionProductoServi
         for(PublicacionProducto p: lista){
             respuesta.add(convertir(p));
         }
-        return respuesta;
+        return excluirEstados(respuesta);
     }
 
 
@@ -272,4 +272,31 @@ public class PublicacionProductoServicioImpl implements PublicacionProductoServi
 
         }
     }
+
+    public List<PublicacionProductoGetDTO> excluirEstados(List<PublicacionProductoGetDTO> listaPublicaciones) {
+        List<PublicacionProductoGetDTO> resultado = new ArrayList<>();
+
+        for (PublicacionProductoGetDTO publicacion : listaPublicaciones) {
+            Estado estado = Estado.valueOf(publicacion.getEstado());
+            if (estado != Estado.NO_APROBADO && estado != Estado.NO_REVISADO) {
+                resultado.add(publicacion);
+            }
+        }
+        System.out.println("El correo es: "+ resultado);
+        return resultado;
+    }
+
+    @Override
+    public List<PublicacionProductoGetDTO> listarTodasLasPublicaciones() throws Exception {
+        List<PublicacionProducto> listaPublicaciones = publicacionProductoRepo.findAll();
+        List<PublicacionProductoGetDTO> respuesta = new ArrayList<>();
+
+        for (PublicacionProducto p : listaPublicaciones) {
+            respuesta.add(convertir(p));
+        }
+
+        return excluirEstados(respuesta);
+    }
+
+
 }

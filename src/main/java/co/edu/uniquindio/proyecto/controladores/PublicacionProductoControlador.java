@@ -93,7 +93,9 @@ public class PublicacionProductoControlador {
     }
 
 
-
-
+    @GetMapping("/listarPublicaciones")
+    public ResponseEntity<MensajeDTO> listarTodasLasPublicaciones() throws Exception{
+        return ResponseEntity.status(200).body( new MensajeDTO(HttpStatus.OK, false, publicacionProductoServicio.listarTodasLasPublicaciones()));
+    }
 
 }

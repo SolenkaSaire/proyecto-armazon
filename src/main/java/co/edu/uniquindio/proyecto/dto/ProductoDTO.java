@@ -17,8 +17,6 @@ import java.util.List;
 @Getter
 @Setter
 public class ProductoDTO {
-//private String nombre;    private List<Categoria> categoria;    private List<String> imagenes;    private List<PublicacionProducto> publicacionProductos;
-
     @NotBlank
     @NotNull
     @Length(max=50, message = "nombre maximo 50 caracteres")

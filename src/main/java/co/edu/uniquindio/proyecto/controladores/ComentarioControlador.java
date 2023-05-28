@@ -34,10 +34,15 @@ public class ComentarioControlador {
         comentarioServicio.eliminarComentario(codigoComentario);
         return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false,"se elimino correctamente el comentario " + codigoComentario));}
 
-    @GetMapping("/obtener/{codigoPublicacion}")
-    public ResponseEntity<MensajeDTO> obtenerComentario(@PathVariable int codigoPublicacion) throws Exception{
-        return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false, comentarioServicio.obtenerComentario(codigoPublicacion)));
+    @GetMapping("/obtener/{codigoComentario}")
+    public ResponseEntity<MensajeDTO> obtenerComentario(@PathVariable int codigoComentario) throws Exception{
+        return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false, comentarioServicio.obtenerComentario(codigoComentario)));
     }
+    @GetMapping("/listarComentarios/{codigoPublicacion}")
+    public ResponseEntity<MensajeDTO> listarComentarios(@PathVariable int codigoPublicacion) throws Exception{
+        return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false, comentarioServicio.listarComentarios(codigoPublicacion)));
+    }
+
 
 
 }

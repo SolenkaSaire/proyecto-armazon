@@ -36,20 +36,22 @@ public class AuthControlador {
     }
 
     @PostMapping("/solicitar")
-    public ResponseEntity<?> solicitarCambioContrasena(@RequestParam("email") String email) {
+    public ResponseEntity<MensajeDTO> solicitarCambioContrasena(@RequestParam String email) {
 
         String mensaje = sesionServicio.solicitarCambioContrasena(email);
 
-        return ResponseEntity.ok(mensaje);
+        return ResponseEntity.status(HttpStatus.CREATED).body(new MensajeDTO(HttpStatus.CREATED, false, "restablecer password correctamente"));
+
     }
 
     @PostMapping("/confirmarCambio")
-    public ResponseEntity<?> cambiarContrasena(@RequestParam("token") String token, @RequestParam("contrasena") String nuevaContrasena) {
+    public ResponseEntity<MensajeDTO> cambiarContrasena(@RequestParam("token") String token, @RequestParam("contrasena") String nuevaContrasena) {
 
         String mensaje = sesionServicio.cambiarContrasena(token, nuevaContrasena);
         // Validar el token de cambio de contraseña
 
-        return ResponseEntity.ok(mensaje);
+        return ResponseEntity.status(HttpStatus.CREATED).body(new MensajeDTO(HttpStatus.CREATED, false, "restablecer password correctamente"));
+
     }
 
     @PostMapping("/generar")

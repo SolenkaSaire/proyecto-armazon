@@ -92,6 +92,10 @@ public class PublicacionProductoControlador {
         return ResponseEntity.status(200).body( new MensajeDTO(HttpStatus.OK, false, publicacionProductoServicio.listarPublicacionProductosPorEstado(estado)));
     }
 
+    @GetMapping("/listarPublicacionesExcluyendo")
+    public ResponseEntity<MensajeDTO> listarTodasLasPublicacionesExluyendo() throws Exception{
+        return ResponseEntity.status(200).body( new MensajeDTO(HttpStatus.OK, false, publicacionProductoServicio.listarTodasLasPublicacionesExcluyendo()));
+    }
 
     @GetMapping("/listarPublicaciones")
     public ResponseEntity<MensajeDTO> listarTodasLasPublicaciones() throws Exception{

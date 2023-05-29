@@ -298,5 +298,16 @@ public class PublicacionProductoServicioImpl implements PublicacionProductoServi
         return excluirEstados(respuesta);
     }
 
+    @Override
+    public List<PublicacionProductoGetDTO> listarTodasLasPublicacionesExcluyendo() throws Exception {
+        List<PublicacionProducto> listaPublicaciones = publicacionProductoRepo.findAll();
+        List<PublicacionProductoGetDTO> respuesta = new ArrayList<>();
+
+        for (PublicacionProducto p : listaPublicaciones) {
+            respuesta.add(convertir(p));
+        }
+
+        return excluirEstados(respuesta);
+    }
 
 }

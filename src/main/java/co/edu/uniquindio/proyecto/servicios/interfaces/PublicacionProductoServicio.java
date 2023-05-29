@@ -24,8 +24,7 @@ public interface PublicacionProductoServicio {
 
     List<PublicacionProductoGetDTO> listarPublicacionProductosNombre(String nombre) throws Exception;
     List<PublicacionProductoGetDTO> listarPublicacionProductosPrecio(double precioMinimo, double precioMaximo) throws Exception;
-
     List<PublicacionProductoGetDTO> listarTodasLasPublicaciones()throws Exception;
-
+    List<PublicacionProductoGetDTO> listarTodasLasPublicacionesExcluyendo()throws Exception;
 }
 

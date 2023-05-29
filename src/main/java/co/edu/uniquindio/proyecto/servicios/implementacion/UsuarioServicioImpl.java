@@ -126,7 +126,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
                 usuario.getApellido(),
                 usuario.getDireccion(),
                 usuario.getTelefono(),
-                usuario.getTelefono()
+                usuario.getEmail()
         );
         return usuarioGetDTO;
     }

@@ -30,6 +30,7 @@ public class FavoritoServicioImpl implements FavoritoServicio {
         if (publicacionesFavoritas.contains(publicacion)) {
             throw new IllegalStateException("La publicación ya está en la lista de favoritos del usuario");
         }
+        //System.out.println("se adiciona favorito "+publicacion.toString());
         publicacionesFavoritas.add(publicacion);
         usuarioRepo.save(usuario);
 

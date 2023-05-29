@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyecto.controladores;
 
+import co.edu.uniquindio.proyecto.dto.ComentarioDTO;
 import co.edu.uniquindio.proyecto.dto.MensajeDTO;
 import co.edu.uniquindio.proyecto.dto.PublicacionProductoDTO;
 import co.edu.uniquindio.proyecto.servicios.interfaces.FavoritoServicio;
@@ -17,10 +18,12 @@ public class FavoritoControlador {
 
     private final FavoritoServicio favoritoServicio;
 
-    @PostMapping("/agregar/{idUsuario}/{idPublicacion}")
-    public ResponseEntity<MensajeDTO> agregarPublicacionFavorita(@PathVariable int idUsuario,@PathVariable int idPublicacion){
-        return ResponseEntity.status(200).body(new MensajeDTO(HttpStatus.OK,false,"favorito agregado del usuario con codigo: "+ favoritoServicio.agregarPublicacionFavorita(idUsuario,idPublicacion)));
+    @PostMapping("/agregar")
+    public ResponseEntity<MensajeDTO> agregarPublicacionFavorita(@RequestBody ComentarioDTO comentarioDTO){
+        System.out.println("favorito agregado del usuario con codigo: " +comentarioDTO.getCodigoUsuario());
+        return ResponseEntity.status(200).body(new MensajeDTO(HttpStatus.OK,false,"favorito agregado del usuario con codigo: "+ favoritoServicio.agregarPublicacionFavorita(comentarioDTO.getCodigoUsuario(),comentarioDTO.getCodigoPublicacionProducto())));
     }
+
 
 
     @PostMapping("/eliminar/{idUsuario}/{idPublicacion}")

@@ -75,6 +75,7 @@ public class SesionServicioImpl implements SesionServicio {
         UserDetails user = (UserDetailsImpl) authentication.getPrincipal();
         String jwtToken = jwtService.generateToken(user);
         String refreshToken = jwtService.generateRefreshToken(user);
+        //crearModerador();
         return new TokenDTO(jwtToken, refreshToken);
     }
 

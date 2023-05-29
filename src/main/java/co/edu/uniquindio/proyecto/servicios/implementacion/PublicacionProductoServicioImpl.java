@@ -295,7 +295,7 @@ public class PublicacionProductoServicioImpl implements PublicacionProductoServi
             respuesta.add(convertir(p));
         }
 
-        return excluirEstados(respuesta);
+        return respuesta;
     }
 
     @Override

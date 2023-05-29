@@ -18,13 +18,13 @@ public class FavoritoControlador {
 
     private final FavoritoServicio favoritoServicio;
 
+
+
     @PostMapping("/agregar")
-    public ResponseEntity<MensajeDTO> agregarPublicacionFavorita(@RequestBody ComentarioDTO comentarioDTO){
-        System.out.println("favorito agregado del usuario con codigo: " +comentarioDTO.getCodigoUsuario());
-        return ResponseEntity.status(200).body(new MensajeDTO(HttpStatus.OK,false,"favorito agregado del usuario con codigo: "+ favoritoServicio.agregarPublicacionFavorita(comentarioDTO.getCodigoUsuario(),comentarioDTO.getCodigoPublicacionProducto())));
+    public ResponseEntity<MensajeDTO> agregarPublicacionFavorita(@RequestParam("idUsuario") int idUsuario,@RequestParam("idPublicacion") int idPublicacion){
+        System.out.println("favorito agregado del usuario con codigo: " +idUsuario);
+        return ResponseEntity.status(HttpStatus.CREATED).body(new MensajeDTO(HttpStatus.CREATED, false, "favorito agregado del usuario con codigo: "+ favoritoServicio.agregarPublicacionFavorita(idUsuario,idPublicacion)));
     }
-
-
 
     @PostMapping("/eliminar/{idUsuario}/{idPublicacion}")
     public ResponseEntity<MensajeDTO> eliminarPublicacionFavorita(@PathVariable int idUsuario,@PathVariable int idPublicacion){

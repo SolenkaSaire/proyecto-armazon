@@ -7,7 +7,9 @@ import co.edu.uniquindio.proyecto.modelo.Comentario;
 import co.edu.uniquindio.proyecto.modelo.Compra;
 import co.edu.uniquindio.proyecto.modelo.PublicacionProducto;
 import co.edu.uniquindio.proyecto.modelo.Usuario;
+import co.edu.uniquindio.proyecto.modelo.Moderador;
 import co.edu.uniquindio.proyecto.repositorios.UsuarioRepo;
+import co.edu.uniquindio.proyecto.repositorios.ModeradorRepo;
 import co.edu.uniquindio.proyecto.seguridad.servicios.JwtService;
 import co.edu.uniquindio.proyecto.servicios.interfaces.EmailServicio;
 import co.edu.uniquindio.proyecto.servicios.interfaces.UsuarioServicio;
@@ -22,6 +24,8 @@ import java.util.*;
 public class UsuarioServicioImpl implements UsuarioServicio {
 
     private final UsuarioRepo usuarioRepo;
+
+    private final ModeradorRepo moderadorRepo;
     private final PasswordEncoder passwordEncoder;
     private final EmailServicio emailServicio;
     private final JwtService jwtService;
@@ -136,6 +140,12 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         if (usuario != null) {
 
             return usuario.getCodigo();
+        }
+        Moderador moderador = moderadorRepo.buscarModerador(correo);
+        if (moderador != null){
+
+            return moderador.getCodigo();
+
         }
         return null;
     }
